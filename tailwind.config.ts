@@ -84,6 +84,10 @@ const config: Config = {
         overlay: {
           30: "rgba(0, 0, 0, 0.3)"
         }
+      },
+      boxShadow: {
+        'soft': '0 4px 4px 0 rgba(0, 0, 0, 0.05)',
+        'ultra-soft': '5px 10px 10px -10px rgba(0, 0, 0, 0.05)',
       }
     },
   },

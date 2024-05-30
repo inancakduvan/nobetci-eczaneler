@@ -7,7 +7,7 @@ const inter = Inter({ subsets: ["latin"] });
 const MainLayout: React.FC <{ children: React.ReactNode }> = ({ children }) => {
   return (
     <div className={`${inter.className}`}>
-                {children}
+      {children}
     </div>
   )
 }
