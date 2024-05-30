@@ -1,22 +1,11 @@
-import useTranslation from "next-translate/useTranslation";
-import setLanguage from 'next-translate/setLanguage'
-import { useRouter } from "next/router";
+import MainLayout from "@/layouts/mainLayout";
 
-import { Inter } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
-
-export default function Home() {
-  const { t } = useTranslation('common');
-  let router = useRouter();
-
+export default function Home()  {
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    >
-      {t("testTitle")}
-
-      <button onClick={async () => await setLanguage('tr')}>Change Lang</button>
-    </main>
+    <>
+      Home
+    </>
   );
 }
+
+Home.Layout = MainLayout;
