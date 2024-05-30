@@ -8,6 +8,43 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontSize: {
+        'heading-medium': ['1rem', {
+          lineHeight: '1rem',
+          fontWeight: '600',
+        }],
+        'heading-large': ['1.25rem', {
+          lineHeight: '1.25rem',
+          fontWeight: '600',
+        }],
+        'subheading-xsmall': ['0.75rem', {
+          lineHeight: '1rem',
+          fontWeight: '500',
+        }],
+        'subheading-small': ['0.875rem', {
+          lineHeight: '1.15rem',
+          fontWeight: '500',
+        }],
+        'subheading-medium': ['1rem', {
+          lineHeight: '1rem',
+          fontWeight: '500',
+        }],
+        'body-xsmall': ['0.75rem', {
+          lineHeight: '1rem',
+          fontWeight: '500',
+          letterSpacing: "0.25px"
+        }],
+        'body-small': ['0.875rem', {
+          lineHeight: '1.15rem',
+          fontWeight: '500',
+          letterSpacing: "0.25px"
+        }],
+        'body-medium': ['1rem', {
+          lineHeight: '1.5rem',
+          fontWeight: '500',
+          letterSpacing: "0.25px"
+        }],
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",

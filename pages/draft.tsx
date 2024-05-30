@@ -10,7 +10,7 @@ export default function Draft()  {
     <main
       className={`flex min-h-screen flex-col items-center justify-between p-24`}
     >
-      <p className="bg-gradient-whiteToBlack text-semantic-warning p-16">{t("testTitle")}</p>
+      <p className="bg-gradient-whiteToBlack text-semantic-warning p-16 text-body-medium">{t("testTitle")}</p>
 
       <button onClick={async () => await setLanguage('en')}>Change Lang</button>
     </main>
