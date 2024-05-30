@@ -1,5 +1,5 @@
 import React from "react";
-import { GlobalContextProvider } from '../stores/globalStore';
+import { GlobalContextProvider } from '@/stores/globalStore';
 
 import { Inter } from "next/font/google";
 

@@ -1,5 +1,7 @@
 import MainLayout from "@/layouts/MainLayout";
 
+import { Button } from '@/components/Button';
+
 import useTranslation from "next-translate/useTranslation";
 import setLanguage from 'next-translate/setLanguage'
 import { useGlobalContext } from "@/stores/globalStore";
@@ -25,7 +27,10 @@ export default function Draft()  {
 
       <p>Selected city: {selectedCity}</p>
 
-      <button onClick={async () => await setLanguage('en')}>Change Lang</button>
+      <Button 
+        text="Change Lang"
+        onClick={async () => await setLanguage('en')}
+      />
     </main>
   );
 }
