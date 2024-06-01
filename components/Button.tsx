@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Icon } from "./Icon";
-
+import resolveConfig from "tailwindcss/resolveConfig";
 import tailwindConfig from "../tailwind.config";
 
 type TButton = React.FC<{
@@ -28,25 +28,22 @@ export const Button: TButton = ({ type, text, icon, iconPosition = "left", class
     }
   }
 
-  // const getIconColor= ():string => {
-  //   switch(type) {
-  //     case "secondary":
-  //       return tailwindConfig?.theme?.extend?.colors?.primary["400"];
-  //     case "rounded":
-  //       return tailwindConfig?.theme?.extend?.colors?.primary["700"];
-  //     default:
-  //       return tailwindConfig?.theme?.extend?.colors?.semantic["light"];
-  //   }
-  // }
-
   const getIconColor= ():string => {
+    const colors = tailwindConfig?.theme?.extend?.colors;
+
     switch(type) {
       case "secondary":
-        return "#18857D";
+        // @ts-ignore: Unreachable code error
+        const secondaryColor = colors?.primary["400"]
+        return secondaryColor;
       case "rounded":
-        return "#024540";
+        // @ts-ignore: Unreachable code error
+        const roundedColor = colors?.primary["700"]
+        return roundedColor;
       default:
-        return "#fff";
+        // @ts-ignore: Unreachable code error
+        const defaultColor = colors?.semantic["light"]
+        return defaultColor;
     }
   }
 
