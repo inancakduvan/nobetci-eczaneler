@@ -28,9 +28,30 @@ export default function Draft()  {
       <p>Selected city: {selectedCity}</p>
 
       <Button 
+        type="primary"
         text="Change Lang"
         icon="phone"
         onClick={async () => await setLanguage('en')}
+      />
+
+      <Button 
+        type="primary-light"
+        icon="search"
+        onClick={async () => await setLanguage('en')}
+      />
+
+      <Button 
+        type="secondary"
+        text="Haritada Gör"
+        icon="arrow-right"
+        iconPosition="right"
+        onClick={async () => await setLanguage('tr')}
+      />
+
+      <Button 
+        type="rounded"
+        icon="search"
+        onClick={async () => await setLanguage('tr')}
       />
     </main>
   );
