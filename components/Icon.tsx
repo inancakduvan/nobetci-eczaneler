@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { ReactElement, useEffect, useRef, useState } from "react";
 
 import AdjustmentsHorizontal2 from '@/public/static/icons/tabler-icon-adjustments-horizontal-2.svg';
 import AdjustmentsHorizontal from '@/public/static/icons/tabler-icon-adjustments-horizontal.svg';
@@ -15,7 +15,7 @@ import StarFilled from '@/public/static/icons/tabler-icon-star-filled.svg';
 import Star from '@/public/static/icons/tabler-icon-star.svg';
 
 
-export type TIcon = React.FC<{
+type TIcon = React.FC<{
   name: string;
   size: number;
   stroke?: string;
@@ -23,33 +23,39 @@ export type TIcon = React.FC<{
   className?: string;
 }>;
 
+type TIconSet = {
+  [name:string]: ReactElement;
+};
+
 export const Icon: TIcon = ({ name, size = 20, stroke = "#fff", fill = "transparent", className }) => {
-  const iconSet:any = useRef<Object>();
+  const [iconSet, setIconSet] = useState<TIconSet>();
 
   useEffect(() => {
-    iconSet.current = {
-      "adjustments-horizontal-2": <AdjustmentsHorizontal2 />,
-      "adjustments-horizontal": <AdjustmentsHorizontal />,
-      "arrow-left": <ArrowLeft />,
-      "arrow-right": <ArrowRight />,
-      "calendar-due": <CalendarDue />,
-      "current-location": <CurrentLocation />,
-      "home-star": <HomeStar />,
-      "info-circle": <InfoCircle />,
-      "phone-call": <PhoneCall />,
-      "phone": <Phone />,
-      "search": <Search />,
-      "star-filled": <StarFilled />,
-      "star": <Star />
-    }
+    setIconSet(
+      {
+        "adjustments-horizontal-2": <AdjustmentsHorizontal2 />,
+        "adjustments-horizontal": <AdjustmentsHorizontal />,
+        "arrow-left": <ArrowLeft />,
+        "arrow-right": <ArrowRight />,
+        "calendar-due": <CalendarDue />,
+        "current-location": <CurrentLocation />,
+        "home-star": <HomeStar />,
+        "info-circle": <InfoCircle />,
+        "phone-call": <PhoneCall />,
+        "phone": <Phone />,
+        "search": <Search />,
+        "star-filled": <StarFilled />,
+        "star": <Star />
+      }
+    )
   }, [])
 
   return (
     <>
       {
-        iconSet.current ?
+        iconSet ?
           <svg className={className ? " " + className : ""} width={size} height={size} stroke={stroke} fill={fill} viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-            { iconSet.current[name] } 
+            { iconSet[name as keyof TIconSet] } 
           </svg>
         :
           <div className={`w-[20px] h-[20px] rounded bg-overlay-30`}></div>
