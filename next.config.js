@@ -10,6 +10,22 @@ const withPWA = require("next-pwa")({
 /** @type {import("next").NextConfig} */
 const nextConfig = withPWA({
   reactStrictMode: false,
+  webpack: (config, options) => {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: [
+        options.defaultLoaders.babel,
+        {
+          loader: "@svgr/webpack",
+          options: {
+            icon: true,
+          },
+        },
+      ],
+    });
+
+    return config;
+  }
 });
 
 module.exports = nextTranslate(nextConfig);

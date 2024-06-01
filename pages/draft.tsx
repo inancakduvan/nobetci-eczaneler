@@ -29,6 +29,7 @@ export default function Draft()  {
 
       <Button 
         text="Change Lang"
+        icon="phone"
         onClick={async () => await setLanguage('en')}
       />
     </main>
