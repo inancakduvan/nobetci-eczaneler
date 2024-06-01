@@ -27,6 +27,7 @@ export const Icon: TIcon = ({ name, size = 20, stroke = "#fff", fill = "transpar
   const iconSet:any = useRef<Object>();
 
   useEffect(() => {
+    return
     iconSet.current = {
       "adjustments-horizontal-2": <AdjustmentsHorizontal2 />,
       "adjustments-horizontal": <AdjustmentsHorizontal />,
@@ -52,7 +53,7 @@ export const Icon: TIcon = ({ name, size = 20, stroke = "#fff", fill = "transpar
             { iconSet.current[name] } 
           </svg>
         :
-          <div className={`w-[${size}px] h-[${size}px] rounded bg-overlay-30`}></div>
+          <div className={`w-[20px] h-[20px] rounded bg-overlay-30`}></div>
       } 
     </>  
   );
