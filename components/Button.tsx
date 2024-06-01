@@ -28,14 +28,25 @@ export const Button: TButton = ({ type, text, icon, iconPosition = "left", class
     }
   }
 
+  // const getIconColor= ():string => {
+  //   switch(type) {
+  //     case "secondary":
+  //       return tailwindConfig?.theme?.extend?.colors?.primary["400"];
+  //     case "rounded":
+  //       return tailwindConfig?.theme?.extend?.colors?.primary["700"];
+  //     default:
+  //       return tailwindConfig?.theme?.extend?.colors?.semantic["light"];
+  //   }
+  // }
+
   const getIconColor= ():string => {
     switch(type) {
       case "secondary":
-        return tailwindConfig?.theme?.extend?.colors?.primary["400"];
+        return "#18857D";
       case "rounded":
-        return tailwindConfig?.theme?.extend?.colors?.primary["700"];
+        return "#024540";
       default:
-        return tailwindConfig?.theme?.extend?.colors?.semantic["light"];
+        return "#fff";
     }
   }
 
