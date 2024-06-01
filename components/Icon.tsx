@@ -27,7 +27,6 @@ export const Icon: TIcon = ({ name, size = 20, stroke = "#fff", fill = "transpar
   const iconSet:any = useRef<Object>();
 
   useEffect(() => {
-    return
     iconSet.current = {
       "adjustments-horizontal-2": <AdjustmentsHorizontal2 />,
       "adjustments-horizontal": <AdjustmentsHorizontal />,
