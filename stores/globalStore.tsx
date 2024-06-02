@@ -21,8 +21,8 @@ interface ContextProps {
     districts: TDistricts[] | never[],
     setDistricts: Dispatch<SetStateAction<TDistricts[]>> | Dispatch<SetStateAction<never[]>>,
 
-    pharmacies: Array<TPharmacies>,
-    setPharmacies: Dispatch<SetStateAction<Array<TPharmacies>>>,
+    pharmacies: TPharmacies[] | never[],
+    setPharmacies: Dispatch<SetStateAction<TPharmacies[]>> | Dispatch<SetStateAction<never[]>>,
 
     selectedCity: string,
     setSelectedCity: Dispatch<SetStateAction<string>>,
@@ -39,13 +39,7 @@ const GlobalContext = createContext<ContextProps>({
     setDistricts: (): TDistricts[] | never[] => [],
 
     pharmacies: [],
-    setPharmacies: (): Array<TPharmacies> => [{
-        "name": "",
-        "dist": "",
-        "address": "",
-        "phone": "",
-        "loc": ""
-    }],
+    setPharmacies: (): TPharmacies[] | never[] => [],
 
     selectedCity: "",
     setSelectedCity: (): string => "",
@@ -59,13 +53,7 @@ export const GlobalContextProvider : React.FC <{ children: React.ReactNode }> = 
 
     const [districts, setDistricts] = useState([]);
 
-    const [pharmacies, setPharmacies] = useState([{
-        "name": "",
-        "dist": "",
-        "address": "",
-        "phone": "",
-        "loc": ""
-    }]);
+    const [pharmacies, setPharmacies] = useState([]);
 
     const [selectedCity, setSelectedCity] = useState('');
     const [selectedDistrict, setSelectedDistrict] = useState('');

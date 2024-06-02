@@ -9,10 +9,10 @@ import { useEffect } from "react";
 import { constants } from "@/constants";
 
 export default function Draft()  {
-  const { DISTRICTS_ENDPOINT } = constants;
+  const { DISTRICTS_ENDPOINT, PHARMACIES_ENDPOINT } = constants;
 
   const { t } = useTranslation('common');
-  const { selectedCity, setSelectedCity, cities, districts, setDistricts } = useGlobalContext();
+  const { selectedCity, setSelectedCity, selectedDistrict, setSelectedDistrict, pharmacies, setPharmacies, cities, districts, setDistricts } = useGlobalContext();
 
   useEffect(() => {
     if(selectedCity) {
@@ -25,6 +25,18 @@ export default function Draft()  {
       })
     }
   }, [selectedCity]);
+
+  useEffect(() => {
+    if(selectedDistrict) {
+      fetch(PHARMACIES_ENDPOINT + "?city=" + selectedCity + "&district=" + selectedDistrict )
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          setPharmacies(data.result);
+        }
+      })
+    }
+  }, [selectedDistrict]);
 
   return (
     <main
@@ -67,7 +79,22 @@ export default function Draft()  {
       }
 
       {
-        (districts.length > 0) && districts.map((district) => <div key={"district-" + district.text} className="pt-1 pointer" onClick={() => console.log(district)}>{district.text}</div>)
+        (districts.length > 0 && pharmacies.length === 0) && districts.map((district) => <div key={"district-" + district.text} className="pt-1 pointer" onClick={() => setSelectedDistrict(district.text)}>{district.text}</div>)
+      }
+
+      {
+        (pharmacies.length > 0) && <>
+        <div className="text-heading-large mb-2">{t("pharmaciesOnDuty")}</div>
+        {
+          pharmacies.map((pharmacy) => <div key={"pharmacy-" + pharmacy.name + pharmacy.loc} className="shadow border border-muted-700 bg-muted-500 p-3 border-solid mb-4 pointer" onClick={() => console.log(pharmacy)}>
+            {pharmacy.name} <br/>
+            {pharmacy.dist} <br/>
+            {pharmacy.address} <br/>
+            {pharmacy.phone} <br/>
+            {pharmacy.loc} <br/>
+          </div>)
+        }
+        </>
       }
       </div>
     </main>
