@@ -16,11 +16,12 @@ export default function Draft()  {
 
   useEffect(() => {
     if(selectedCity) {
-      fetch(DISTRICTS_ENDPOINT + "?city=izmir")
+      fetch(DISTRICTS_ENDPOINT + "?city=" + selectedCity)
       .then(response => response.json())
       .then(data => {
-        console.log(data);
-        // setDistricts(data);
+        if (data.success) {
+          setDistricts(data.result);
+        }
       })
     }
   }, [selectedCity]);
@@ -62,7 +63,11 @@ export default function Draft()  {
 
       <div className="pt-10">
       {
-        cities.length > 0 && cities.map((city) => <div key={"city-" + city} className="pt-1 pointer" onClick={() => setSelectedCity(city)}>{city}</div>)
+        (cities.length > 0 && districts.length === 0) && cities.map((city) => <div key={"city-" + city} className="pt-1 pointer" onClick={() => setSelectedCity(city)}>{city}</div>)
+      }
+
+      {
+        (districts.length > 0) && districts.map((district) => <div key={"district-" + district.text} className="pt-1 pointer" onClick={() => console.log(district)}>{district.text}</div>)
       }
       </div>
     </main>
