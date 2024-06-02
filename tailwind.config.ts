@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        'tablet': '767px',
+      },
       fontSize: {
         'heading-medium': ['1rem', {
           lineHeight: '1rem',

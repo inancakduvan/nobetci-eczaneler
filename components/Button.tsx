@@ -13,7 +13,6 @@ type TButton = React.FC<{
 }>;
 
 export const Button: TButton = ({ type, text, icon, iconPosition = "left", className, onClick }) => {
-  console.log(tailwindConfig)
   
   const getButtonClassName = ():string => {
     switch(type) {
@@ -58,7 +57,7 @@ export const Button: TButton = ({ type, text, icon, iconPosition = "left", class
 
   return (
     <button
-        className={"inline-flex items-center justify-center gap-[8px] pointer duration-300 active:opacity-80 hover:opacity-80 " + (getButtonClassName()) + (className ? " " + className : "")}
+        className={"inline-flex items-center justify-center gap-[8px] pointer duration-300 active:opacity-80 sm:hover:opacity-80 " + (getButtonClassName()) + (className ? " " + className : "")}
         onClick={onClick ? () => onClick() : undefined}
     >
         {icon && iconPosition !== "right" ? <Icon name={icon} size={getIconSize()} stroke={getIconColor()} /> : null}
