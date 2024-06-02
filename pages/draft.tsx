@@ -40,9 +40,12 @@ export default function Draft()  {
 
   return (
     <main
-      className={`p-24`}>
+      className={`flex flex-col items-center p-24`}>
 
-      <p className="bg-gradient-greenToWhite225deg text-semantic-warning p-16 text-body-medium shadow-ultra-soft">{t("testTitle")}</p>
+      <p className="bg-helper-yellow-400 border border-solid border-helper-yellow-700 inline-flex text-semantic-warning p-16 text-body-medium shadow-ultra-soft">{t("testTitle")}</p>
+
+      <br />
+      <br />
 
       {selectedCity && <p>Selected city: {selectedCity}</p>}
 
@@ -50,12 +53,14 @@ export default function Draft()  {
         type="primary"
         text="Change Lang"
         icon="phone"
+        className="mb-5"
         onClick={async () => await setLanguage('en')}
       />
 
       <Button 
         type="primary-light"
         icon="search"
+        className="mb-5"
         onClick={async () => await setLanguage('en')}
       />
 
@@ -64,6 +69,7 @@ export default function Draft()  {
         text="Haritada Gör"
         icon="arrow-right"
         iconPosition="right"
+        className="mb-5"
         onClick={async () => await setLanguage('tr')}
       />
 
