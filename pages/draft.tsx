@@ -5,19 +5,10 @@ import { Button } from '@/components/Button';
 import useTranslation from "next-translate/useTranslation";
 import setLanguage from 'next-translate/setLanguage'
 import { useGlobalContext } from "@/stores/globalStore";
-import { useEffect } from "react";
 
 export default function Draft()  {
   const { t } = useTranslation('common');
-  const { selectedCity, setSelectedCity } = useGlobalContext();
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setSelectedCity("izmir");
-    }, 2000);
-
-    return () => clearTimeout(timeout);
-  }, [])
+  const { selectedCity, setSelectedCity, cities } = useGlobalContext();
 
   return (
     <main
@@ -25,7 +16,7 @@ export default function Draft()  {
     >
       <p className="bg-gradient-whiteToBlack text-semantic-warning p-16 text-body-medium shadow-ultra-soft">{t("testTitle")}</p>
 
-      <p>Selected city: {selectedCity}</p>
+      {selectedCity && <p>Selected city: {selectedCity}</p>}
 
       <Button 
         type="primary"
@@ -53,6 +44,12 @@ export default function Draft()  {
         icon="search"
         onClick={async () => await setLanguage('tr')}
       />
+
+      <div className="pt-10">
+      {
+        cities.length > 0 && cities.map((city) => <div className="pt-1 pointer" onClick={() => setSelectedCity(city)}>{city}</div>)
+      }
+      </div>
     </main>
   );
 }
