@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head />
-      <body>
+      <body className="max-h-screen	overscroll-auto	bg-no-repeat bg-gradient-greenToWhite225deg">
         <Main />
         <NextScript />
       </body>
