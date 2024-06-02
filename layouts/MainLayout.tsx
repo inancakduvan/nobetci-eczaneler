@@ -22,7 +22,7 @@ const MainLayout: React.FC <{ children: React.ReactNode }> = ({ children }) => {
 
   return (
       <div className={`${urbanist.className}`}>
-        <div className="-z-50 fixed left-0 top-0 bg-gradient-greenToWhite225deg text-semantic-light w-full h-[400px]"></div>
+        <div className="-z-50 block fixed left-0 top-0 bg-gradient-greenToWhite225deg text-semantic-light w-full h-[400px]"></div>
         {children}
       </div>
   )
