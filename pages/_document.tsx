@@ -4,8 +4,10 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head />
-      <body className="max-h-screen	overscroll-auto	bg-no-repeat bg-gradient-greenToWhite225deg">
-        <Main />
+      <body>
+        <div id="appContainer" className="max-h-screen w-full overflow-auto bg-no-repeat bg-gradient-greenToWhite225deg">
+          <Main />
+        </div>
         <NextScript />
       </body>
     </Html>
