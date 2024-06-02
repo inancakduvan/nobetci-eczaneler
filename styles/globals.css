@@ -22,7 +22,7 @@ html {
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: #fff;
+  background: #FAFAFA;
 }
 
 @layer utilities {

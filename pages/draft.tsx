@@ -28,9 +28,9 @@ export default function Draft()  {
 
   return (
     <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24`}
-    >
-      <p className="bg-gradient-whiteToBlack text-semantic-warning p-16 text-body-medium shadow-ultra-soft">{t("testTitle")}</p>
+      className={`flex min-h-screen flex-col items-center justify-between p-24`}>
+
+      <p className="bg-gradient-greenToWhite225deg text-semantic-warning p-16 text-body-medium shadow-ultra-soft">{t("testTitle")}</p>
 
       {selectedCity && <p>Selected city: {selectedCity}</p>}
 
