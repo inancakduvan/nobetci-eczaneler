@@ -45,10 +45,10 @@ const GlobalContext = createContext<ContextProps>({
     pharmacies: [],
     setPharmacies: (): Array<TPharmacies> => [{
         "name": "",
-        "dist": "KONAK",
-        "address": "156 SOK. NO:15 HATAY",
-        "phone": "2322430037",
-        "loc": "38.402917,27.105986"
+        "dist": "",
+        "address": "",
+        "phone": "",
+        "loc": ""
     }],
 
     selectedCity: "",
@@ -69,10 +69,10 @@ export const GlobalContextProvider : React.FC <{ children: React.ReactNode }> = 
 
     const [pharmacies, setPharmacies] = useState([{
         "name": "",
-        "dist": "KONAK",
-        "address": "156 SOK. NO:15 HATAY",
-        "phone": "2322430037",
-        "loc": "38.402917,27.105986"
+        "dist": "",
+        "address": "",
+        "phone": "",
+        "loc": ""
     }]);
 
     const [selectedCity, setSelectedCity] = useState('');
