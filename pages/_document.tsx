@@ -5,7 +5,7 @@ export default function Document() {
     <Html lang="en">
       <Head />
       <body>
-        <div id="appContainer" className="max-h-screen w-full overflow-auto bg-no-repeat bg-gradient-greenToWhite225deg">
+        <div id="appContainer" className="max-h-screen max-w-[640px] my-0 mx-auto w-full overflow-auto bg-no-repeat bg-muted-400 text-onText-primary">
           <Main />
         </div>
         <NextScript />

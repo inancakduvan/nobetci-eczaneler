@@ -1,6 +1,6 @@
 import MainLayout from "@/layouts/MainLayout";
 
-import { Button } from '@/components/Button';
+import { Button } from '@/elements/Button';
 
 import useTranslation from "next-translate/useTranslation";
 import setLanguage from 'next-translate/setLanguage'
