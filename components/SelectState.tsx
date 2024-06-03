@@ -146,9 +146,9 @@ const SelectState: TSelectState = ({stateType}) => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ delay: 0.04 * index }}
+                    key={"city-" + state}
                 >
                     <div className="flex items-center justify-between px-medium text-subheading-medium h-[60px] border-b border-solid border-muted-700" 
-                        key={"city-" + state}
                         onClick={() => setCityAndDistrict(state)}>
                         {state} 
                         {(stateType === "city" && isResultsLoading && state === selectedCity) && <span className="loader"></span>}
