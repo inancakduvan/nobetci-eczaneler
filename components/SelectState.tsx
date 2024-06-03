@@ -14,6 +14,8 @@ type TSelectState = React.FC<{
     stateType: "city" | "district";
 }>;
 
+let isDistrictsFetched:boolean = false;
+
 const SelectState: TSelectState = ({stateType}) => {
     const router = useRouter();
 
@@ -69,20 +71,24 @@ const SelectState: TSelectState = ({stateType}) => {
 
     useEffect(() => {
         if(selectedCity) {
-            setIsResultsLoading(true);
+            if(!isDistrictsFetched) {
+                setIsResultsLoading(true);
 
-            fetch(DISTRICTS_ENDPOINT + "?city=" + selectedCity)
-            .then(response => response.json())
-            .then(data => {
-                if(data.success) {
-                    const result = data.result.map((district: {text: string}) => district.text);
-                    setDistricts(result);
-                    setIsResultsLoading(false);
-                    router.push("/district");
-                } else {
-                    router.push("/city");
-                }
-            })
+                fetch(DISTRICTS_ENDPOINT + "?city=" + selectedCity)
+                .then(response => response.json())
+                .then(data => {
+                    if(data.success) {
+                        const result = data.result.map((district: {text: string}) => district.text);
+                        setDistricts(result);
+                        setIsResultsLoading(false);
+                        router.push("/district");
+                    } else {
+                        router.push("/city");
+                    }
+                })
+
+                isDistrictsFetched = true;
+            }
         } else {
             router.push("/city");
         }
