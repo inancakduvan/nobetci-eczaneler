@@ -101,6 +101,9 @@ const config: Config = {
         'medium': '16px',
         'large': '24px',
         'xlarge': '32px'
+      },
+      height: {
+        'fit-screen': 'calc(var(--vh, 1vh) * 100)',
       }
     },
   },

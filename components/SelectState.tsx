@@ -63,6 +63,10 @@ const SelectState: TSelectState = ({stateType}) => {
         }
     }, [cities])
 
+    if(true) {
+
+    }
+
     return (
         <>
             <div className="z-10 sticky top-0 left-0 w-full bg-muted-400 pb-medium">
