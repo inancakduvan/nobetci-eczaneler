@@ -123,6 +123,7 @@ const SelectState: TSelectState = ({stateType}) => {
     const goBack = () => {
         setSearchedResultList([]);
         setSelectedCity("");
+        isDistrictsFetched = false;
     }
 
     if(searchedResultList.length === 0) {
