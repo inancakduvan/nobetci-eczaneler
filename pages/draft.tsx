@@ -86,7 +86,7 @@ export default function Draft()  {
       }
 
       {
-        (districts.length > 0 && pharmacies.length === 0) && districts.map((district) => <div key={"district-" + district.text} className="pt-1 pointer" onClick={() => setSelectedDistrict(district.text)}>{district.text}</div>)
+        (districts.length > 0 && pharmacies.length === 0) && districts.map((district) => <div key={"district-" + district} className="pt-1 pointer" onClick={() => setSelectedDistrict(district)}>{district}</div>)
       }
 
       {
