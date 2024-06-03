@@ -52,22 +52,6 @@ const SelectState: TSelectState = ({stateType}) => {
                 setCities(data);
             })
         }
-
-        if(stateType === "district") {
-            if(selectedCity) {
-                fetch(DISTRICTS_ENDPOINT + "?city=" + selectedCity)
-                .then(response => response.json())
-                .then(data => {
-                    if(data.success) {
-                        setDistricts(data.result);
-                    } else {
-                        router.push("/city");
-                    }
-                })
-            } else {
-                router.push("/city");
-            }
-        }
     }, [])
 
     useEffect(() => {
@@ -83,7 +67,16 @@ const SelectState: TSelectState = ({stateType}) => {
 
     useEffect(() => {
         if(selectedCity) {
-            router.push("/district");
+            fetch(DISTRICTS_ENDPOINT + "?city=" + selectedCity)
+            .then(response => response.json())
+            .then(data => {
+                if(data.success) {
+                    setDistricts(data.result);
+                    router.push("/district");
+                } else {
+                    router.push("/city");
+                }
+            })
         } else {
             router.push("/city");
         }
