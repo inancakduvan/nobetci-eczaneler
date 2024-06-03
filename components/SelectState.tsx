@@ -3,6 +3,7 @@ import { Icon } from "@/elements/Icon";
 import { useGlobalContext } from "@/stores/globalStore";
 import useTranslation from "next-translate/useTranslation";
 import { useEffect, useMemo, useState } from "react";
+import { motion } from "framer-motion";
 
 import Fuse from "fuse.js";
 
@@ -138,12 +139,21 @@ const SelectState: TSelectState = ({stateType}) => {
             </div>
 
             <div className={"relative mt-medium px-medium pb-medium" + (isResultsLoading ? " pointer-events-none" : "")}>
-                {searchedResultList && searchedResultList.length > 0 && searchedResultList.map((state) => <div className="flex items-center justify-between px-medium text-subheading-medium h-[60px] border-b border-solid border-muted-700" 
-                    key={"city-" + state}
-                    onClick={() => setCityAndDistrict(state)}>
-                    {state} 
-                    {(stateType === "city" && isResultsLoading && state === selectedCity) && <span className="loader"></span>}
-                </div>)}
+                {searchedResultList && searchedResultList.length > 0 && searchedResultList.map((state, index) => 
+                <motion.div 
+                    custom={index}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ delay: 0.04 * index }}
+                >
+                    <div className="flex items-center justify-between px-medium text-subheading-medium h-[60px] border-b border-solid border-muted-700" 
+                        key={"city-" + state}
+                        onClick={() => setCityAndDistrict(state)}>
+                        {state} 
+                        {(stateType === "city" && isResultsLoading && state === selectedCity) && <span className="loader"></span>}
+                    </div>
+                </motion.div>)}
             </div>
         </>
     )
