@@ -1,5 +1,8 @@
 {
     "testTitle": "whoooa!",
     "pharmaciesOnDuty": "Pharmacies on Duty",
-    "selectCity": "SELECT CITY"
+    "selectCity": "SELECT CITY",
+    "selectDistrict": "SELECT DISTRICT",
+    "searchCity": "Search...",
+    "searchDistrict": "Search..."
 }

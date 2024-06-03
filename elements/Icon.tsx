@@ -21,13 +21,14 @@ type TIcon = React.FC<{
   stroke?: string;
   fill?: string;
   className?: string;
+  onClick?: Function;
 }>;
 
 type TIconSet = {
   [name:string]: ReactElement;
 };
 
-export const Icon: TIcon = ({ name, size = 20, stroke = "#fff", fill = "transparent", className }) => {
+export const Icon: TIcon = ({ name, size = 20, stroke = "#fff", fill = "transparent", className, onClick }) => {
   const [iconSet, setIconSet] = useState<TIconSet>();
 
   useEffect(() => {
@@ -54,7 +55,7 @@ export const Icon: TIcon = ({ name, size = 20, stroke = "#fff", fill = "transpar
     <>
       {
         iconSet ?
-          <svg className={className ? " " + className : ""} width={size} height={size} stroke={stroke} fill={fill} viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <svg onClick={onClick ? () => onClick() : undefined} className={className ? " " + className : ""} width={size} height={size} stroke={stroke} fill={fill} viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
             { iconSet[name as keyof TIconSet] } 
           </svg>
         :

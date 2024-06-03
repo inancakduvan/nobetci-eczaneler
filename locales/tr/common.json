@@ -1,5 +1,8 @@
 {
     "testTitle": "üüüfff!",
     "pharmaciesOnDuty": "Nöbetçi Eczaneler",
-    "selectCity": "İL SEÇİMİ YAPIN"
+    "selectCity": "İL SEÇİMİ YAPIN",
+    "selectDistrict": "İLÇE SEÇİMİ YAPIN",
+    "searchCity": "Şehir ara...",
+    "searchDistrict": "İlçe ara..."
 }
