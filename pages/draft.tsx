@@ -20,7 +20,8 @@ export default function Draft()  {
       .then(response => response.json())
       .then(data => {
         if (data.success) {
-          setDistricts(data.result);
+          const result = data.result.map((district: {text: string}) => district.text);
+          setDistricts(result);
         }
       })
     }

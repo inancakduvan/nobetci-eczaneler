@@ -2,10 +2,6 @@
 
 import { createContext, useContext, Dispatch, SetStateAction, useState } from "react";
 
-type TDistricts = {
-    text: string
-}
-
 type TPharmacies = {
     name: string,
     dist: string,
@@ -18,8 +14,8 @@ interface ContextProps {
     cities: Array<string>,
     setCities: Dispatch<SetStateAction<Array<string>>>,
 
-    districts: TDistricts[] | never[],
-    setDistricts: Dispatch<SetStateAction<TDistricts[]>> | Dispatch<SetStateAction<never[]>>,
+    districts: string[] | never[],
+    setDistricts: Dispatch<SetStateAction<string[]>> | Dispatch<SetStateAction<never[]>>,
 
     pharmacies: TPharmacies[] | never[],
     setPharmacies: Dispatch<SetStateAction<TPharmacies[]>> | Dispatch<SetStateAction<never[]>>,
@@ -36,7 +32,7 @@ const GlobalContext = createContext<ContextProps>({
     setCities: (): Array<string> => [""],
 
     districts: [],
-    setDistricts: (): TDistricts[] | never[] => [],
+    setDistricts: (): string[] | never[] => [],
 
     pharmacies: [],
     setPharmacies: (): TPharmacies[] | never[] => [],

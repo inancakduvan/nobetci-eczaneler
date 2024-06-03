@@ -28,6 +28,7 @@ const SelectState: TSelectState = ({stateType}) => {
 
     const { cities, setCities, districts, setDistricts, selectedCity, setSelectedCity, selectedDistrict, setSelectedDistrict } = useGlobalContext();
 
+    const [isResultsLoading, setIsResultsLoading] = useState<boolean>(false);
     const [searchedResultList, setSearchedResultList] = useState<string[]>([]);
     const [searchedValue, setSearchedValue] = useState<string>("");
 
@@ -36,7 +37,7 @@ const SelectState: TSelectState = ({stateType}) => {
     };
     
     const fuse = useMemo(() => {
-        const results = stateType === "city" ? cities : districts.map((district) => district.text);
+        const results = stateType === "city" ? cities : districts;
         return new Fuse(results, fuseOptions);
     }, [cities, districts]);
 
@@ -55,7 +56,7 @@ const SelectState: TSelectState = ({stateType}) => {
     }, [])
 
     useEffect(() => {
-        const results = stateType === "city" ? cities : districts.map((district) => district.text);
+        const results = stateType === "city" ? cities : districts;
 
         if(searchResults.length === 0) {
             setSearchedResultList(results);
@@ -67,11 +68,15 @@ const SelectState: TSelectState = ({stateType}) => {
 
     useEffect(() => {
         if(selectedCity) {
+            setIsResultsLoading(true);
+
             fetch(DISTRICTS_ENDPOINT + "?city=" + selectedCity)
             .then(response => response.json())
             .then(data => {
                 if(data.success) {
-                    setDistricts(data.result);
+                    const result = data.result.map((district: {text: string}) => district.text);
+                    setDistricts(result);
+                    setIsResultsLoading(false);
                     router.push("/district");
                 } else {
                     router.push("/city");
@@ -94,8 +99,7 @@ const SelectState: TSelectState = ({stateType}) => {
         }
 
         if(stateType === "district") {
-            const _districts = districts.map((district) => district.text);
-            setSearchedResultList(_districts);
+            setSearchedResultList(districts);
         }
     }, [cities, districts])
 
@@ -133,11 +137,12 @@ const SelectState: TSelectState = ({stateType}) => {
                 </div>
             </div>
 
-            <div className="relative mt-medium px-medium pb-medium">
-                {searchedResultList && searchedResultList.length > 0 && searchedResultList.map((state) => <div className="flex items-center px-medium text-subheading-medium h-[60px] border-b border-solid border-muted-700" 
+            <div className={"relative mt-medium px-medium pb-medium" + (isResultsLoading ? " pointer-events-none" : "")}>
+                {searchedResultList && searchedResultList.length > 0 && searchedResultList.map((state) => <div className="flex items-center justify-between px-medium text-subheading-medium h-[60px] border-b border-solid border-muted-700" 
                     key={"city-" + state}
                     onClick={() => setCityAndDistrict(state)}>
-                    {state}
+                    {state} 
+                    {(stateType === "city" && isResultsLoading && state === selectedCity) && <span className="loader"></span>}
                 </div>)}
             </div>
         </>
