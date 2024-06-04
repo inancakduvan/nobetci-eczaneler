@@ -29,10 +29,10 @@ interface ContextProps {
 
 const GlobalContext = createContext<ContextProps>({
     cities: [],
-    setCities: (): Array<string> => [""],
+    setCities: (): Array<string> => [],
 
     districts: [],
-    setDistricts: (): Array<string> => [""],
+    setDistricts: (): Array<string> => [],
 
     pharmacies: [],
     setPharmacies: (): TPharmacies[] | never[] => [],
