@@ -181,6 +181,7 @@ const SelectState: TSelectState = ({stateType}) => {
         setSelectedCity("");
         localStorage.removeItem(SELECTED_CITY_KEY);
         isDistrictsFetched = false;
+        router.push("/city");
     }
 
     if(searchedResultList.length === 0) {
