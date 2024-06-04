@@ -1,0 +1,92 @@
+.skeletton-page {
+    z-index: 20;
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 16px;
+    width: 100%;
+    height: calc(var(--vh, 1vh) * 100);
+}
+
+.skeletton-wrapper {
+    padding: 16px;
+    border-radius: 4px;
+}
+  
+.skeletton-wrapper:nth-child(odd) {
+    background-color: #eee;
+}
+
+.skeletton-wrapper:nth-child(even) {
+    background-color: #ddd;
+}
+
+.skeletton {
+    width: 360px;
+    height: 100px;
+    display: block;
+    position: relative;
+    background-image: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.5) 50%, transparent 80%), linear-gradient(#FFF 20px, transparent 0), linear-gradient(#FFF 20px, transparent 0), linear-gradient(#FFF 20px, transparent 0);
+    background-repeat: no-repeat;
+    background-size: 75px 100px,  125px 20px, 260px 20px, 260px 20px;
+    background-position: 0% 0, 120px 0, 120px 40px, 120px 80px;
+    box-sizing: border-box;
+    animation: animloader 1s linear infinite;
+}
+
+.skeletton::after {
+    content: '';  
+    box-sizing: border-box;
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    background: #FFF;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.skeletton-top {
+    width: 320px;
+    height: 150px;
+    display: block;
+    margin: auto;
+    position: relative;
+    background: #FFF;
+    box-sizing: border-box;
+  }
+  .skeletton-top::after {
+    content: '';  
+    width: calc(100% - 30px);
+    height: calc(100% - 30px);
+    top: 15px;
+    left: 15px;
+    position: absolute;
+    background-image: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.5) 50%, transparent 80%), radial-gradient(circle 28px at 28px 28px, #DDD 99%, transparent 0), linear-gradient(#DDD 24px, transparent 0), linear-gradient(#DDD 18px, transparent 0), linear-gradient(#DDD 66px, transparent 0);
+    background-repeat: no-repeat;
+    background-size: 75px 130px, 55px 56px, 160px 30px, 260px 20px, 290px 56px;
+    background-position: 0% 0, 0 0, 70px 5px, 70px 38px, 0px 66px;
+    box-sizing: border-box;
+    animation: animloaderTitle 1s linear infinite;
+  }
+  
+  @keyframes animloaderTitle {
+    0% {
+      background-position: 0% 0, 0 0, 70px 5px, 70px 38px, 0px 66px;
+    }
+    100% {
+      background-position: 150% 0, 0 0, 70px 5px, 70px 38px, 0px 66px;
+    }
+  }
+
+@keyframes animloader {
+    0% {
+        background-position: 0% 0, 120px 0, 120px 40px, 120px 80px;
+    }
+    100% {
+        background-position: 100% 0, 120px 0, 120px 40px, 120px 80px;
+    }
+}

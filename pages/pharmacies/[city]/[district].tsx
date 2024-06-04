@@ -1,4 +1,5 @@
 import { constants } from "@/constants";
+import Skeletton from "@/elements/Skeletton/Skeletton";
 import MainLayout from "@/layouts/MainLayout";
 import { useGlobalContext } from "@/stores/globalStore";
 import useTranslation from "next-translate/useTranslation";
@@ -39,7 +40,7 @@ export default function Pharmacies()  {
   return (
     <>
        {
-        (pharmacies.length > 0) && <>
+        (pharmacies.length > 0) ? <>
         <div className="text-heading-large mb-2">{t("pharmaciesOnDuty")}</div>
         {
           pharmacies.map((pharmacy) => <div key={"pharmacy-" + pharmacy.name + pharmacy.loc} className="shadow border border-muted-700 bg-muted-500 p-3 border-solid mb-4 pointer" onClick={() => console.log(pharmacy)}>
@@ -51,6 +52,8 @@ export default function Pharmacies()  {
           </div>)
         }
         </>
+        :
+        <Skeletton />
       }
     </>
   );

@@ -1,3 +1,4 @@
+import Skeletton from "@/elements/Skeletton/Skeletton";
 import MainLayout from "@/layouts/MainLayout";
 import { useGlobalContext } from "@/stores/globalStore";
 import { useRouter } from "next/router";
@@ -8,20 +9,21 @@ export default function Home()  {
 
   const { cities, setCities, districts, setDistricts, selectedCity, setSelectedCity, selectedDistrict, setSelectedDistrict } = useGlobalContext();
 
-  useEffect(() => {
-    if(!selectedDistrict) {
-      router.push("/city");
-    }
-  }, [])
+  // useEffect(() => {
+  //   if(!selectedDistrict) {
+  //     router.push("/city");
+  //   }
+  // }, [])
 
-  if(!selectedDistrict) {
-    return "";
-  }
+  // if(!selectedDistrict) {
+  //   return "";
+  // }
 
   return (
     <>
-      Homepage <br/><br/>
-      {selectedDistrict}
+      <div className="text-primary-700">
+        Home
+      </div>
     </>
   );
 }
