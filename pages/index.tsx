@@ -9,12 +9,12 @@ export default function Home()  {
   const { cities, setCities, districts, setDistricts, selectedCity, setSelectedCity, selectedDistrict, setSelectedDistrict } = useGlobalContext();
 
   useEffect(() => {
-    if(!selectedDistrict || !selectedCity) {
+    if(!selectedDistrict) {
       router.push("/city");
     }
   }, [])
 
-  if(!selectedDistrict || !selectedCity) {
+  if(!selectedDistrict) {
     return "";
   }
 

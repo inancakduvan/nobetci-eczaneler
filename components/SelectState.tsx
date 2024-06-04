@@ -14,10 +14,20 @@ type TSelectState = React.FC<{
     stateType: "city" | "district";
 }>;
 
+type TDistrictsResponseResult = {
+    text: string;
+}
+
+type TDistrictsResponse = {
+    success: boolean;
+    result: TDistrictsResponseResult[];
+}
+
 let isDistrictsFetched:boolean = false;
 
 const SelectState: TSelectState = ({stateType}) => {
     const router = useRouter();
+    const cityParamater = router.query.city ? router.query.city.toString() : "";
 
     const TAILWIND_COLORS = tailwindConfig?.theme?.extend?.colors;
     // @ts-ignore: Unreachable code error
@@ -27,7 +37,7 @@ const SelectState: TSelectState = ({stateType}) => {
     
     const { t } = useTranslation('common');
 
-    const { CITIES_ENDPOINT, DISTRICTS_ENDPOINT } = constants;
+    const { CITIES_ENDPOINT, DISTRICTS_ENDPOINT, SELECTED_CITY_KEY, SELECTED_DISTRICT_KEY } = constants;
 
     const { cities, setCities, districts, setDistricts, selectedCity, setSelectedCity, selectedDistrict, setSelectedDistrict } = useGlobalContext();
 
@@ -56,6 +66,30 @@ const SelectState: TSelectState = ({stateType}) => {
                 setCities(data);
             })
         }
+
+        if(stateType === "district") {
+            if(!selectedCity) {
+                setIsResultsLoading(true);
+
+                if(!isDistrictsFetched) {
+
+                    fetchDistricts(cityParamater, 
+                        (data: TDistrictsResponse) => {
+                            const result = data.result.map((item) => item.text);
+                            
+                            setDistricts(result);
+                            setIsResultsLoading(false);
+                            router.push("/district/" + cityParamater?.toString().toLowerCase());
+                        },
+                        () => {
+                            router.push("/city");
+                        }
+                    )
+
+                    isDistrictsFetched = true;
+                }
+            }
+        }
     }, [])
 
     useEffect(() => {
@@ -70,33 +104,43 @@ const SelectState: TSelectState = ({stateType}) => {
     }, [searchResults])
 
     useEffect(() => {
-        if(selectedCity) {
-            if(!isDistrictsFetched) {
-                setIsResultsLoading(true);
+        if(stateType === "city") {
+            if(selectedCity) {
+                if (window) {
+                    localStorage.setItem(SELECTED_CITY_KEY, selectedCity);
+                }
+    
+                if(!isDistrictsFetched) {
+                    setIsResultsLoading(true);
 
-                fetch(DISTRICTS_ENDPOINT + "?city=" + selectedCity)
-                .then(response => response.json())
-                .then(data => {
-                    if(data.success) {
-                        const result = data.result.map((district: {text: string}) => district.text);
-                        setDistricts(result);
-                        setIsResultsLoading(false);
-                        router.push("/district");
-                    } else {
-                        router.push("/city");
-                    }
-                })
-
-                isDistrictsFetched = true;
+                    fetchDistricts(selectedCity, 
+                        (data: TDistrictsResponse) => {
+                            const result = data.result.map((item) => item.text);
+                            
+                            setDistricts(result);
+                            setIsResultsLoading(false);
+                            router.push("/district/" + selectedCity.toLowerCase());
+                        },
+                        () => {
+                            router.push("/city");
+                        }
+                    )
+    
+                    isDistrictsFetched = true;
+                }
+            } else {
+                router.push("/city");
             }
-        } else {
-            router.push("/city");
         }
     }, [selectedCity])
 
     useEffect(() => {
         if(selectedDistrict) {
-            router.push("/");
+            if (window) {
+                localStorage.setItem(selectedDistrict, selectedDistrict);
+            }
+
+            router.push("/pharmacies/" + (selectedCity.toLowerCase() || cityParamater.toLowerCase()) + "/" + selectedDistrict.toLowerCase());
         }
     }, [selectedDistrict])
 
@@ -120,9 +164,22 @@ const SelectState: TSelectState = ({stateType}) => {
         }
     }
 
+    const fetchDistricts = (city: string, onSuccess: Function, onError: Function) => {
+        fetch(DISTRICTS_ENDPOINT + "?city=" + city)
+        .then(response => response.json())
+        .then(data => {
+            if(data.success) {
+                onSuccess(data);
+            } else {
+                onError(data);
+            }
+        })
+    }
+
     const goBack = () => {
         setSearchedResultList([]);
         setSelectedCity("");
+        localStorage.removeItem(SELECTED_CITY_KEY);
         isDistrictsFetched = false;
     }
 
@@ -151,7 +208,6 @@ const SelectState: TSelectState = ({stateType}) => {
                     custom={index}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
                     transition={{ delay: 0.04 * index }}
                     key={"city-" + state}
                 >

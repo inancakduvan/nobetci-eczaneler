@@ -14,8 +14,8 @@ interface ContextProps {
     cities: Array<string>,
     setCities: Dispatch<SetStateAction<Array<string>>>,
 
-    districts: string[] | never[],
-    setDistricts: Dispatch<SetStateAction<string[]>> | Dispatch<SetStateAction<never[]>>,
+    districts: Array<string>,
+    setDistricts: Dispatch<SetStateAction<Array<string>>>,
 
     pharmacies: TPharmacies[] | never[],
     setPharmacies: Dispatch<SetStateAction<TPharmacies[]>> | Dispatch<SetStateAction<never[]>>,
@@ -32,7 +32,7 @@ const GlobalContext = createContext<ContextProps>({
     setCities: (): Array<string> => [""],
 
     districts: [],
-    setDistricts: (): string[] | never[] => [],
+    setDistricts: (): Array<string> => [""],
 
     pharmacies: [],
     setPharmacies: (): TPharmacies[] | never[] => [],
@@ -47,7 +47,7 @@ const GlobalContext = createContext<ContextProps>({
 export const GlobalContextProvider : React.FC <{ children: React.ReactNode }> = ({ children }) => {
     const [cities, setCities] = useState([""]);
 
-    const [districts, setDistricts] = useState([]);
+    const [districts, setDistricts] = useState([""]);
 
     const [pharmacies, setPharmacies] = useState([]);
 
