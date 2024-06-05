@@ -1,4 +1,4 @@
-import { constants } from "@/constants";
+import { StorageKeys } from "@/enums";
 import Skeletton from "@/elements/Skeletton/Skeletton";
 import MainLayout from "@/layouts/MainLayout";
 import { useGlobalContext } from "@/stores/globalStore";
@@ -10,7 +10,7 @@ export default function Home()  {
 
   const { cities, setCities, districts, setDistricts, selectedCity, setSelectedCity, selectedDistrict, setSelectedDistrict } = useGlobalContext();
   
-  const { SELECTED_CITY_KEY, SELECTED_DISTRICT_KEY } = constants; 
+  const { SELECTED_CITY_KEY, SELECTED_DISTRICT_KEY } = StorageKeys; 
 
   useEffect(() => {
     if(window) {

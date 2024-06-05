@@ -4,5 +4,7 @@
     "selectCity": "İL SEÇİMİ YAPIN",
     "selectDistrict": "İLÇE SEÇİMİ YAPIN",
     "searchCity": "Şehir ara...",
-    "searchDistrict": "İlçe ara..."
+    "searchDistrict": "İlçe ara...",
+    "errorMessage": "Bir hata oluştu.",
+    "goBack": "Geri Dön"
 }

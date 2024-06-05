@@ -1,10 +1,11 @@
-import { constants } from "@/constants";
+import { EndPoints } from "@/enums";
 import Skeletton from "@/elements/Skeletton/Skeletton";
 import MainLayout from "@/layouts/MainLayout";
 import { useGlobalContext } from "@/stores/globalStore";
 import useTranslation from "next-translate/useTranslation";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Button } from "@/elements/Button";
 
 export default function Pharmacies()  {
   const { t } = useTranslation('common');
@@ -13,9 +14,11 @@ export default function Pharmacies()  {
   const cityParamater = router.query.city?.toString();
   const districtParamater = router.query.district?.toString();
 
-  const { PHARMACIES_ENDPOINT } = constants;
+  const { PHARMACIES_ENDPOINT } = EndPoints;
 
   const { cities, setCities, districts, setDistricts, selectedCity, setSelectedCity, selectedDistrict, setSelectedDistrict, pharmacies, setPharmacies } = useGlobalContext();
+
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     if(cityParamater && districtParamater) {
@@ -25,11 +28,11 @@ export default function Pharmacies()  {
             if (data.success) {
                 setPharmacies(data.result);
             } else {
-                router.push("/city");
+                setHasError(true);
             }
         })
     } else {
-        router.push("/city");
+        setHasError(true);
     }
   }, [])
 
@@ -53,7 +56,22 @@ export default function Pharmacies()  {
         }
         </>
         :
-        <Skeletton />
+        <>
+        {
+          hasError ?
+          <div className="w-full h-fit-screen flex items-center justify-center bg-black/10">
+            <div className="inline-flex flex-col px-large py-medium bg-white shadow-ultra-soft rounded">
+              <div className="text-body-medium">
+                {t("errorMessage")}
+              </div>
+
+              <Button type="primary" text={t("goBack")} />
+            </div>
+          </div>
+          :
+          <Skeletton />
+        }
+        </>
       }
     </>
   );

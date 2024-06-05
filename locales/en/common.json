@@ -4,5 +4,7 @@
     "selectCity": "SELECT CITY",
     "selectDistrict": "SELECT DISTRICT",
     "searchCity": "Search...",
-    "searchDistrict": "Search..."
+    "searchDistrict": "Search...",
+    "errorMessage": "An error occured.",
+    "goBack": "Go Back"
 }

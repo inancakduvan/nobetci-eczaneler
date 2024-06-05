@@ -6,10 +6,10 @@ import useTranslation from "next-translate/useTranslation";
 import setLanguage from 'next-translate/setLanguage'
 import { useGlobalContext } from "@/stores/globalStore";
 import { useEffect } from "react";
-import { constants } from "@/constants";
+import { EndPoints, StorageKeys } from "@/enums";
 
 export default function Draft()  {
-  const { DISTRICTS_ENDPOINT, PHARMACIES_ENDPOINT } = constants;
+  const { DISTRICTS_ENDPOINT, PHARMACIES_ENDPOINT } = EndPoints;
 
   const { t } = useTranslation('common');
   const { selectedCity, setSelectedCity, selectedDistrict, setSelectedDistrict, pharmacies, setPharmacies, cities, districts, setDistricts } = useGlobalContext();
