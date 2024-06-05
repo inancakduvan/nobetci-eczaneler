@@ -177,7 +177,7 @@ const SelectState: TSelectState = ({stateType}) => {
         <>
             <div className="z-10 sticky top-0 left-0 w-full bg-muted-400 pb-medium">
                 <div className="relative py-large px-medium text-center text-heading-large text-primary-700 bg-semantic-light border border-solid border-muted-light">
-                    {stateType === "district" && <div className="absolute left-[16px] top-[50%] translate-y-[-50%] inline-flex text-primary-400"><IconArrowLeft size={24} /></div>}
+                    {stateType === "district" && <div className="absolute left-[16px] top-[50%] translate-y-[-50%] inline-flex text-primary-400" onClick={goBack}><IconArrowLeft size={24} /></div>}
                     
                     {stateType === "city" ? t("selectCity") : t("selectDistrict")}
                 </div>
