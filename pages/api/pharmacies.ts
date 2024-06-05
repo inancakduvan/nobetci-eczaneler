@@ -5,7 +5,7 @@ export const config = {
 };
 
 export default async function handler(req: NextRequest) {
-    const envMode = process.env.ENV_MODE;
+    const dataType = process.env.DATA_TYPE;
     const key = process.env.PHARMACY_API_KEY;
     const params = req.nextUrl.searchParams;
     const city = params.get("city");
@@ -32,7 +32,7 @@ export default async function handler(req: NextRequest) {
     }
 
     try {
-        if(envMode !== "development") {
+        if(dataType !== "mock") {
             if (!city || !district) {
                 return new Response("Missing parameters", { status: 400 });
             }
