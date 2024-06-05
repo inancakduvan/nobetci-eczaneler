@@ -19,7 +19,7 @@ export default async function handler(req: NextRequest) {
                 text: "BORNOVA"
             },
             {
-                text: "BALÇOVA"
+                text: process.env.DATA_TYPE
             }
         ]
     }
