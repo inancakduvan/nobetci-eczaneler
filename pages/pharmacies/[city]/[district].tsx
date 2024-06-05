@@ -61,11 +61,11 @@ export default function Pharmacies()  {
           hasError ?
           <div className="w-full h-fit-screen flex items-center justify-center bg-black/10">
             <div className="inline-flex flex-col px-large py-medium bg-white shadow-ultra-soft rounded">
-              <div className="text-body-medium">
+              <div className="text-body-medium mb-medium">
                 {t("errorMessage")}
               </div>
 
-              <Button type="primary" text={t("goBack")} />
+              <Button type="primary" text={t("goBack")} onClick={() => router.push("/city")} />
             </div>
           </div>
           :
