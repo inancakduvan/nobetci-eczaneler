@@ -23,8 +23,6 @@ type TDistrictsResponse = {
     result: TDistrictsResponseResult[];
 }
 
-let isDistrictsFetched:boolean = false;
-
 const SelectState: TSelectState = ({stateType}) => {
     const router = useRouter();
     const cityParamater = router.query.city ? router.query.city.toString() : "";
@@ -71,23 +69,18 @@ const SelectState: TSelectState = ({stateType}) => {
             if(!selectedCity) {
                 setIsResultsLoading(true);
 
-                if(!isDistrictsFetched) {
-
-                    fetchDistricts(cityParamater, 
-                        (data: TDistrictsResponse) => {
-                            const result = data.result.map((item) => item.text);
-                            
-                            setDistricts(result);
-                            setIsResultsLoading(false);
-                            router.push("/district/" + cityParamater?.toString().toLowerCase());
-                        },
-                        () => {
-                            router.push("/city");
-                        }
-                    )
-
-                    isDistrictsFetched = true;
-                }
+                fetchDistricts(cityParamater, 
+                    (data: TDistrictsResponse) => {
+                        const result = data.result.map((item) => item.text);
+                        
+                        setDistricts(result);
+                        setIsResultsLoading(false);
+                        router.push("/district/" + cityParamater?.toString().toLowerCase());
+                    },
+                    () => {
+                        router.push("/city");
+                    }
+                )
             }
         }
     }, [])
@@ -110,24 +103,20 @@ const SelectState: TSelectState = ({stateType}) => {
                     localStorage.setItem(SELECTED_CITY_KEY, selectedCity);
                 }
     
-                if(!isDistrictsFetched) {
-                    setIsResultsLoading(true);
+                setIsResultsLoading(true);
 
-                    fetchDistricts(selectedCity, 
-                        (data: TDistrictsResponse) => {
-                            const result = data.result.map((item) => item.text);
-                            
-                            setDistricts(result);
-                            setIsResultsLoading(false);
-                            router.push("/district/" + selectedCity.toLowerCase());
-                        },
-                        () => {
-                            router.push("/city");
-                        }
-                    )
-    
-                    isDistrictsFetched = true;
-                }
+                fetchDistricts(selectedCity, 
+                    (data: TDistrictsResponse) => {
+                        const result = data.result.map((item) => item.text);
+                        
+                        setDistricts(result);
+                        setIsResultsLoading(false);
+                        router.push("/district/" + selectedCity.toLowerCase());
+                    },
+                    () => {
+                        router.push("/city");
+                    }
+                )
             } else {
                 router.push("/city");
             }
@@ -137,7 +126,7 @@ const SelectState: TSelectState = ({stateType}) => {
     useEffect(() => {
         if(selectedDistrict) {
             if (window) {
-                localStorage.setItem(selectedDistrict, selectedDistrict);
+                localStorage.setItem(SELECTED_DISTRICT_KEY, selectedDistrict);
             }
 
             router.push("/pharmacies/" + (selectedCity.toLowerCase() || cityParamater.toLowerCase()) + "/" + selectedDistrict.toLowerCase());
@@ -180,7 +169,6 @@ const SelectState: TSelectState = ({stateType}) => {
         setSearchedResultList([]);
         setSelectedCity("");
         localStorage.removeItem(SELECTED_CITY_KEY);
-        isDistrictsFetched = false;
         router.push("/city");
     }
 
