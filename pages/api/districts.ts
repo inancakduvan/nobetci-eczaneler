@@ -19,15 +19,38 @@ export default async function handler(req: NextRequest) {
                 text: "BORNOVA"
             },
             {
-                text: process.env.DATA_TYPE
+                text: "BALÇOVA"
             }
         ]
     }
 
     try {
-        return new Response(JSON.stringify(mockData), {
-            status: 200
-        });
+        if(process.env.DATA_TYPE == "mock") {
+            return new Response(JSON.stringify(mockData), {
+                status: 200
+            });
+        } else {
+            if (!city) {
+                return new Response("Missing parameters", { status: 400 });
+            }
+    
+            const url = `https://api.collectapi.com/health/districtList?il=${city}`;
+    
+            const response = await fetch(url, {
+                mode: 'cors',
+                headers: {
+                    "Access-Control-Allow-Origin" : "*",
+                    "Authorization" : 'apikey ' + key,
+                    "Content-Type" : "application/json"
+                }
+            });
+            
+            const data = await response.json();
+    
+            return new Response(JSON.stringify(data), {
+                status: 200
+            });
+        }
     } catch (error) {
         if (error instanceof Error) {
             return new Response(error.message, { status: 500 });
