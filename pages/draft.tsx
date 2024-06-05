@@ -2,6 +2,8 @@ import MainLayout from "@/layouts/MainLayout";
 
 import { Button } from '@/elements/Button';
 
+import { IconPhone } from '@tabler/icons-react';
+
 import useTranslation from "next-translate/useTranslation";
 import setLanguage from 'next-translate/setLanguage'
 import { useGlobalContext } from "@/stores/globalStore";
@@ -53,14 +55,14 @@ export default function Draft()  {
       <Button 
         type="primary"
         text="Change Lang"
-        icon="phone"
+        Icon={IconPhone}
         className="mb-5"
         onClick={async () => await setLanguage('en')}
       />
 
       <Button 
         type="primary-light"
-        icon="search"
+        Icon={IconPhone}
         className="mb-5"
         onClick={async () => await setLanguage('en')}
       />
@@ -68,7 +70,7 @@ export default function Draft()  {
       <Button 
         type="secondary"
         text="Haritada Gör"
-        icon="arrow-right"
+        Icon={IconPhone}
         iconPosition="right"
         className="mb-5"
         onClick={async () => await setLanguage('tr')}
@@ -76,7 +78,7 @@ export default function Draft()  {
 
       <Button 
         type="rounded"
-        icon="search"
+        Icon={IconPhone}
         onClick={async () => await setLanguage('tr')}
       />
 

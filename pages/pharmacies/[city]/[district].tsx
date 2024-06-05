@@ -7,6 +7,8 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Button } from "@/elements/Button";
 
+import { IconArrowLeft } from "@tabler/icons-react";
+
 export default function Pharmacies()  {
   const { t } = useTranslation('common');
   const router = useRouter();
@@ -65,7 +67,7 @@ export default function Pharmacies()  {
                 {t("errorMessage")}
               </div>
 
-              <Button type="primary" text={t("goBack")} onClick={() => router.push("/city")} />
+              <Button type="primary" Icon={IconArrowLeft} text={t("goBack")} onClick={() => router.push("/city")} />
             </div>
           </div>
           :
