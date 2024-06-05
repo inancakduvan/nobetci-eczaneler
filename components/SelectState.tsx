@@ -1,4 +1,4 @@
-import { constants } from "@/constants";
+import { EndPoints, StorageKeys } from "@/enums";
 import { Icon } from "@/elements/Icon";
 import { useGlobalContext } from "@/stores/globalStore";
 import useTranslation from "next-translate/useTranslation";
@@ -35,7 +35,8 @@ const SelectState: TSelectState = ({stateType}) => {
     
     const { t } = useTranslation('common');
 
-    const { CITIES_ENDPOINT, DISTRICTS_ENDPOINT, SELECTED_CITY_KEY, SELECTED_DISTRICT_KEY } = constants;
+    const { CITIES_ENDPOINT, DISTRICTS_ENDPOINT } = EndPoints;
+    const { SELECTED_CITY_KEY, SELECTED_DISTRICT_KEY } = StorageKeys;
 
     const { cities, setCities, districts, setDistricts, selectedCity, setSelectedCity, selectedDistrict, setSelectedDistrict } = useGlobalContext();
 
