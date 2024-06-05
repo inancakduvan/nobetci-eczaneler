@@ -5,7 +5,7 @@ export const config = {
 };
 
 export default async function handler(req: NextRequest) {
-    const envMode = process.env.NODE_ENV;
+    const envMode = process.env.ENV_MODE;
     const key = process.env.PHARMACY_API_KEY;
     const params = req.nextUrl.searchParams;
     const city = params.get("city");
