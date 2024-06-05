@@ -5,31 +5,53 @@ export const config = {
 };
 
 export default async function handler(req: NextRequest) {
+    const envMode = process.env.NODE_ENV;
     const key = process.env.PHARMACY_API_KEY;
     const params = req.nextUrl.searchParams;
     const city = params.get("city");
 
-    try {
-        if (!city) {
-            return new Response("Missing parameters", { status: 400 });
-        }
-
-        const url = `https://api.collectapi.com/health/districtList?il=${city}`;
-
-        const response = await fetch(url, {
-            mode: 'cors',
-            headers: {
-                "Access-Control-Allow-Origin" : "*",
-                "Authorization" : 'apikey ' + key,
-                "Content-Type" : "application/json"
+    const mockData = {
+        success: true,
+        result: [
+            {
+                text: "KONAK"
+            },
+            {
+                text: "BORNOVA"
+            },
+            {
+                text: "BALÇOVA"
             }
-        });
-        
-        const data = await response.json();
+        ]
+    }
 
-        return new Response(JSON.stringify(data), {
-            status: 200
-        });
+    try {
+        if(envMode !== "development") {
+            if (!city) {
+                return new Response("Missing parameters", { status: 400 });
+            }
+    
+            const url = `https://api.collectapi.com/health/districtList?il=${city}`;
+    
+            const response = await fetch(url, {
+                mode: 'cors',
+                headers: {
+                    "Access-Control-Allow-Origin" : "*",
+                    "Authorization" : 'apikey ' + key,
+                    "Content-Type" : "application/json"
+                }
+            });
+            
+            const data = await response.json();
+    
+            return new Response(JSON.stringify(data), {
+                status: 200
+            });
+        } else {
+            return new Response(JSON.stringify(mockData), {
+                status: 200
+            });
+        }
     } catch (error) {
         if (error instanceof Error) {
             return new Response(error.message, { status: 500 });
