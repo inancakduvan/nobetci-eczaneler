@@ -6,12 +6,18 @@ import { IconPhone } from '@tabler/icons-react';
 
 import useTranslation from "next-translate/useTranslation";
 import setLanguage from 'next-translate/setLanguage'
-import { useGlobalContext } from "@/stores/globalStore";
+import { TPharmacies, useGlobalContext } from "@/stores/globalStore";
 import { useEffect } from "react";
-import { EndPoints, StorageKeys } from "@/enums";
+import { EndPoints } from "@/enums";
+import { fetchPharmacies } from "@/utils/fetch";
+
+type TPharmaciesResponse = {
+  success: boolean;
+  result: TPharmacies[];
+}
 
 export default function Draft()  {
-  const { DISTRICTS_ENDPOINT, PHARMACIES_ENDPOINT } = EndPoints;
+  const { DISTRICTS_ENDPOINT } = EndPoints;
 
   const { t } = useTranslation('common');
   const { selectedCity, setSelectedCity, selectedDistrict, setSelectedDistrict, pharmacies, setPharmacies, cities, districts, setDistricts } = useGlobalContext();
@@ -31,13 +37,11 @@ export default function Draft()  {
 
   useEffect(() => {
     if(selectedDistrict) {
-      fetch(PHARMACIES_ENDPOINT + "?city=" + selectedCity + "&district=" + selectedDistrict )
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
+      fetchPharmacies(selectedCity, selectedDistrict, 
+        (data: TPharmaciesResponse) => {
           setPharmacies(data.result);
         }
-      })
+      )
     }
   }, [selectedDistrict]);
 

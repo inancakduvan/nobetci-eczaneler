@@ -2,7 +2,7 @@
 
 import { createContext, useContext, Dispatch, SetStateAction, useState } from "react";
 
-type TPharmacies = {
+export type TPharmacies = {
     name: string,
     dist: string,
     address: string,
@@ -11,20 +11,20 @@ type TPharmacies = {
 }
 
 interface ContextProps {
-    cities: Array<string>,
-    setCities: Dispatch<SetStateAction<Array<string>>>,
+    cities: Array<string>;
+    setCities: Dispatch<SetStateAction<Array<string>>>;
 
-    districts: Array<string>,
-    setDistricts: Dispatch<SetStateAction<Array<string>>>,
+    districts: Array<string>;
+    setDistricts: Dispatch<SetStateAction<Array<string>>>;
 
-    pharmacies: TPharmacies[] | never[],
-    setPharmacies: Dispatch<SetStateAction<TPharmacies[]>> | Dispatch<SetStateAction<never[]>>,
+    pharmacies: TPharmacies[];
+    setPharmacies: Dispatch<SetStateAction<Array<TPharmacies>>>;
 
-    selectedCity: string,
-    setSelectedCity: Dispatch<SetStateAction<string>>,
+    selectedCity: string;
+    setSelectedCity: Dispatch<SetStateAction<string>>;
 
-    selectedDistrict: string,
-    setSelectedDistrict: Dispatch<SetStateAction<string>>
+    selectedDistrict: string;
+    setSelectedDistrict: Dispatch<SetStateAction<string>>;
 }
 
 const GlobalContext = createContext<ContextProps>({
@@ -35,7 +35,7 @@ const GlobalContext = createContext<ContextProps>({
     setDistricts: (): Array<string> => [],
 
     pharmacies: [],
-    setPharmacies: (): TPharmacies[] | never[] => [],
+    setPharmacies: () => [],
 
     selectedCity: "",
     setSelectedCity: (): string => "",
@@ -45,11 +45,11 @@ const GlobalContext = createContext<ContextProps>({
 })
 
 export const GlobalContextProvider : React.FC <{ children: React.ReactNode }> = ({ children }) => {
-    const [cities, setCities] = useState([""]);
+    const [cities, setCities] = useState<Array<string>>([]);
 
-    const [districts, setDistricts] = useState([""]);
+    const [districts, setDistricts] = useState<Array<string>>([]);
 
-    const [pharmacies, setPharmacies] = useState([]);
+    const [pharmacies, setPharmacies] = useState<Array<TPharmacies>>([]);
 
     const [selectedCity, setSelectedCity] = useState('');
     const [selectedDistrict, setSelectedDistrict] = useState('');

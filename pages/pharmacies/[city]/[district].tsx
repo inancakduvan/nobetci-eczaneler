@@ -1,13 +1,18 @@
-import { EndPoints } from "@/enums";
 import Skeletton from "@/elements/Skeletton/Skeletton";
 import MainLayout from "@/layouts/MainLayout";
-import { useGlobalContext } from "@/stores/globalStore";
+import { TPharmacies, useGlobalContext } from "@/stores/globalStore";
 import useTranslation from "next-translate/useTranslation";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { Button } from "@/elements/Button";
 
 import { IconArrowLeft } from "@tabler/icons-react";
+import { fetchPharmacies } from "@/utils/fetch";
+
+type TPharmaciesResponse = {
+  success: boolean;
+  result: TPharmacies[];
+}
 
 export default function Pharmacies()  {
   const { t } = useTranslation('common');
@@ -16,23 +21,23 @@ export default function Pharmacies()  {
   const cityParamater = router.query.city?.toString();
   const districtParamater = router.query.district?.toString();
 
-  const { PHARMACIES_ENDPOINT } = EndPoints;
-
-  const { cities, setCities, districts, setDistricts, selectedCity, setSelectedCity, selectedDistrict, setSelectedDistrict, pharmacies, setPharmacies } = useGlobalContext();
+  const { selectedCity, selectedDistrict, pharmacies, setPharmacies } = useGlobalContext();
 
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     if(cityParamater && districtParamater) {
-        fetch(PHARMACIES_ENDPOINT + "?city=" + (selectedCity.toLowerCase() || cityParamater.toLowerCase()) + "&district=" + (selectedDistrict.toLowerCase() || districtParamater.toLowerCase()))
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                setPharmacies(data.result);
-            } else {
-                setHasError(true);
-            }
-        })
+      const _city = (selectedCity.toLowerCase() || cityParamater.toLowerCase());
+      const _district = (selectedDistrict.toLowerCase() || districtParamater.toLowerCase());
+
+      fetchPharmacies(_city, _district, 
+        (data: TPharmaciesResponse) => {
+          setPharmacies(data.result);
+        },
+        () => {
+          setHasError(true);
+        }
+      );
     } else {
         setHasError(true);
     }
@@ -45,7 +50,7 @@ export default function Pharmacies()  {
   return (
     <>
        {
-        (pharmacies.length > 0) ? <>
+        (pharmacies && pharmacies.length > 0) ? <>
         <div className="text-heading-large mb-2">{t("pharmaciesOnDuty")}</div>
         {
           pharmacies.map((pharmacy) => <div key={"pharmacy-" + pharmacy.name + pharmacy.loc} className="shadow border border-muted-700 bg-muted-500 p-3 border-solid mb-4 pointer" onClick={() => console.log(pharmacy)}>

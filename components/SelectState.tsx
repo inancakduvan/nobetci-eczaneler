@@ -9,7 +9,8 @@ import { motion } from "framer-motion";
 
 import {IconArrowLeft, IconSearch } from '@tabler/icons-react';
 
-import { EndPoints, StorageKeys } from "@/enums";
+import { StorageKeys } from "@/enums";
+import { fetchCities, fetchDistricts } from "@/utils/fetch";
 
 
 type TSelectState = React.FC<{
@@ -31,7 +32,6 @@ const SelectState: TSelectState = ({stateType}) => {
     
     const { t } = useTranslation('common');
 
-    const { CITIES_ENDPOINT, DISTRICTS_ENDPOINT } = EndPoints;
     const { SELECTED_CITY_KEY, SELECTED_DISTRICT_KEY } = StorageKeys;
 
     const { cities, setCities, districts, setDistricts, selectedCity, setSelectedCity, selectedDistrict, setSelectedDistrict } = useGlobalContext();
@@ -55,11 +55,9 @@ const SelectState: TSelectState = ({stateType}) => {
 
     useEffect(() => {
         if(stateType === "city") {
-            fetch(CITIES_ENDPOINT)
-            .then(response => response.json())
-            .then(data => {
+            fetchCities((data: string[]) => {
                 setCities(data);
-            })
+            });
         }
 
         if(stateType === "district") {
@@ -148,18 +146,6 @@ const SelectState: TSelectState = ({stateType}) => {
         if(stateType === "district") {
             setSelectedDistrict(name);
         }
-    }
-
-    const fetchDistricts = (city: string, onSuccess: Function, onError: Function) => {
-        fetch(DISTRICTS_ENDPOINT + "?city=" + city)
-        .then(response => response.json())
-        .then(data => {
-            if(data.success) {
-                onSuccess(data);
-            } else {
-                onError(data);
-            }
-        })
     }
 
     const goBack = () => {

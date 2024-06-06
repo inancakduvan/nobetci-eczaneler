@@ -1,14 +1,11 @@
 import { StorageKeys } from "@/enums";
 import Skeletton from "@/elements/Skeletton/Skeletton";
 import MainLayout from "@/layouts/MainLayout";
-import { useGlobalContext } from "@/stores/globalStore";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 export default function Home()  {
   const router = useRouter();
-
-  const { cities, setCities, districts, setDistricts, selectedCity, setSelectedCity, selectedDistrict, setSelectedDistrict } = useGlobalContext();
   
   const { SELECTED_CITY_KEY, SELECTED_DISTRICT_KEY } = StorageKeys; 
 
