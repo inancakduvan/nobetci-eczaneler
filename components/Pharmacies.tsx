@@ -84,7 +84,7 @@ const Pharmacies: TPharmaciesComponent = ({city, district}) => {
                         <>
                         {
                             (pharmacies && pharmacies.length > 0) ? 
-                            <div className="mt-medium">
+                            <div className="mt-medium pb-[104px]">
                                 {
                                 pharmacies.map((pharmacy) => <div key={"pharmacy-" + pharmacy.name + pharmacy.loc} className="shadow-ultra-soft border border-muted-700 border-solid bg-semantic-light mb-medium rounded-lg">
                                     <div className="p-medium border-b border-solid border-muted-600 text-heading-medium text-onText-primary">
