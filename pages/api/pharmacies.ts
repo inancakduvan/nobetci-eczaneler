@@ -19,14 +19,49 @@ export default async function handler(req: NextRequest) {
                 dist: "Konak",
                 address: "730/2 sk, Zerafet mahallesi",
                 phone: "2324201313",
-                loc: "23,127, 31,231"
+                loc: "38,24, 27,81"
             },
             {
                 name: "ŞUKUFE ECZANESİ",
                 dist: "Konak",
                 address: "730/2 sk, Zerafet mahallesi",
                 phone: "2324201313",
-                loc: "23,127, 31,231"
+                loc: "38,10, 27,31"
+            },
+            {
+                name: "ŞUKUFE ECZANESİ",
+                dist: "Konak",
+                address: "730/2 sk, Zerafet mahallesi",
+                phone: "2324201313",
+                loc: "38,10, 27,32"
+            },
+            {
+                name: "ŞUKUFE ECZANESİ",
+                dist: "Konak",
+                address: "730/2 sk, Zerafet mahallesi",
+                phone: "2324201313",
+                loc: "38,10, 27,33"
+            },
+            {
+                name: "ŞUKUFE ECZANESİ",
+                dist: "Konak",
+                address: "730/2 sk, Zerafet mahallesi",
+                phone: "2324201313",
+                loc: "38,10, 27,34"
+            },
+            {
+                name: "ŞUKUFE ECZANESİ",
+                dist: "Konak",
+                address: "730/2 sk, Zerafet mahallesi",
+                phone: "2324201313",
+                loc: "38,10, 27,35"
+            },
+            {
+                name: "ŞUKUFE ECZANESİ",
+                dist: "Konak",
+                address: "730/2 sk, Zerafet mahallesi",
+                phone: "2324201313",
+                loc: "38,10, 27,36"
             }
         ]
     }

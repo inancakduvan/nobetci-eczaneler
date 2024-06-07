@@ -37,16 +37,27 @@ export const Button: TButton = ({ type, text, Icon, iconPosition = "left", iconC
     }
   }
 
+  const getIconColor = ():string => {
+    switch(type) {
+      case "secondary":
+        return "text-primary-400";
+      case "rounded":
+        return "text-primary-700";
+      default:
+        return "text-primary-light";
+    }
+  }
+
   return (
     <button
         className={"inline-flex items-center justify-center gap-[8px] pointer duration-300 active:opacity-80 sm:hover:opacity-80 " + (getButtonClassName()) + (className ? " " + className : "")}
         onClick={onClick ? () => onClick() : undefined}
     >
-        {Icon && iconPosition !== "right" ? <div className={iconClassName ? iconClassName : ""}><Icon size={getIconSize()}  /></div> : null}
+        {Icon && iconPosition !== "right" ? <div className={getIconColor() + (iconClassName ? " " + iconClassName : "")}><Icon size={getIconSize()}  /></div> : null}
 
         {text ? text : null}
 
-        {Icon && iconPosition === "right" ? <div className={iconClassName ? iconClassName : ""}><Icon size={getIconSize()}  /></div> : null}
+        {Icon && iconPosition === "right" ? <div className={getIconColor() + (iconClassName ? " " + iconClassName : "")}><Icon size={getIconSize()}  /></div> : null}
     </button>
   );
 };

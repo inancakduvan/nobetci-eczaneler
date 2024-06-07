@@ -35,17 +35,17 @@ const config: Config = {
         }],
         'body-xsmall': ['0.75rem', {
           lineHeight: '1rem',
-          fontWeight: '500',
+          fontWeight: '400',
           letterSpacing: "0.25px"
         }],
         'body-small': ['0.875rem', {
           lineHeight: '1.15rem',
-          fontWeight: '500',
+          fontWeight: '400',
           letterSpacing: "0.25px"
         }],
         'body-medium': ['1rem', {
           lineHeight: '1.5rem',
-          fontWeight: '500',
+          fontWeight: '400',
           letterSpacing: "0.25px"
         }],
       },
@@ -93,17 +93,31 @@ const config: Config = {
         'soft': '0 4px 4px 0 rgba(0, 0, 0, 0.05)',
         'ultra-soft': '5px 10px 10px -10px rgba(0, 0, 0, 0.05)',
       },
+      gap: {
+        'xsmall': '4px',
+        'small': '8px',
+        'medium': '16px',
+        'large': '24px',
+        'xlarge': '32px'
+      },
       padding: {
+        'xsmall': '4px',
+        'small': '8px',
         'medium': '16px',
         'large': '24px',
         'xlarge': '32px'
       },
       margin: {
+        'xsmall': '4px',
+        'small': '8px',
         'medium': '16px',
         'large': '24px',
         'xlarge': '32px'
       },
       height: {
+        'fit-screen': 'calc(var(--vh, 1vh) * 100)',
+      },
+      minHeight: {
         'fit-screen': 'calc(var(--vh, 1vh) * 100)',
       }
     },

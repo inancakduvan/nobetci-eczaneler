@@ -1,6 +1,6 @@
 import Skeletton from "@/elements/Skeletton/Skeletton";
 import MainLayout from "@/layouts/MainLayout";
-import { TPharmacies, useGlobalContext } from "@/stores/globalStore";
+import { useGlobalContext } from "@/stores/globalStore";
 import useTranslation from "next-translate/useTranslation";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -8,11 +8,7 @@ import { Button } from "@/elements/Button";
 
 import { IconArrowLeft } from "@tabler/icons-react";
 import { fetchPharmacies } from "@/utils/fetch";
-
-type TPharmaciesResponse = {
-  success: boolean;
-  result: TPharmacies[];
-}
+import { TPharmaciesResponse } from "@/components/Pharmacies";
 
 export default function Pharmacies()  {
   const { t } = useTranslation('common');
