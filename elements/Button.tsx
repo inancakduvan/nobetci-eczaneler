@@ -44,7 +44,7 @@ export const Button: TButton = ({ type, text, Icon, iconPosition = "left", iconC
       case "rounded":
         return "text-primary-700";
       default:
-        return "text-primary-light";
+        return "text-onText-light";
     }
   }
 

@@ -103,8 +103,12 @@ const Pharmacies: TPharmaciesComponent = ({city, district}) => {
                                         </div>
                                     </div>
 
-                                    <div className="flex items-center justify-end p-medium">
+                                    <div className="flex items-center justify-end gap-medium p-medium">
                                         <Button type="secondary" text={"Haritada Gör"} Icon={IconArrowRight} iconPosition="right" onClick={() => redirectToMap(pharmacy.loc)} />
+                                        
+                                        <a href={"tel:" + pharmacy.phone}>
+                                            <Button type="primary-light" className="md:hidden" Icon={IconPhoneCall} />
+                                        </a>
                                     </div>
                                 </div>)
                                 }
