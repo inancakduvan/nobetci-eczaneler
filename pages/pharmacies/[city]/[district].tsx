@@ -10,6 +10,9 @@ import { IconArrowLeft } from "@tabler/icons-react";
 import { fetchPharmacies } from "@/utils/fetch";
 import { TPharmaciesResponse } from "@/components/Pharmacies";
 
+import PharmaciesComponent from "@/components/Pharmacies";
+
+
 export default function Pharmacies()  {
   const { t } = useTranslation('common');
   const router = useRouter();
@@ -45,37 +48,7 @@ export default function Pharmacies()  {
 
   return (
     <>
-       {
-        (pharmacies && pharmacies.length > 0) ? <>
-        <div className="text-heading-large mb-2">{t("pharmaciesOnDuty")}</div>
-        {
-          pharmacies.map((pharmacy) => <div key={"pharmacy-" + pharmacy.name + pharmacy.loc} className="shadow border border-muted-700 bg-muted-500 p-3 border-solid mb-4 pointer" onClick={() => console.log(pharmacy)}>
-            {pharmacy.name} <br/>
-            {pharmacy.dist} <br/>
-            {pharmacy.address} <br/>
-            {pharmacy.phone} <br/>
-            {pharmacy.loc} <br/>
-          </div>)
-        }
-        </>
-        :
-        <>
-        {
-          hasError ?
-          <div className="w-full h-fit-screen flex items-center justify-center bg-black/10">
-            <div className="inline-flex flex-col px-large py-medium bg-white shadow-ultra-soft rounded">
-              <div className="text-body-medium mb-medium">
-                {t("errorMessage")}
-              </div>
-
-              <Button type="primary" Icon={IconArrowLeft} text={t("goBack")} onClick={() => router.push("/city")} />
-            </div>
-          </div>
-          :
-          <Skeletton />
-        }
-        </>
-      }
+       <PharmaciesComponent city={cityParamater} district={districtParamater} />
     </>
   );
 }

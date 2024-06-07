@@ -54,7 +54,7 @@ const config: Config = {
         "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         "gradient-greenToWhite225deg": "linear-gradient(225deg, #E4FFF0, #FAFAFA 30%)",
         "gradient-whiteToTransparent90deg": "linear-gradient(90deg, #fff, rgba(255, 255, 255, 0.3) 30%)",
-        "gradient-whiteToBlack": "linear-gradient(0, rgba(187, 187, 187, 1), rgba(187, 187, 187, 0.3) 30%)",
+        "gradient-whiteToBlack": "linear-gradient(0, rgba(187, 187, 187, 1), rgba(187, 187, 187, 0) 30%)",
       },
       colors: {
         primary: {
@@ -98,21 +98,24 @@ const config: Config = {
         'small': '8px',
         'medium': '16px',
         'large': '24px',
-        'xlarge': '32px'
+        'xlarge': '32px',
+        'xxlarge': '48px'
       },
       padding: {
         'xsmall': '4px',
         'small': '8px',
         'medium': '16px',
         'large': '24px',
-        'xlarge': '32px'
+        'xlarge': '32px',
+        'xxlarge': '48px'
       },
       margin: {
         'xsmall': '4px',
         'small': '8px',
         'medium': '16px',
         'large': '24px',
-        'xlarge': '32px'
+        'xlarge': '32px',
+        'xxlarge': '48px'
       },
       height: {
         'fit-screen': 'calc(var(--vh, 1vh) * 100)',

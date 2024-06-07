@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import useTranslation from "next-translate/useTranslation";
-import { IconInfoCircle, IconArrowLeft, IconPhone, IconPhoneCall, IconArrowRight } from "@tabler/icons-react";
+import { IconInfoCircle, IconArrowLeft, IconPhone, IconPhoneCall, IconArrowRight, IconAdjustmentsHorizontal } from "@tabler/icons-react";
 
 import { fetchPharmacies } from "@/utils/fetch";
 import { TPharmacies, useGlobalContext } from "@/stores/globalStore";
@@ -134,6 +134,10 @@ const Pharmacies: TPharmaciesComponent = ({city, district}) => {
                         </>
                     </div>
                 </div>
+            </div>
+
+            <div className="fixed left-0 bottom-0 flex items-center justify-center gap-medium w-full px-medium py-xxlarge bg-gradient-whiteToBlack">
+                <Button type="primary" text={district} Icon={IconAdjustmentsHorizontal} className="capitalize" onClick={() => router.push("/district/" + city)} />
             </div>
         </>
     )
