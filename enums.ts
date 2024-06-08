@@ -7,6 +7,7 @@ export enum EndPoints {
 export enum StorageKeys {
     SELECTED_CITY_KEY =  "NOBETCI_ECZANELER_NCZ_SELECTED_CITY",
     SELECTED_DISTRICT_KEY =  "NOBETCI_ECZANELER_NCZ_SELECTED_DISTRICT",
+    LAST_TEN_CITY_DISTRICT =  "NOBETCI_ECZANELER_NCZ_LAST_TEN_CITY_DISTRICT",
 }
 
 export const Months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
