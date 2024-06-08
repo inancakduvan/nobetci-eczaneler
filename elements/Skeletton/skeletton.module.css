@@ -1,6 +1,6 @@
 .skeletton-page {
     z-index: 60;
-    position: fixed;
+    position: absolute;
     left: 0;
     top: 0;
     display: flex;
@@ -9,6 +9,7 @@
     padding: 16px;
     width: 100%;
     height: calc(var(--vh, 1vh) * 100);
+    background: #fafafa;
 }
 
 .skeletton-wrapper {
@@ -25,6 +26,7 @@
 }
 
 .skeletton {
+  max-width: 100%;
     width: 360px;
     height: 100px;
     display: block;

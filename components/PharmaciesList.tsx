@@ -105,9 +105,8 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
                         </div>
                     </div>
 
-                    <div className="mt-xlarge">
+                    <div className="relative mt-xlarge">
                         <div className="text-heading-large text-onText-subdark">{t("pharmaciesOnDuty")}</div>
-
                         <>
                         {
                             (pharmacies && pharmacies.length > 0) ? 
@@ -173,9 +172,12 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
                 </div>
             </div>
 
+           {
+            pharmacies.length > 0 &&  
             <div className="fixed left-0 bottom-0 flex items-center justify-center gap-medium w-full px-medium py-xxlarge bg-gradient-whiteToBlack">
                 <Button type="primary" text={district} Icon={IconAdjustmentsHorizontal} className="capitalize" onClick={() => router.push("/district/" + city)} />
             </div>
+           }
         </>
     )
 }

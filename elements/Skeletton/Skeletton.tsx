@@ -5,10 +5,6 @@ const Skeletton = () => {
     return (
        <div className={styles["skeletton-page"]}>
             <div className={styles["skeletton-wrapper"]}>
-                <div className={styles["skeletton-top"]}></div>
-            </div>
-
-            <div className={styles["skeletton-wrapper"]}>
                 <div className={styles["skeletton"]}></div>
             </div>
 
