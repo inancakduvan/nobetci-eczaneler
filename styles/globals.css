@@ -25,6 +25,10 @@ body {
   background: #FAFAFA;
 }
 
+.bg-blur {
+  backdrop-filter: blur(100px);
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

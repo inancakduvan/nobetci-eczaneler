@@ -46,11 +46,26 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
     const [currentLocation, setCurrentLocation] = useState<TCurrentLocation | null>();
     const [closestPharmacy, setClosestPharmacy] = useState<TPharmacies | null>();
 
+    const [isPageScrolled, setIsPageScrolled] = useState<boolean>(false);
     const [isFilterButtonLoading, setIsFilterButtonLoading] = useState<boolean>(false);
     const [hasError, setHasError] = useState(false);
 
     useEffect(() => {
+        const onScroll = (event: Event) => {
+            const scrollTop = (event.target as HTMLElement).scrollTop;
+
+            if(scrollTop > 30) {
+                setIsPageScrolled(true);
+            } else {
+                setIsPageScrolled(false);
+            }
+        }
+
         if(window) {
+            // Window scroll
+            document.getElementById("appContainer")?.addEventListener("scroll", onScroll);
+
+            // Date
             const date = new Date();
             
             const _dayOfWeek = t(Days[date.getDay()]);
@@ -67,6 +82,7 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
             setYear(_year);
             setDate(_date);
 
+            // Permission
             navigator.permissions.query({ name: 'geolocation' })
             .then((permisssion) => {
                 const state = permisssion.state;
@@ -78,7 +94,7 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
                     })
                 }   
             })
-    }
+        }
 
         if(city && district) {
             fetchPharmacies(city, district, 
@@ -91,6 +107,10 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
             );
         } else {
             setHasError(true);
+        }
+
+        return () => {
+            document.getElementById("appContainer")?.removeEventListener("scroll", onScroll);
         }
     }, [])
 
@@ -154,9 +174,11 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
         <>
             <div className="bg-gradient-greenToWhite225deg min-h-fit-screen">
                 <div className="p-medium">
-                    <div className="p-medium bg-semantic-light shadow-ultra-soft border border-solid border-muted-700 rounded-lg">
-                        <div className="text-heading-medium text-onText-primary">{date}</div>
-                        <div className="text-subheading-xsmall text-primary-700 mt-xsmall capitalize">{city} / {district}</div>
+                    <div className={"transition-all flex items-center justify-center" + (isPageScrolled ? " z-20 fixed left-0 top-0 w-full" : "")}>
+                        <div className={"max-w-[640px] w-full p-medium shadow-ultra-soft border-solid border-muted-700" + (isPageScrolled ? " bg-gradient-whiteToTransparent90deg bg-blur border-b" : " bg-semantic-light border rounded-lg")}>
+                            <div className="text-heading-medium text-onText-primary">{date}</div>
+                            <div className="text-subheading-xsmall text-primary-700 mt-xsmall capitalize">{city} / {district}</div>
+                        </div>
                     </div>
 
                     <div className="mt-medium">
@@ -177,7 +199,7 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
                         {
                             (pharmacies && pharmacies.length > 0) ? 
                             
-                                <div className="flex flex-col mt-medium pb-[104px]">
+                                <div className="flex flex-col mt-medium pb-[92px]">
                                     {
                                     pharmacies.map((pharmacy, index) => 
                                     <motion.div 
