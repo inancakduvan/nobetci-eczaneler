@@ -22,6 +22,11 @@ export type TPharmaciesResponse = {
   result: TPharmacies[];
 }
 
+type TCurrentLocation = {
+    latitude: number;
+    longitude: number;
+}
+
 const PharmaciesList: TPharmaciesList = ({city, district}) => {
     const router = useRouter();
 
@@ -38,7 +43,8 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
 
     const [isCurrentLocationModelOpen, setIsCurrentLocationModelOpen] = useState<boolean>(false);
     const [currentLocationStatus, setCurrentLocationStatus] = useState<string>("prompt");
-    const [currentLocation, setCurrentLocation] = useState<Object>({});
+    const [currentLocation, setCurrentLocation] = useState<TCurrentLocation | null>();
+    const [closestPharmacy, setClosestPharmacy] = useState<TPharmacies | null>();
 
 
     const [hasError, setHasError] = useState(false);
@@ -89,7 +95,9 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
     }, [])
 
     useEffect(() => {
-        console.log(currentLocation);
+        if(currentLocation) {
+            findClosestPharmacy(currentLocation.latitude, currentLocation.longitude);
+        }
     }, [currentLocation])
 
     const redirectToMap = (coordinates: string) => {
@@ -111,6 +119,27 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
         }, function(error) {
             setCurrentLocationStatus("denied");
         });
+    }
+
+    const findClosestPharmacy = (userLat: number = 0, userLng: number = 0) => {    
+        let closest = 0;
+        let closestPharmacy = null;
+
+        for (let item of pharmacies) {
+            const location = item.loc.split(",");
+            const lat = userLat - Number(location[0]);
+            const lng = userLng - Number(location[1]);
+
+    
+            const distance = Math.sqrt((lat * lat) + (lng * lng));
+    
+            if (!closest || distance < closest) {
+                closest = distance;
+                closestPharmacy = item;
+            }
+        }
+    
+        setClosestPharmacy(closestPharmacy);
     }
 
     if(!(city && district)) {
@@ -144,7 +173,7 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
                         {
                             (pharmacies && pharmacies.length > 0) ? 
                             
-                                <div className="mt-medium pb-[104px]">
+                                <div className="flex flex-col mt-medium pb-[104px]">
                                     {
                                     pharmacies.map((pharmacy, index) => 
                                     <motion.div 
@@ -153,10 +182,11 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
                                     animate={{ opacity: 1 }}
                                     transition={{ delay: 0.04 * index }}
                                     key={"pharmacy-" + pharmacy.name + pharmacy.phone + pharmacy.loc}
+                                    className={(closestPharmacy && (closestPharmacy.phone === pharmacy.phone)) ? "-order-1" : ""}
                                     >
                                         <div  className="shadow-ultra-soft border border-muted-700 border-solid bg-semantic-light mb-medium rounded-lg">
                                             <div className="p-medium border-b border-solid border-muted-600 text-heading-medium text-onText-primary">
-                                                {pharmacy.name}
+                                                {pharmacy.name} {(closestPharmacy && (closestPharmacy.phone === pharmacy.phone)) && " (En yakın)"}
                                             </div>
 
                                             <div className="px-medium pt-small pb-medium">

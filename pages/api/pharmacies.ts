@@ -15,31 +15,17 @@ export default async function handler(req: NextRequest) {
         success: true,
         result: [
             {
-                name: "DAMLA ECZANESİ",
-                dist: "Konak",
-                address: "730/2 sk, Zerafet mahallesi",
-                phone: "2324201313",
-                loc: "38.423142,27.162524"
-            },
-            {
                 name: "ŞUKUFE ECZANESİ",
                 dist: "Konak",
                 address: "730/2 sk, Zerafet mahallesi",
-                phone: "2324201313",
-                loc: "38.423142,27.162524"
+                phone: "2324201312",
+                loc: "37.423142,27.162524"
             },
             {
                 name: "DAMLA ECZANESİ",
                 dist: "Konak",
                 address: "730/2 sk, Zerafet mahallesi",
-                phone: "2324201313",
-                loc: "38.423142,27.162524"
-            },
-            {
-                name: "ŞUKUFE ECZANESİ",
-                dist: "Konak",
-                address: "730/2 sk, Zerafet mahallesi",
-                phone: "2324201313",
+                phone: "2324201311",
                 loc: "38.423142,27.162524"
             },
             {
@@ -47,28 +33,42 @@ export default async function handler(req: NextRequest) {
                 dist: "Konak",
                 address: "730/2 sk, Zerafet mahallesi",
                 phone: "2324201313",
-                loc: "38.423142,27.162524"
+                loc: "35.423142,27.162524"
             },
             {
                 name: "ŞUKUFE ECZANESİ",
                 dist: "Konak",
                 address: "730/2 sk, Zerafet mahallesi",
                 phone: "2324201313",
-                loc: "38.423142,27.162524"
+                loc: "34.423142,27.162524"
             },
             {
                 name: "DAMLA ECZANESİ",
                 dist: "Konak",
                 address: "730/2 sk, Zerafet mahallesi",
                 phone: "2324201313",
-                loc: "38.423142,27.162524"
+                loc: "33.423142,27.162524"
             },
             {
                 name: "ŞUKUFE ECZANESİ",
                 dist: "Konak",
                 address: "730/2 sk, Zerafet mahallesi",
                 phone: "2324201313",
-                loc: "38.423142,27.162524"
+                loc: "32.423142,27.162524"
+            },
+            {
+                name: "DAMLA ECZANESİ",
+                dist: "Konak",
+                address: "730/2 sk, Zerafet mahallesi",
+                phone: "2324201313",
+                loc: "31.423142,27.162524"
+            },
+            {
+                name: "ŞUKUFE ECZANESİ",
+                dist: "Konak",
+                address: "730/2 sk, Zerafet mahallesi",
+                phone: "2324201313",
+                loc: "30.423142,27.162524"
             }
         ]
     }
