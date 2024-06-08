@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import useTranslation from "next-translate/useTranslation";
 import { motion } from "framer-motion";
 
-import { IconInfoCircle, IconArrowLeft, IconPhone, IconPhoneCall, IconArrowRight, IconAdjustmentsHorizontal, IconCurrentLocation } from "@tabler/icons-react";
+import { IconInfoCircle, IconArrowLeft, IconPhone, IconPhoneCall, IconArrowRight, IconAdjustmentsHorizontal, IconCurrentLocation, IconStarFilled } from "@tabler/icons-react";
 
 import { fetchPharmacies } from "@/utils/fetch";
 import { TPharmacies, useGlobalContext } from "@/stores/globalStore";
@@ -53,7 +53,8 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
         if(window) {
             const date = new Date();
             
-            const _dayOfWeek = t(Days[date.getDay() - 1]);
+            const _dayIndex = date.getDay() - 1;
+            const _dayOfWeek = t(Days[(_dayIndex < 0 ? 6 : _dayIndex)]);
             const _nextDayOfWeek = t(Days[date.getDay()]);
             const _dayOfMonth = date.getDate();
             const _month = t(Months[date.getMonth()]);
@@ -130,7 +131,6 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
             const lat = userLat - Number(location[0]);
             const lng = userLng - Number(location[1]);
 
-    
             const distance = Math.sqrt((lat * lat) + (lng * lng));
     
             if (!closest || distance < closest) {
@@ -185,8 +185,20 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
                                     className={(closestPharmacy && (closestPharmacy.phone === pharmacy.phone)) ? "-order-1" : ""}
                                     >
                                         <div  className="shadow-ultra-soft border border-muted-700 border-solid bg-semantic-light mb-medium rounded-lg">
-                                            <div className="p-medium border-b border-solid border-muted-600 text-heading-medium text-onText-primary">
-                                                {pharmacy.name} {(closestPharmacy && (closestPharmacy.phone === pharmacy.phone)) && " (En yakın)"}
+                                            <div className="flex items-center justify-between p-medium border-b border-solid border-muted-600 text-heading-medium text-onText-primary">
+                                                {pharmacy.name} 
+                                                
+                                                {(closestPharmacy && (closestPharmacy.phone === pharmacy.phone)) && 
+                                                    <div className="inline-flex gap-small px-[12px] py-[6px] bg-helper-yellow-400 rounded border border-solid border-helper-yellow-700">
+                                                        <div className="text-helper-yellow-700">
+                                                            <IconStarFilled size={16} />
+                                                        </div>
+                                                        
+                                                        <div className="text-onText-subdark text-subheading-xsmall">
+                                                            {t("closest")}
+                                                        </div>
+                                                    </div>
+                                                }
                                             </div>
 
                                             <div className="px-medium pt-small pb-medium">

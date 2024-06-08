@@ -10,6 +10,7 @@
     "seeOnMap": "See on Map",
     "goBack": "Go Back",
     "cancel": "Cancel",
+    "closest": "Closest",
     "allowLocationTitle": "Allow Location",
     "allowLocationDesc": "To access information about the nearest pharmacy, you need to allow location access.",
     "allowLocationDeniedDesc": "To access information about the nearest pharmacy, you need to allow location access. You can enable location services by going to your browser settings.",

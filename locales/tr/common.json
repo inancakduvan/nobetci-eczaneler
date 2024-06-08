@@ -10,9 +10,10 @@
     "seeOnMap": "Haritada gör",
     "goBack": "Geri Dön",
     "cancel": "Vazgeç",
+    "closest": "En yakın",
     "allowLocationTitle": "Konumunu Aç",
     "allowLocationDesc": "Sana en yakın eczane bilgisine erişebilmek için konum bilgine izin vermelisin.",
-    "allowLocationDeniedDesc": "To access information about the nearest pharmacy, you need to allow location access. You can enable location services by going to your browser settings.",
+    "allowLocationDeniedDesc": "Sana en yakın eczane bilgisine erişebilmek için konum bilgine izin vermelisin. Tarayıcı ayarlarına giderek konum bilgini açabilirsin.",
     "pharmacyWorkingTimeDesc": "Bu sayfada {{currentDate}} günü gün boyu ve {{nextDay}} sabahına kadar açık olan nöbetçi eczaneler listelenmektedir.",
 
     "monday": "Pazartesi",

@@ -94,43 +94,6 @@ const SelectState: TSelectState = ({stateType}) => {
 
     useEffect(() => {
         if(stateType === "city") {
-            if(selectedCity) {
-                if (window) {
-                    localStorage.setItem(SELECTED_CITY_KEY, selectedCity);
-                }
-    
-                setIsResultsLoading(true);
-
-                fetchDistricts(selectedCity, 
-                    (data: TDistrictsResponse) => {
-                        const result = data.result.map((item) => item.text);
-                        
-                        setDistricts(result);
-                        setIsResultsLoading(false);
-                        router.push("/district/" + selectedCity.toLowerCase());
-                    },
-                    () => {
-                        router.push("/city");
-                    }
-                )
-            } else {
-                router.push("/city");
-            }
-        }
-    }, [selectedCity])
-
-    useEffect(() => {
-        if(selectedDistrict) {
-            if (window) {
-                localStorage.setItem(SELECTED_DISTRICT_KEY, selectedDistrict);
-            }
-
-            router.push("/pharmacies/" + (selectedCity.toLowerCase() || cityParamater.toLowerCase()) + "/" + selectedDistrict.toLowerCase());
-        }
-    }, [selectedDistrict])
-
-    useEffect(() => {
-        if(stateType === "city") {
             setSearchedResultList(cities);
         }
 
@@ -142,10 +105,31 @@ const SelectState: TSelectState = ({stateType}) => {
     const setCityAndDistrict = (name: string) => {
         if(stateType === "city") {
             setSelectedCity(name);
+
+            if (window) {
+                localStorage.setItem(SELECTED_CITY_KEY, name);
+            }
+
+            setIsResultsLoading(true);
+
+            fetchDistricts(name, 
+                (data: TDistrictsResponse) => {
+                    const result = data.result.map((item) => item.text);
+                    
+                    setDistricts(result);
+                    setIsResultsLoading(false);
+                    router.push("/district/" + name.toLowerCase());
+                },
+                () => {
+                    router.push("/city");
+                }
+            )
         }
 
         if(stateType === "district") {
+            localStorage.setItem(SELECTED_DISTRICT_KEY, name);
             setSelectedDistrict(name);
+            router.push("/pharmacies/" + (selectedCity.toLowerCase() || cityParamater.toLowerCase()) + "/" + name.toLowerCase());
         }
     }
 
@@ -190,7 +174,7 @@ const SelectState: TSelectState = ({stateType}) => {
                     <div className="flex items-center justify-between px-medium text-subheading-medium h-[60px] border-b border-solid border-muted-700" 
                         onClick={() => setCityAndDistrict(state)}>
                         {state} 
-                        {(stateType === "city" && isResultsLoading && state === selectedCity) && <Spinner />}
+                        {(isResultsLoading && state === selectedCity) && <Spinner />}
                     </div>
                 </motion.div>)}
             </div>
