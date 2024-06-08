@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import useTranslation from "next-translate/useTranslation";
+import { motion } from "framer-motion";
+
 import { IconInfoCircle, IconArrowLeft, IconPhone, IconPhoneCall, IconArrowRight, IconAdjustmentsHorizontal } from "@tabler/icons-react";
 
 import { fetchPharmacies } from "@/utils/fetch";
@@ -9,7 +11,7 @@ import { Button } from "@/elements/Button";
 import Skeletton from "@/elements/Skeletton/Skeletton";
 
 
-type TPharmaciesComponent = React.FC<{
+type TPharmaciesList = React.FC<{
     city: string;
     district: string;
 }>;
@@ -19,7 +21,7 @@ export type TPharmaciesResponse = {
   result: TPharmacies[];
 }
 
-const Pharmacies: TPharmaciesComponent = ({city, district}) => {
+const PharmaciesList: TPharmaciesList = ({city, district}) => {
     const router = useRouter();
 
     const { t } = useTranslation('common');
@@ -63,7 +65,7 @@ const Pharmacies: TPharmaciesComponent = ({city, district}) => {
                 <div className="p-medium">
                     <div className="p-medium bg-semantic-light shadow-ultra-soft border border-solid border-muted-700 rounded-lg">
                         <div className="text-heading-medium text-onText-primary">16 Nisan 2023, Cumartesi</div>
-                        <div className="text-subheading-xsmall text-primary-700 mt-xsmall">İzmir / Konak</div>
+                        <div className="text-subheading-xsmall text-primary-700 mt-xsmall capitalize">{city} / {district}</div>
                     </div>
 
                     <div className="mt-medium">
@@ -84,35 +86,45 @@ const Pharmacies: TPharmaciesComponent = ({city, district}) => {
                         <>
                         {
                             (pharmacies && pharmacies.length > 0) ? 
-                            <div className="mt-medium pb-[104px]">
-                                {
-                                pharmacies.map((pharmacy) => <div key={"pharmacy-" + pharmacy.name + pharmacy.loc} className="shadow-ultra-soft border border-muted-700 border-solid bg-semantic-light mb-medium rounded-lg">
-                                    <div className="p-medium border-b border-solid border-muted-600 text-heading-medium text-onText-primary">
-                                        {pharmacy.name}
-                                    </div>
-
-                                    <div className="px-medium pt-small pb-medium">
-                                        <div className="text-body-small text-onText-subdark">{pharmacy.address}</div>
-                                        
-                                        <div className="flex items-center gap-xsmall mt-medium"> 
-                                            <div className="inline-flex text-primary-400 -translate-y-[1px]">
-                                                <IconPhone size={18} />
+                            
+                                <div className="mt-medium pb-[104px]">
+                                    {
+                                    pharmacies.map((pharmacy, index) => 
+                                    <motion.div 
+                                    custom={index}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    transition={{ delay: 0.04 * index }}
+                                    key={"pharmacy-" + pharmacy.name + pharmacy.phone}
+                                    >
+                                        <div  className="shadow-ultra-soft border border-muted-700 border-solid bg-semantic-light mb-medium rounded-lg">
+                                            <div className="p-medium border-b border-solid border-muted-600 text-heading-medium text-onText-primary">
+                                                {pharmacy.name}
                                             </div>
 
-                                            <div className="text-subheading-medium text-onText-subdark">{pharmacy.phone}</div>
-                                        </div>
-                                    </div>
+                                            <div className="px-medium pt-small pb-medium">
+                                                <div className="text-body-small text-onText-subdark">{pharmacy.address}</div>
+                                                
+                                                <div className="flex items-center gap-xsmall mt-medium"> 
+                                                    <div className="inline-flex text-primary-400 -translate-y-[1px]">
+                                                        <IconPhone size={18} />
+                                                    </div>
 
-                                    <div className="flex items-center justify-end gap-medium p-medium">
-                                        <Button type="secondary" text={"Haritada Gör"} Icon={IconArrowRight} iconPosition="right" onClick={() => redirectToMap(pharmacy.loc)} />
-                                        
-                                        <a href={"tel:" + pharmacy.phone}>
-                                            <Button type="primary-light" className="md:hidden" Icon={IconPhoneCall} />
-                                        </a>
-                                    </div>
-                                </div>)
-                                }
-                            </div>
+                                                    <a href={"tel:" + pharmacy.phone} className="block text-subheading-medium text-onText-subdark underline">{pharmacy.phone}</a>
+                                                </div>
+                                            </div>
+
+                                            <div className="flex items-center justify-end gap-medium p-medium">
+                                                <Button type="secondary" text={"Haritada Gör"} Icon={IconArrowRight} iconPosition="right" onClick={() => redirectToMap(pharmacy.loc)} />
+                                                
+                                                <a href={"tel:" + pharmacy.phone}>
+                                                    <Button type="primary-light" className="md:hidden" Icon={IconPhoneCall} />
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </motion.div>)
+                                    }
+                                </div>
                             :
                             <>
                             {
@@ -143,4 +155,4 @@ const Pharmacies: TPharmaciesComponent = ({city, district}) => {
     )
 }
 
-export default Pharmacies;
+export default PharmaciesList;

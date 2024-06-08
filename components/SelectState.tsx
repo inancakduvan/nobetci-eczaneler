@@ -11,6 +11,7 @@ import {IconArrowLeft, IconSearch } from '@tabler/icons-react';
 
 import { StorageKeys } from "@/enums";
 import { fetchCities, fetchDistricts } from "@/utils/fetch";
+import Spinner from "@/elements/Spinner/Spinner";
 
 
 type TSelectState = React.FC<{
@@ -189,7 +190,7 @@ const SelectState: TSelectState = ({stateType}) => {
                     <div className="flex items-center justify-between px-medium text-subheading-medium h-[60px] border-b border-solid border-muted-700" 
                         onClick={() => setCityAndDistrict(state)}>
                         {state} 
-                        {(stateType === "city" && isResultsLoading && state === selectedCity) && <span className="loader"></span>}
+                        {(stateType === "city" && isResultsLoading && state === selectedCity) && <Spinner />}
                     </div>
                 </motion.div>)}
             </div>

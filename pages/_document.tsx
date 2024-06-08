@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head />
-      <body>
+      <body className="overflow-hidden">
         <div id="appContainer" className="h-fit-screen w-full overflow-auto bg-no-repeat bg-muted-400 text-onText-primary">
           <div className="max-w-[640px] my-0 mx-auto">
             <Main />

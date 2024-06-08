@@ -99,7 +99,7 @@ const config: Config = {
         'medium': '16px',
         'large': '24px',
         'xlarge': '32px',
-        'xxlarge': '48px'
+        'xxlarge': '40px'
       },
       padding: {
         'xsmall': '4px',
@@ -107,7 +107,7 @@ const config: Config = {
         'medium': '16px',
         'large': '24px',
         'xlarge': '32px',
-        'xxlarge': '48px'
+        'xxlarge': '40px'
       },
       margin: {
         'xsmall': '4px',
@@ -115,7 +115,7 @@ const config: Config = {
         'medium': '16px',
         'large': '24px',
         'xlarge': '32px',
-        'xxlarge': '48px'
+        'xxlarge': '40px'
       },
       height: {
         'fit-screen': 'calc(var(--vh, 1vh) * 100)',

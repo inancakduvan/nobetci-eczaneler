@@ -8,9 +8,7 @@ import { Button } from "@/elements/Button";
 
 import { IconArrowLeft } from "@tabler/icons-react";
 import { fetchPharmacies } from "@/utils/fetch";
-import { TPharmaciesResponse } from "@/components/Pharmacies";
-
-import PharmaciesComponent from "@/components/Pharmacies";
+import PharmaciesList, { TPharmaciesResponse } from "@/components/PharmaciesList";
 
 
 export default function Pharmacies()  {
@@ -48,7 +46,7 @@ export default function Pharmacies()  {
 
   return (
     <>
-       <PharmaciesComponent city={cityParamater} district={districtParamater} />
+       <PharmaciesList city={cityParamater} district={districtParamater} />
     </>
   );
 }
