@@ -93,9 +93,9 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
     }, [currentLocation])
 
     const redirectToMap = (coordinates: string) => {
-        const splittedCoordinates = coordinates.split(", ");
-        const lat = splittedCoordinates[0].replace(",", ".");
-        const lng = splittedCoordinates[1].replace(",", ".");
+        const splittedCoordinates = coordinates.split(",");
+        const lat = splittedCoordinates[0];
+        const lng = splittedCoordinates[1];
 
         const url = "https://www.google.com/maps/search/?api=1&query=" + lat + "," + lng;
         
