@@ -1,5 +1,5 @@
-import { EndPoints, StorageKeys } from "@/enums";
-import { getCookieOfTodaysPharmacies, setCookieOfTodaysPharmacies } from "./cookies";
+import { EndPoints, StorageKeys, Months } from "@/enums";
+import { setDataOfTodaysPharmacies } from "./storage";
 
 export const fetchCities = (onSuccess: Function) => {
     fetch(EndPoints.CITIES_ENDPOINT)
@@ -54,16 +54,28 @@ export const fetchDistricts = (city: string, onSuccess: Function, onError?: Func
 }
 
 export const fetchPharmacies = (city: string, district: string, onSuccess: Function, onError?: Function) => {
-    const todaysPharmacies = getCookieOfTodaysPharmacies();
+    const todaysPharmacies = localStorage.getItem(StorageKeys.TODAYS_PHARMACIES);
 
     if(todaysPharmacies) {
         const todaysPharmaciesParsed = JSON.parse(todaysPharmacies);
-        const searchedPharmacies = todaysPharmaciesParsed.find((item: {state: string}) => item.state === (city + "-" + district));
 
-        if(searchedPharmacies) {
-            onSuccess && onSuccess(searchedPharmacies.data);
+        const date = new Date();
 
-            return;
+        const _dayOfMonth = date.getDate();
+        const _month = Months[date.getMonth()];
+        const _year = date.getFullYear();
+        const _date = _dayOfMonth + " " + _month + " " + _year; 
+
+        if(todaysPharmaciesParsed.date !== _date) {
+            localStorage.removeItem(StorageKeys.TODAYS_PHARMACIES);
+        } else {
+            const searchedPharmacies = todaysPharmaciesParsed.value.find((item: {state: string}) => item.state === (city + "-" + district));
+    
+            if(searchedPharmacies) {
+                onSuccess && onSuccess(searchedPharmacies.data);
+    
+                return;
+            }
         }
     }
 
@@ -75,16 +87,16 @@ export const fetchPharmacies = (city: string, district: string, onSuccess: Funct
                 const todaysPharmaciesParsed = JSON.parse(todaysPharmacies);
 
                 const newData = [
-                    ...todaysPharmaciesParsed,
+                    ...todaysPharmaciesParsed.value,
                     {
                         state: city + "-" + district,
                         data
                     }
                 ];
 
-                setCookieOfTodaysPharmacies(JSON.stringify(newData));
+                setDataOfTodaysPharmacies(JSON.stringify(newData));
             } else {
-                setCookieOfTodaysPharmacies(JSON.stringify([
+                setDataOfTodaysPharmacies(JSON.stringify([
                     {
                         state: city + "-" + district,
                         data
