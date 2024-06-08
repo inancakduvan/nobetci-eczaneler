@@ -164,9 +164,8 @@ const SelectState: TSelectState = ({stateType}) => {
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.04 * index }}
                     key={"city-" + state}
-                >
-                    <div className="flex items-center justify-between px-medium text-subheading-medium h-[60px] border-b border-solid border-muted-700 cursor-pointer" 
-                        onClick={() => setCityAndDistrict(state)}>
+                    onClick={() => setCityAndDistrict(state)}                >
+                    <div className="flex items-center justify-between px-medium text-subheading-medium h-[60px] border-b border-solid border-muted-700 cursor-pointer">
                         {state} 
                         {(isResultsLoading && state === selectedCity) && <Spinner />}
                     </div>
