@@ -70,7 +70,6 @@ const SelectState: TSelectState = ({stateType}) => {
                         const result = data.result.map((item) => item.text);
                         
                         setDistricts(result);
-                        setIsResultsLoading(false);
                         router.push("/district/" + cityParamater?.toString().toLocaleLowerCase('tr-TR'));
                     },
                     () => {
@@ -117,7 +116,6 @@ const SelectState: TSelectState = ({stateType}) => {
                     const result = data.result.map((item) => item.text);
                     
                     setDistricts(result);
-                    setIsResultsLoading(false);
                     router.push("/district/" + name.toLocaleLowerCase('tr-TR'));
                 },
                 () => {
@@ -138,10 +136,6 @@ const SelectState: TSelectState = ({stateType}) => {
         setSelectedCity("");
         localStorage.removeItem(SELECTED_CITY_KEY);
         router.push("/city");
-    }
-
-    if(searchedResultList.length === 0) {
-        return "";
     }
 
     return (
