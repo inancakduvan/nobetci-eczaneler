@@ -71,7 +71,7 @@ const SelectState: TSelectState = ({stateType}) => {
                         
                         setDistricts(result);
                         setIsResultsLoading(false);
-                        router.push("/district/" + cityParamater?.toString().toLowerCase());
+                        router.push("/district/" + cityParamater?.toString().toLocaleLowerCase('tr-TR'));
                     },
                     () => {
                         router.push("/city");
@@ -118,7 +118,7 @@ const SelectState: TSelectState = ({stateType}) => {
                     
                     setDistricts(result);
                     setIsResultsLoading(false);
-                    router.push("/district/" + name.toLowerCase());
+                    router.push("/district/" + name.toLocaleLowerCase('tr-TR'));
                 },
                 () => {
                     router.push("/city");
@@ -129,7 +129,7 @@ const SelectState: TSelectState = ({stateType}) => {
         if(stateType === "district") {
             localStorage.setItem(SELECTED_DISTRICT_KEY, name);
             setSelectedDistrict(name);
-            router.push("/pharmacies/" + (selectedCity.toLowerCase() || cityParamater.toLowerCase()) + "/" + name.toLowerCase());
+            router.push("/pharmacies/" + (selectedCity.toLocaleLowerCase('tr-TR') || cityParamater.toLocaleLowerCase('tr-TR')) + "/" + name.toLocaleLowerCase('tr-TR'));
         }
     }
 
@@ -171,7 +171,7 @@ const SelectState: TSelectState = ({stateType}) => {
                     transition={{ delay: 0.04 * index }}
                     key={"city-" + state}
                 >
-                    <div className="flex items-center justify-between px-medium text-subheading-medium h-[60px] border-b border-solid border-muted-700" 
+                    <div className="flex items-center justify-between px-medium text-subheading-medium h-[60px] border-b border-solid border-muted-700 cursor-pointer" 
                         onClick={() => setCityAndDistrict(state)}>
                         {state} 
                         {(isResultsLoading && state === selectedCity) && <Spinner />}

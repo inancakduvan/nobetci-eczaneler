@@ -88,18 +88,18 @@ export default function Draft()  {
 
       <div className="pt-10">
       {
-        (cities.length > 0 && districts.length === 0) && cities.map((city) => <div key={"city-" + city} className="pt-1 pointer" onClick={() => setSelectedCity(city)}>{city}</div>)
+        (cities.length > 0 && districts.length === 0) && cities.map((city) => <div key={"city-" + city} className="pt-1 cursor-pointer" onClick={() => setSelectedCity(city)}>{city}</div>)
       }
 
       {
-        (districts.length > 0 && pharmacies.length === 0) && districts.map((district) => <div key={"district-" + district} className="pt-1 pointer" onClick={() => setSelectedDistrict(district)}>{district}</div>)
+        (districts.length > 0 && pharmacies.length === 0) && districts.map((district) => <div key={"district-" + district} className="pt-1 cursor-pointer" onClick={() => setSelectedDistrict(district)}>{district}</div>)
       }
 
       {
         (pharmacies.length > 0) && <>
         <div className="text-heading-large mb-2">{t("pharmaciesOnDuty")}</div>
         {
-          pharmacies.map((pharmacy) => <div key={"pharmacy-" + pharmacy.name + pharmacy.loc} className="shadow border border-muted-700 bg-muted-500 p-3 border-solid mb-4 pointer" onClick={() => console.log(pharmacy)}>
+          pharmacies.map((pharmacy) => <div key={"pharmacy-" + pharmacy.name + pharmacy.loc} className="shadow border border-muted-700 bg-muted-500 p-3 border-solid mb-4 cursor-pointer" onClick={() => console.log(pharmacy)}>
             {pharmacy.name} <br/>
             {pharmacy.dist} <br/>
             {pharmacy.address} <br/>

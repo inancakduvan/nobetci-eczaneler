@@ -24,8 +24,8 @@ export default function Pharmacies()  {
 
   useEffect(() => {
     if(cityParamater && districtParamater) {
-      const _city = (selectedCity.toLowerCase() || cityParamater.toLowerCase());
-      const _district = (selectedDistrict.toLowerCase() || districtParamater.toLowerCase());
+      const _city = (selectedCity.toLocaleLowerCase('tr-TR') || cityParamater.toLocaleLowerCase('tr-TR'));
+      const _district = (selectedDistrict.toLocaleLowerCase('tr-TR') || districtParamater.toLocaleLowerCase('tr-TR'));
 
       fetchPharmacies(_city, _district, 
         (data: TPharmaciesResponse) => {

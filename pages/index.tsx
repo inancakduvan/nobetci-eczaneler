@@ -23,7 +23,7 @@ export default function Home()  {
       }
 
       if(!_selectedDistrict) {
-        router.push("/district/" + _selectedCity.toLowerCase());
+        router.push("/district/" + _selectedCity.toLocaleLowerCase('tr-TR'));
         return;
       }
 
@@ -34,7 +34,7 @@ export default function Home()  {
 
   return (
     <>
-      {(city && district) && <PharmaciesList city={city.toLowerCase()} district={district.toLowerCase()} />}
+      {(city && district) && <PharmaciesList city={city.toLocaleLowerCase('tr-TR')} district={district.toLocaleLowerCase('tr-TR')} />}
     </>
   );
 }

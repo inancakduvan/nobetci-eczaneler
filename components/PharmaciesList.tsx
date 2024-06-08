@@ -282,17 +282,17 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
                                 {
                                     currentLocationStatus === "denied" ?
                                     <>
-                                        <div className="flex-1 flex items-center justify-center bg-muted-400 text-subheading-small text-onText-primary border-t border-solid border-muted-700 pointer" onClick={() => setIsCurrentLocationModelOpen(false)}>
+                                        <div className="flex-1 flex items-center justify-center bg-muted-400 text-subheading-small text-onText-primary border-t border-solid border-muted-700 cursor-pointer" onClick={() => setIsCurrentLocationModelOpen(false)}>
                                             {t("okay")}
                                         </div>
                                     </>
                                     :
                                     <>
-                                        <div className="flex-1 flex items-center justify-center bg-muted-400 text-subheading-small text-onText-primary border-t border-r border-solid border-muted-700 pointer" onClick={() => setIsCurrentLocationModelOpen(false)}>
+                                        <div className="flex-1 flex items-center justify-center bg-muted-400 text-subheading-small text-onText-primary border-t border-r border-solid border-muted-700 cursor-pointer" onClick={() => setIsCurrentLocationModelOpen(false)}>
                                             {t("cancel")}
                                         </div>
 
-                                        <div className="flex-1 flex items-center justify-center bg-muted-400 text-subheading-small text-onText-primary border-t border-solid border-muted-700 pointer" onClick={getCurrentLocation}>
+                                        <div className="flex-1 flex items-center justify-center bg-muted-400 text-subheading-small text-onText-primary border-t border-solid border-muted-700 cursor-pointer" onClick={getCurrentLocation}>
                                             {t("allowLocationTitle")}
                                         </div>
                                     </>
