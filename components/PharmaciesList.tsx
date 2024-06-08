@@ -9,6 +9,7 @@ import { fetchPharmacies } from "@/utils/fetch";
 import { TPharmacies, useGlobalContext } from "@/stores/globalStore";
 import { Button } from "@/elements/Button";
 import Skeletton from "@/elements/Skeletton/Skeletton";
+import { Days, Months } from "@/enums";
 
 
 type TPharmaciesList = React.FC<{
@@ -28,18 +29,42 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
 
     const { pharmacies, setPharmacies } = useGlobalContext();
 
+    const [dayOfWeek, setDayOfWeek] = useState<string>();
+    const [dayOfMonth, setDayOfMonth] = useState<number>();
+    const [month, setMonth] = useState<string>();
+    const [year, setYear] = useState<number>();
+    const [date, setDate] = useState<string>("-");
+
+
     const [hasError, setHasError] = useState(false);
 
     useEffect(() => {
+        if(window) {
+            const date = new Date();
+            
+            const _dayOfWeek = t(Days[date.getDay() - 1]);
+            const _dayOfMonth = date.getDate();
+            const _month = t(Months[date.getMonth()]);
+            const _year = date.getFullYear();
+            const _date = _dayOfMonth + " " + _month + " " + _year + ", " + _dayOfWeek; 
+
+
+            setMonth(_dayOfWeek);
+            setDayOfMonth(_dayOfMonth);
+            setMonth(_month);
+            setYear(_year);
+            setDate(_date);
+        }
+
         if(city && district) {
-        fetchPharmacies(city, district, 
-            (data: TPharmaciesResponse) => {
-                setPharmacies(data.result);
-            },
-            () => {
-                setHasError(true);
-            }
-        );
+            fetchPharmacies(city, district, 
+                (data: TPharmaciesResponse) => {
+                    setPharmacies(data.result);
+                },
+                () => {
+                    setHasError(true);
+                }
+            );
         } else {
             setHasError(true);
         }
@@ -64,7 +89,7 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
             <div className="bg-gradient-greenToWhite225deg min-h-fit-screen">
                 <div className="p-medium">
                     <div className="p-medium bg-semantic-light shadow-ultra-soft border border-solid border-muted-700 rounded-lg">
-                        <div className="text-heading-medium text-onText-primary">16 Nisan 2023, Cumartesi</div>
+                        <div className="text-heading-medium text-onText-primary">{date}</div>
                         <div className="text-subheading-xsmall text-primary-700 mt-xsmall capitalize">{city} / {district}</div>
                     </div>
 
@@ -95,7 +120,7 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     transition={{ delay: 0.04 * index }}
-                                    key={"pharmacy-" + pharmacy.name + pharmacy.phone}
+                                    key={"pharmacy-" + pharmacy.name + pharmacy.phone + pharmacy.loc}
                                     >
                                         <div  className="shadow-ultra-soft border border-muted-700 border-solid bg-semantic-light mb-medium rounded-lg">
                                             <div className="p-medium border-b border-solid border-muted-600 text-heading-medium text-onText-primary">
