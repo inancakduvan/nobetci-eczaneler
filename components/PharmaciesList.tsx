@@ -46,15 +46,14 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
     const [currentLocation, setCurrentLocation] = useState<TCurrentLocation | null>();
     const [closestPharmacy, setClosestPharmacy] = useState<TPharmacies | null>();
 
-
+    const [isFilterButtonLoading, setIsFilterButtonLoading] = useState<boolean>(false);
     const [hasError, setHasError] = useState(false);
 
     useEffect(() => {
         if(window) {
             const date = new Date();
             
-            const _dayIndex = date.getDay() - 1;
-            const _dayOfWeek = t(Days[(_dayIndex < 0 ? 6 : _dayIndex)]);
+            const _dayOfWeek = t(Days[date.getDay()]);
             const _nextDayOfWeek = t(Days[date.getDay()]);
             const _dayOfMonth = date.getDate();
             const _month = t(Months[date.getMonth()]);
@@ -140,6 +139,11 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
         }
     
         setClosestPharmacy(closestPharmacy);
+    }
+
+    const openFilters = () => {
+        setIsFilterButtonLoading(true);
+        router.push("/district/" + city);
     }
 
     if(!(city && district)) {
@@ -251,7 +255,7 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
             pharmacies.length > 0 &&  
             <div className="fixed left-0 bottom-0 flex items-center justify-center gap-medium w-full px-medium py-xxlarge bg-gradient-whiteToBlack">
                 {currentLocationStatus !== "granted" && <Button type="rounded" Icon={IconCurrentLocation} className="capitalize" onClick={() => setIsCurrentLocationModelOpen(true)} />}
-                <Button type="primary" text={district} Icon={IconAdjustmentsHorizontal} className="capitalize" onClick={() => router.push("/district/" + city)} />
+                <Button type="primary" text={district} Icon={IconAdjustmentsHorizontal} className="capitalize" isLoading={isFilterButtonLoading} onClick={openFilters} />
             </div>
            }
 

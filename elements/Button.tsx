@@ -1,9 +1,11 @@
 import React, { RefAttributes } from "react";
 import { IconProps, Icon } from "@tabler/icons-react";
+import Spinner from "./Spinner/Spinner";
 
 type TButton = React.FC<{
   type: "primary" | "primary-light" | "secondary" | "rounded";
   text?: string;
+  isLoading?: boolean;
   Icon?: TIcon;
   iconPosition?: string;
   iconClassName?: string;
@@ -13,7 +15,7 @@ type TButton = React.FC<{
 
 type TIcon = React.ForwardRefExoticComponent<IconProps & RefAttributes<Icon>>;
 
-export const Button: TButton = ({ type, text, Icon, iconPosition = "left", iconClassName, className, onClick }) => {
+export const Button: TButton = ({ type, text, isLoading, Icon, iconPosition = "left", iconClassName, className, onClick }) => {
   
   const getButtonClassName = ():string => {
     switch(type) {
@@ -53,11 +55,18 @@ export const Button: TButton = ({ type, text, Icon, iconPosition = "left", iconC
         className={"inline-flex items-center justify-center gap-[8px] pointer duration-300 active:opacity-80 sm:hover:opacity-80 " + (getButtonClassName()) + (className ? " " + className : "")}
         onClick={onClick ? () => onClick() : undefined}
     >
-        {Icon && iconPosition !== "right" ? <div className={getIconColor() + (iconClassName ? " " + iconClassName : "")}><Icon size={getIconSize()}  /></div> : null}
+        {
+          isLoading ?
+          <Spinner />
+          :
+          <>
+          {Icon && iconPosition !== "right" ? <div className={getIconColor() + (iconClassName ? " " + iconClassName : "")}><Icon size={getIconSize()}  /></div> : null}
 
-        {text ? text : null}
+          {text ? text : null}
 
-        {Icon && iconPosition === "right" ? <div className={getIconColor() + (iconClassName ? " " + iconClassName : "")}><Icon size={getIconSize()}  /></div> : null}
+          {Icon && iconPosition === "right" ? <div className={getIconColor() + (iconClassName ? " " + iconClassName : "")}><Icon size={getIconSize()}  /></div> : null}
+          </>
+        }
     </button>
   );
 };
