@@ -1,17 +1,12 @@
-import { StorageKeys, Months } from "@/enums";
+import { StorageKeys } from "@/enums";
 
 export const setDataOfTodaysPharmacies = (value: string) => {
-    const date = new Date();
-
-    const _dayOfMonth = date.getDate();
-    const _month = Months[date.getMonth()];
-    const _year = date.getFullYear();
-    const _date = _dayOfMonth + " " + _month + " " + _year; 
+    const date = new Date().setHours(7,0,0);
 
     const valueParsed = JSON.parse(value);
 
     const newData = {
-        date: _date,
+        date,
         value: valueParsed
     }
 

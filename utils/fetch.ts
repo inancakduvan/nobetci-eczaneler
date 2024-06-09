@@ -59,14 +59,9 @@ export const fetchPharmacies = (city: string, district: string, onSuccess: Funct
     if(todaysPharmacies) {
         const todaysPharmaciesParsed = JSON.parse(todaysPharmacies);
 
-        const date = new Date();
+        const date = new Date().getTime();
 
-        const _dayOfMonth = date.getDate();
-        const _month = Months[date.getMonth()];
-        const _year = date.getFullYear();
-        const _date = _dayOfMonth + " " + _month + " " + _year; 
-
-        if(todaysPharmaciesParsed.date !== _date) {
+        if(date > Number(todaysPharmaciesParsed.date)) {
             localStorage.removeItem(StorageKeys.TODAYS_PHARMACIES);
         } else {
             const searchedPharmacies = todaysPharmaciesParsed.value.find((item: {state: string}) => item.state === (city + "-" + district));
