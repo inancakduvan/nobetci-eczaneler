@@ -26,7 +26,15 @@ body {
 }
 
 .bg-blur {
-  backdrop-filter: blur(200px);
+  backdrop-filter: blur(100px);
+}
+
+@supports not (backdrop-filter: blur(100px)) {
+  .bg-blur {
+    backdrop-filter: none;
+    background-color: #ffffff;
+    background-image: none;
+  }
 }
 
 @layer utilities {
