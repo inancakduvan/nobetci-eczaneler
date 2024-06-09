@@ -15,11 +15,11 @@ export default async function handler(req: NextRequest) {
         success: true,
         result: [
             {
-                name: "ŞUKUFE ECZANESİ",
+                name: "SENA ECZANESİ",
                 dist: "Konak",
                 address: "730/2 sk, Zerafet mahallesi",
                 phone: "2324201312",
-                loc: "37.423142,27.162524"
+                loc: "38.223142,27.182524"
             },
             {
                 name: "DAMLA ECZANESİ",
@@ -64,7 +64,7 @@ export default async function handler(req: NextRequest) {
                 loc: "31.423142,27.162524"
             },
             {
-                name: "ŞUKUFE ECZANESİ",
+                name: "SENA ECZANESİ",
                 dist: "Konak",
                 address: "730/2 sk, Zerafet mahallesi",
                 phone: "2324201313",

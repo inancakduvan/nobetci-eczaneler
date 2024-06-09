@@ -10,6 +10,7 @@ import { TPharmacies, useGlobalContext } from "@/stores/globalStore";
 import { Button } from "@/elements/Button";
 import Skeletton from "@/elements/Skeletton/Skeletton";
 import { Days, Months } from "@/enums";
+import { findDistanceAsKm } from "@/utils/location";
 
 
 type TPharmaciesList = React.FC<{
@@ -153,12 +154,18 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
         let closest = 0;
         let closestPharmacy = null;
 
+        let pharmaciesNew = [];
+
         for (let item of pharmacies) {
             const location = item.loc.split(",");
             const lat = userLat - Number(location[0]);
             const lng = userLng - Number(location[1]);
 
             const distance = Math.sqrt((lat * lat) + (lng * lng));
+
+            const distanceAsKm = findDistanceAsKm(Number(location[0]), Number(location[1]), userLat, userLng);
+            item.distance = distanceAsKm;
+            pharmaciesNew.push(item);
     
             if (!closest || distance < closest) {
                 closest = distance;
@@ -166,7 +173,8 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
             }
         }
     
-        setClosestPharmacy(closestPharmacy);
+        setClosestPharmacy(closestPharmacy); 
+        setPharmacies(pharmaciesNew);
     }
 
     const openFilters = () => {
@@ -224,7 +232,10 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
                                     >
                                         <div  className="shadow-ultra-soft border border-muted-700 border-solid bg-semantic-light mb-medium rounded-lg">
                                             <div className="flex items-center justify-between p-medium border-b border-solid border-muted-600 text-heading-medium text-onText-primary">
-                                                {pharmacy.name} 
+                                                <div className="flex flex-col">
+                                                    {pharmacy.name} 
+                                                    {pharmacy.distance && <div className="mt-xsmall text-subheading-small text-onText-subdark">≈ {pharmacy.distance.toFixed(1)}<span className="text-onText-secondary text-body-small"> km</span></div>}
+                                                </div>
                                                 
                                                 {(closestPharmacy && (closestPharmacy.phone === pharmacy.phone)) && 
                                                     <div className="inline-flex gap-small px-[12px] py-[6px] bg-helper-yellow-400 rounded border border-solid border-helper-yellow-700">

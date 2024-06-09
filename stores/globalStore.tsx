@@ -8,7 +8,8 @@ export type TPharmacies = {
     address: string,
     phone: string,
     loc: string,
-    closest?: boolean
+    closest?: boolean,
+    distance?: number
 }
 
 interface ContextProps {
