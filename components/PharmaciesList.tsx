@@ -62,6 +62,8 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
         }
 
         if(window) {
+            window.scrollTo(0, 0);
+
             // Window scroll
             document.getElementById("appContainer")?.addEventListener("scroll", onScroll);
 
@@ -69,7 +71,7 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
             const date = new Date();
             
             const _dayOfWeek = t(Days[date.getDay()]);
-            const _nextDayOfWeek = t(Days[date.getDay()]);
+            const _nextDayOfWeek = t(Days[date.getDay() === 6 ? 0 : date.getDay() + 1]);
             const _dayOfMonth = date.getDate();
             const _month = t(Months[date.getMonth()]);
             const _year = date.getFullYear();
@@ -119,6 +121,12 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
             findClosestPharmacy(currentLocation.latitude, currentLocation.longitude);
         }
     }, [currentLocation])
+
+    useEffect(() => {
+        if(window && closestPharmacy) {
+            window.scrollTo(0, 0);
+        }
+    }, [closestPharmacy])
 
     const redirectToMap = (coordinates: string) => {
         const splittedCoordinates = coordinates.split(",");
@@ -178,8 +186,8 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
                         isPageScrolled &&
                         <div className="bg-transparent h-[70px] w-full"></div>
                     }
-                    <div className={"transition-all flex items-center justify-center" + (isPageScrolled ? " z-20 fixed left-0 top-0 w-full" : "")}>
-                        <div className={"max-w-[640px] w-full p-medium shadow-ultra-soft border-solid border-muted-700" + (isPageScrolled ? " bg-gradient-whiteToTransparent90deg bg-blur border-b" : " bg-semantic-light border rounded-lg")}>
+                    <div className={"transition-all flex items-center justify-center" + (isPageScrolled ? " z-20 fixed left-0 top-0 w-full bg-gradient-whiteToTransparent90deg bg-blur border-b" : " bg-semantic-light border rounded-lg")}>
+                        <div className={"max-w-[640px] w-full p-medium shadow-ultra-soft border-solid border-muted-700 bg-transparent"}>
                             <div className="text-heading-medium text-onText-primary">{date}</div>
                             <div className="text-subheading-xsmall text-primary-700 mt-xsmall capitalize">{city} / {district}</div>
                         </div>
