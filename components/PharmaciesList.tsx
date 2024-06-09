@@ -174,6 +174,10 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
         <>
             <div className="bg-gradient-greenToWhite225deg min-h-fit-screen">
                 <div className="p-medium">
+                    {
+                        isPageScrolled &&
+                        <div className="bg-transparent h-[70px] w-full"></div>
+                    }
                     <div className={"transition-all flex items-center justify-center" + (isPageScrolled ? " z-20 fixed left-0 top-0 w-full" : "")}>
                         <div className={"max-w-[640px] w-full p-medium shadow-ultra-soft border-solid border-muted-700" + (isPageScrolled ? " bg-gradient-whiteToTransparent90deg bg-blur border-b" : " bg-semantic-light border rounded-lg")}>
                             <div className="text-heading-medium text-onText-primary">{date}</div>
