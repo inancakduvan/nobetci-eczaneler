@@ -236,7 +236,7 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
                                             <div className="flex items-center justify-between p-medium border-b border-solid border-muted-600 text-heading-medium text-onText-primary">
                                                 <div className="flex flex-col">
                                                     {pharmacy.name} 
-                                                    {pharmacy.distance && <div className="mt-xsmall text-body-xsmall text-onText-secondary">≈ {pharmacy.distance.toFixed(1)}km</div>}
+                                                    {pharmacy.distance && <div className="mt-xsmall text-subheading-xsmall text-onText-secondary">≈ {pharmacy.distance.toFixed(1)}km</div>}
                                                 </div>
                                                 
                                                 {(closestPharmacy && (closestPharmacy.phone === pharmacy.phone)) && 
@@ -253,7 +253,7 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
                                             </div>
 
                                             <div className="px-medium py-medium">
-                                                <div className="text-body-small text-onText-subdark">{pharmacy.address}</div>
+                                                <div className="text-body-small text-onText-secondary">{pharmacy.address}</div>
                                                 
                                                 <div className="flex items-center gap-xsmall mt-medium"> 
                                                     <div className="inline-flex text-primary-400 -translate-y-[1px]">

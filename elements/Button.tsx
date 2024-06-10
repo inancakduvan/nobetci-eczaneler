@@ -52,7 +52,7 @@ export const Button: TButton = ({ type, text, isLoading, Icon, iconPosition = "l
 
   return (
     <button
-        className={"inline-flex items-center justify-center gap-[8px] cursor-pointer duration-300 active:opacity-80 sm:hover:opacity-80 " + (getButtonClassName()) + (className ? " " + className : "")}
+        className={"inline-flex items-center justify-center gap-[8px] cursor-pointer duration-300 active:opacity-80 sm:hover:opacity-80 select-none	" + (getButtonClassName()) + (className ? " " + className : "")}
         onClick={onClick ? () => onClick() : undefined}
     >
         {
