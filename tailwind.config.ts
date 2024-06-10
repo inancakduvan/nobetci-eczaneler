@@ -54,7 +54,7 @@ const config: Config = {
         "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         "gradient-greenToWhite225deg": "linear-gradient(225deg, #E4FFF0, #FAFAFA 10%)",
         "gradient-whiteToTransparent90deg": "linear-gradient(90deg, #fff, rgba(255, 255, 255, 0.6) 70%)",
-        "gradient-whiteToBlack": "linear-gradient(0, rgba(187, 187, 187, 1), rgba(187, 187, 187, 0) 30%)",
+        "gradient-whiteToBlack": "linear-gradient(0, rgba(187, 187, 187, 1), rgba(187, 187, 187, 0) 50%)",
       },
       colors: {
         primary: {
