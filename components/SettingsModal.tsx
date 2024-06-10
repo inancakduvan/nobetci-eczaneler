@@ -46,7 +46,7 @@ const SettingsModal:TSettingsModal = ({isOpen, setIsOpen}) => {
                     <motion.div 
                         initial={{ x: 100 }}
                         animate={{ x: 0 }}
-                        className="w-[84%] h-full bg-semantic-light shadow-soft p-medium overflow-auto"
+                        className="w-[84%] sm:w-[24%] h-full bg-semantic-light shadow-soft p-medium overflow-auto"
                     >
                         <div className="flex items-center justify-end cursor-pointer mb-large" onClick={() => setIsOpen(false)}>
                             <IconX />

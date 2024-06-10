@@ -280,15 +280,15 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
                                                         <IconPhone size={18} />
                                                     </div>
 
-                                                    <a href={"tel:" + pharmacy.phone} className="block text-subheading-medium text-onText-subdark underline">{pharmacy.phone}</a>
+                                                    <a href={"tel:0" + pharmacy.phone} className="block text-subheading-medium text-onText-subdark underline">0{pharmacy.phone}</a>
                                                 </div>
                                             </div>
 
                                             <div className="flex items-center justify-end gap-medium p-medium mt-small">
                                                 <Button type="secondary" text={t("seeOnMap")} Icon={IconMapUp} onClick={() => redirectToMap(pharmacy.loc)} />
                                                 
-                                                <a href={"tel:" + pharmacy.phone}>
-                                                    <Button type="primary-light" className="md:hidden" Icon={IconPhoneCall} />
+                                                <a href={"tel:0" + pharmacy.phone}>
+                                                    <Button type="primary-light" Icon={IconPhoneCall} />
                                                 </a>
                                             </div>
                                         </div>
