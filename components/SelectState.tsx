@@ -73,12 +73,9 @@ const SelectState: TSelectState = ({stateType}) => {
                         
                         setDistricts(result);
                         router.push("/district/" + cityParamater?.toString().toLocaleLowerCase('tr-TR'));
-
-                        setIsResultsLoading(false);
                     },
                     () => {
                         router.push("/city");
-                        setIsResultsLoading(false);
                     }
                 )
             }
@@ -122,11 +119,9 @@ const SelectState: TSelectState = ({stateType}) => {
                     
                     setDistricts(result);
                     router.push("/district/" + name.toLocaleLowerCase('tr-TR'));
-                    setIsResultsLoading(false);
                 },
                 () => {
                     router.push("/city");
-                    setIsResultsLoading(false);
                 }
             )
         }
