@@ -5,6 +5,7 @@ import { IconArrowRight, IconBrandGithub, IconBrandX, IconWorldWww, IconX } from
 import setLanguage from 'next-translate/setLanguage'
 import useTranslation from "next-translate/useTranslation";
 import { useGlobalContext } from "@/stores/globalStore";
+import { Button } from "@/elements/Button";
 
 type TSettingsModal = React.FC<{
     isOpen: boolean;
@@ -141,6 +142,8 @@ const SettingsModal:TSettingsModal = ({isOpen, setIsOpen}) => {
 
                             <a className="text-subheading-small underline" href="https://github.com/inancakduvan/nobetci-eczaneler" target="_blank" rel="noreferrer">github.com/inancakduvan/nobetci-eczaneler</a>
                         </div>
+
+                        <Button type="secondary" text={t("close")} className="w-full mt-large" onClick={() => setIsOpen(false)} />
 
                     </motion.div>
                 </div>
