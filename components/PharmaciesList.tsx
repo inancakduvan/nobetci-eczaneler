@@ -11,6 +11,7 @@ import { Button } from "@/elements/Button";
 import Skeletton from "@/elements/Skeletton/Skeletton";
 import { Days, Months } from "@/enums";
 import { findDistanceAsKm } from "@/utils/location";
+import { clearAllStorageData } from "@/utils/storage";
 
 
 type TPharmaciesList = React.FC<{
@@ -128,6 +129,12 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
             document.getElementById("appContainer")?.scrollTo(0, 0);
         }
     }, [closestPharmacy])
+
+    useEffect(() => {
+        if(hasError) {
+            clearAllStorageData();
+        }
+    }, [hasError])
 
     const redirectToMap = (coordinates: string) => {
         const splittedCoordinates = coordinates.split(",");
