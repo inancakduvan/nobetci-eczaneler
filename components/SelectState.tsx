@@ -56,6 +56,7 @@ const SelectState: TSelectState = ({stateType}) => {
 
     useEffect(() => {
         setIsResultsLoading(false);
+        setSearchedResultList([]);
         
         if(stateType === "city") {
             fetchCities((data: string[]) => {
