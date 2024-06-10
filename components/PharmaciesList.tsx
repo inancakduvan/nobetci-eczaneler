@@ -116,7 +116,6 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
 
         let dayIndex = hours <= 7 ? date.getDay() - 1 : date.getDay();
         dayIndex = dayIndex === -1 ? 6 : dayIndex;
-        console.log(dayIndex, hours);
 
         let nextDayIndex = dayIndex + 1;
         nextDayIndex = nextDayIndex === 7 ? 0 : nextDayIndex;
