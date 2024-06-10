@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@bradgarropy/next-google-analytics": "^1.0.2",
     "@tabler/icons-react": "^3.5.0",
     "framer-motion": "^11.2.10",
     "fuse.js": "^7.0.0",
