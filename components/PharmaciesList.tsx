@@ -35,7 +35,7 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
 
     const { t } = useTranslation('common');
 
-    const { pharmacies, setPharmacies } = useGlobalContext();
+    const { pharmacies, setPharmacies, siteLanguage } = useGlobalContext();
 
     const [dayOfWeek, setDayOfWeek] = useState<string>();
     const [nextDayOfWeek, setNextDayOfWeek] = useState<string>();
@@ -72,23 +72,6 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
 
             document.getElementById("appContainer")?.scrollTo(0, 0);
 
-            // Date
-            const date = new Date();
-            
-            const _dayOfWeek = t(Days[date.getDay()]);
-            const _nextDayOfWeek = t(Days[date.getDay() === 6 ? 0 : date.getDay() + 1]);
-            const _dayOfMonth = date.getDate();
-            const _month = t(Months[date.getMonth()]);
-            const _year = date.getFullYear();
-            const _date = _dayOfMonth + " " + _month + " " + _year + ", " + _dayOfWeek; 
-
-            setDayOfWeek(_dayOfWeek);
-            setNextDayOfWeek(_nextDayOfWeek);
-            setDayOfMonth(_dayOfMonth);
-            setMonth(_month);
-            setYear(_year);
-            setDate(_date);
-
             // Permission
             navigator.permissions.query({ name: 'geolocation' })
             .then((permisssion) => {
@@ -104,6 +87,8 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
         }
 
         if(city && district) {
+            setPharmacies([]);
+            
             fetchPharmacies(city, district, 
                 (data: TPharmaciesResponse) => {
                     setPharmacies(data.result);
@@ -120,6 +105,25 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
             document.getElementById("appContainer")?.removeEventListener("scroll", onScroll);
         }
     }, [])
+
+    useEffect(() => {
+        // Date
+        const date = new Date();
+        
+        const _dayOfWeek = t(Days[date.getDay()]);
+        const _nextDayOfWeek = t(Days[date.getDay() === 6 ? 0 : date.getDay() + 1]);
+        const _dayOfMonth = date.getDate();
+        const _month = t(Months[date.getMonth()]);
+        const _year = date.getFullYear();
+        const _date = _dayOfMonth + " " + _month + " " + _year + ", " + _dayOfWeek; 
+
+        setDayOfWeek(_dayOfWeek);
+        setNextDayOfWeek(_nextDayOfWeek);
+        setDayOfMonth(_dayOfMonth);
+        setMonth(_month);
+        setYear(_year);
+        setDate(_date);
+    }, [siteLanguage])
 
     useEffect(() => {
         if(currentLocation) {
@@ -213,8 +217,8 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
                                 <div className="text-subheading-xsmall text-primary-700 mt-xsmall capitalize">{city} / {district}</div>
                             </div>
 
-                            <div className="text-onText-subdark cursor-pointer" onClick={() => setIsSettingsModalOpen(true)}>
-                                <IconSettings size={18} />
+                            <div className="text-onText-secondary cursor-pointer" onClick={() => setIsSettingsModalOpen(true)}>
+                                <IconSettings size={22} />
                             </div>
                         </div>
                     </div>

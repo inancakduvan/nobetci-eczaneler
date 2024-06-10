@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import { IconArrowRight, IconBrandGithub, IconBrandX, IconWorldWww, IconX } from "@tabler/icons-react";
 
 import setLanguage from 'next-translate/setLanguage'
+import useTranslation from "next-translate/useTranslation";
+import { useGlobalContext } from "@/stores/globalStore";
 
 type TSettingsModal = React.FC<{
     isOpen: boolean;
@@ -10,7 +12,9 @@ type TSettingsModal = React.FC<{
 }>;
 
 const SettingsModal:TSettingsModal = ({isOpen, setIsOpen}) => {
-    const [siteLanguage, setSiteLanguage] = useState<string>("tr");
+    const { t } = useTranslation('common');
+
+    const { siteLanguage, setSiteLanguage } = useGlobalContext();
 
     useEffect(() => {
         if(window) {
@@ -49,7 +53,7 @@ const SettingsModal:TSettingsModal = ({isOpen, setIsOpen}) => {
                         </div>
                     
                         <div className="flex items-center justify-between bg-muted-400 border-solid border border-muted-700 rounded-lg cursor-pointer p-medium" onClick={updateLanguage}>
-                            <div className="text-onText-primary text-subheading-medium">Change language to {siteLanguage === "en" ? "Turkish" : "English"}</div>
+                            <div className="text-onText-primary text-subheading-medium">{t("changeLanguage")}</div>
 
                             <div className="text-primary-400">
                                 <IconArrowRight />
@@ -57,7 +61,7 @@ const SettingsModal:TSettingsModal = ({isOpen, setIsOpen}) => {
                         </div>
 
                         <div className="mt-large bg-muted-400 border-solid border border-muted-700 rounded-lg cursor-pointer p-medium">
-                            <div className="text-onText-primary text-subheading-medium">Developed and Designed by</div>
+                            <div className="text-onText-primary text-subheading-medium">{t("developedAndDesignedBy")}</div>
 
                             <div className="text-primary-400">İnanç Akduvan</div>
 
@@ -105,13 +109,13 @@ const SettingsModal:TSettingsModal = ({isOpen, setIsOpen}) => {
                         </div>
 
                         <div className="mt-medium bg-helper-yellow-400 text-semantic-warning border-solid border border-muted-700 rounded-lg cursor-pointer p-medium">
-                            <div className="text-body-small mb-small">This project retrieves data from the following source:</div>
+                            <div className="text-body-small mb-small">{t("dataSourceDesc")}:</div>
 
                             <a className="text-subheading-small underline" href="https://collectapi.com/tr/api/health/nobetci-eczane-api" target="_blank" rel="noreferrer">collectapi.com/tr/api/health/nobetci-eczane-api</a>
                         </div>
 
                         <div className="mt-medium bg-sky-100 text-sky-900 border-solid border border-sky-300 rounded-lg cursor-pointer p-medium">
-                            <div className="text-body-small mb-medium">This project is an open-source project. You can see the details on the GitHub page.</div>
+                            <div className="text-body-small mb-medium">{t("openSourceDesc")}</div>
 
                             <div className="flex gap-small flex-wrap mb-large">
                                 <div className="inline-block bg-sky-200 text-sky-950 border border-solid border-sky-400 text-body-xsmall py-xsmall px-small rounded">

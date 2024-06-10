@@ -42,7 +42,7 @@ const SelectState: TSelectState = ({stateType}) => {
     const [searchedValue, setSearchedValue] = useState<string>("");
 
     const fuseOptions = {
-        threshold: 0.3
+        threshold: 0.5
     };
     
     const fuse = useMemo(() => {

@@ -27,6 +27,9 @@ interface ContextProps {
 
     selectedDistrict: string;
     setSelectedDistrict: Dispatch<SetStateAction<string>>;
+
+    siteLanguage: string;
+    setSiteLanguage: Dispatch<SetStateAction<string>>;
 }
 
 const GlobalContext = createContext<ContextProps>({
@@ -44,6 +47,9 @@ const GlobalContext = createContext<ContextProps>({
 
     selectedDistrict: "",
     setSelectedDistrict: (): string => "",
+
+    siteLanguage: "",
+    setSiteLanguage: (): string => "",
 })
 
 export const GlobalContextProvider : React.FC <{ children: React.ReactNode }> = ({ children }) => {
@@ -55,6 +61,8 @@ export const GlobalContextProvider : React.FC <{ children: React.ReactNode }> = 
 
     const [selectedCity, setSelectedCity] = useState('');
     const [selectedDistrict, setSelectedDistrict] = useState('');
+
+    const [siteLanguage, setSiteLanguage] = useState('tr');
     
     return (
         <GlobalContext.Provider value={{ 
@@ -67,7 +75,9 @@ export const GlobalContextProvider : React.FC <{ children: React.ReactNode }> = 
             selectedCity, 
             setSelectedCity, 
             selectedDistrict, 
-            setSelectedDistrict 
+            setSelectedDistrict,
+            siteLanguage, 
+            setSiteLanguage 
         }}>
             {children}
         </GlobalContext.Provider>

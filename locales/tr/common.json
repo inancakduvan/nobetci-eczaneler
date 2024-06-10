@@ -35,5 +35,10 @@
     "september": "Eylül",
     "october": "Ekim",
     "november": "Kasım",
-    "december": "Aralık"
+    "december": "Aralık",
+
+    "changeLanguage": "Dili İngilizceye çevir",
+    "developedAndDesignedBy": "Tasarlayan ve Geliştiren",
+    "dataSourceDesc": "Bu proje, verileri aşağıdan belirtilen kaynaktan almaktadır",
+    "openSourceDesc": "Bu proje, açık kaynak bir projedir. Detaylarını github adresinden görebilirsiniz."
 }
