@@ -20,9 +20,9 @@ export const Button: TButton = ({ type, text, isLoading, Icon, iconPosition = "l
   const getButtonClassName = ():string => {
     switch(type) {
       case "primary-light":
-        return "bg-primary-400 w-[36px] h-[36px] rounded";
+        return "bg-primary-400 w-[40px] h-[40px] rounded-full";
       case "secondary":
-        return "bg-muted-500 border-muted-700 border border-solid rounded py-[5px] px-[16px]";
+        return "bg-muted-400 border-primary-300 border border-solid rounded-[99px] py-[7px] px-[18px] text-onText-primary text-body-medium";
       case "rounded":
         return "bg-primary-300 w-[44px] h-[44px] border-primary-700 border border-solid rounded-full";
       default:

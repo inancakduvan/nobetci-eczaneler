@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import useTranslation from "next-translate/useTranslation";
 import { motion } from "framer-motion";
 
-import { IconInfoCircle, IconArrowLeft, IconPhone, IconPhoneCall, IconArrowRight, IconAdjustmentsHorizontal, IconCurrentLocation, IconStarFilled } from "@tabler/icons-react";
+import { IconInfoCircle, IconArrowLeft, IconPhone, IconPhoneCall, IconArrowRight, IconAdjustmentsHorizontal, IconCurrentLocation, IconStarFilled, IconMapUp } from "@tabler/icons-react";
 
 import { fetchPharmacies } from "@/utils/fetch";
 import { TPharmacies, useGlobalContext } from "@/stores/globalStore";
@@ -236,7 +236,7 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
                                             <div className="flex items-center justify-between p-medium border-b border-solid border-muted-600 text-heading-medium text-onText-primary">
                                                 <div className="flex flex-col">
                                                     {pharmacy.name} 
-                                                    {pharmacy.distance && <div className="mt-xsmall text-subheading-small text-onText-subdark">≈ {pharmacy.distance.toFixed(1)}<span className="text-onText-secondary text-body-small"> km</span></div>}
+                                                    {pharmacy.distance && <div className="mt-xsmall text-body-xsmall text-onText-secondary">≈ {pharmacy.distance.toFixed(1)}km</div>}
                                                 </div>
                                                 
                                                 {(closestPharmacy && (closestPharmacy.phone === pharmacy.phone)) && 
@@ -252,7 +252,7 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
                                                 }
                                             </div>
 
-                                            <div className="px-medium pt-small pb-medium">
+                                            <div className="px-medium py-medium">
                                                 <div className="text-body-small text-onText-subdark">{pharmacy.address}</div>
                                                 
                                                 <div className="flex items-center gap-xsmall mt-medium"> 
@@ -264,8 +264,8 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
                                                 </div>
                                             </div>
 
-                                            <div className="flex items-center justify-end gap-medium p-medium">
-                                                <Button type="secondary" text={t("seeOnMap")} Icon={IconArrowRight} iconPosition="right" onClick={() => redirectToMap(pharmacy.loc)} />
+                                            <div className="flex items-center justify-end gap-medium p-medium mt-small">
+                                                <Button type="secondary" text={t("seeOnMap")} Icon={IconMapUp} onClick={() => redirectToMap(pharmacy.loc)} />
                                                 
                                                 <a href={"tel:" + pharmacy.phone}>
                                                     <Button type="primary-light" className="md:hidden" Icon={IconPhoneCall} />
