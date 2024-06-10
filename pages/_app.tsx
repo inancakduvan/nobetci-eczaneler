@@ -24,7 +24,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
       </Layout>
 
-      <GoogleAnalytics measurementId="G-LJ3G0FWS7N" />
+      <GoogleAnalytics measurementId={process.env.GOOGLE_ANALYTICS_KEY!} />
     </GlobalContextProvider>
   )
 }
