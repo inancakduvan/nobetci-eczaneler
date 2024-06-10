@@ -56,14 +56,26 @@ export const fetchDistricts = (city: string, onSuccess: Function, onError?: Func
 export const fetchPharmacies = (city: string, district: string, onSuccess: Function, onError?: Function) => {
     const todaysPharmacies = localStorage.getItem(StorageKeys.TODAYS_PHARMACIES);
 
+    alert("1111")
+
     if(todaysPharmacies) {
+        alert("2222")
+
         const todaysPharmaciesParsed = JSON.parse(todaysPharmacies);
 
         const date = new Date().getTime();
 
+        alert(date);
+        alert(Number(todaysPharmaciesParsed.date))
+        alert(date > Number(todaysPharmaciesParsed.date))
+
         if(date > Number(todaysPharmaciesParsed.date)) {
             localStorage.removeItem(StorageKeys.TODAYS_PHARMACIES);
+            alert("333")
+
         } else {
+            alert("4444")
+
             const searchedPharmacies = todaysPharmaciesParsed.value.find((item: {state: string}) => item.state === (city + "-" + district));
     
             if(searchedPharmacies) {
@@ -77,6 +89,7 @@ export const fetchPharmacies = (city: string, district: string, onSuccess: Funct
     fetch(EndPoints.PHARMACIES_ENDPOINT + "?city=" + city + "&district=" + district )
     .then(response => response.json())
     .then(data => {
+        alert("5555")
         if(data.success) {
             if(todaysPharmacies) {
                 const todaysPharmaciesParsed = JSON.parse(todaysPharmacies);
