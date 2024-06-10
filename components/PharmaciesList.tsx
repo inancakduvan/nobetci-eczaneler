@@ -300,10 +300,14 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
 
            {
             pharmacies.length > 0 &&  
-            <div className="fixed left-0 bottom-0 flex items-center justify-center gap-medium w-full px-medium pb-xxlarge pt-[80px] bg-gradient-whiteToBlack">
+            <>
+            <div className="z-20 fixed bottom-[40px] left-[50%] -translate-x-[50%] inline-flex items-center justify-center gap-medium">
                 {currentLocationStatus !== "granted" && <Button type="rounded" Icon={IconCurrentLocation} className="capitalize" onClick={() => setIsCurrentLocationModelOpen(true)} />}
                 <Button type="primary" text={district} Icon={IconAdjustmentsHorizontal} className="capitalize" isLoading={isFilterButtonLoading} onClick={openFilters} />
             </div>
+
+            <div className="fixed left-0 bottom-0 block w-full h-[164px] bg-gradient-whiteToBlack pointer-events-none"></div>
+            </>
            }
 
            {
