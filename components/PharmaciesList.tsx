@@ -63,10 +63,10 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
         }
 
         if(window) {
-            window.scrollTo(0, 0);
-
             // Window scroll
             document.getElementById("appContainer")?.addEventListener("scroll", onScroll);
+
+            document.getElementById("appContainer")?.scrollTo(0, 0);
 
             // Date
             const date = new Date();
@@ -124,8 +124,8 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
     }, [currentLocation])
 
     useEffect(() => {
-        if(window && closestPharmacy) {
-            window.scrollTo(0, 0);
+        if(window && closestPharmacy) {   
+            document.getElementById("appContainer")?.scrollTo(0, 0);
         }
     }, [closestPharmacy])
 
@@ -173,8 +173,10 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
             }
         }
     
-        setClosestPharmacy(closestPharmacy); 
-        setPharmacies(pharmaciesNew);
+        setClosestPharmacy(closestPharmacy);  
+        
+        const pharmaciesSortedBasedOnDistance = pharmaciesNew.sort((a,b) => a.distance! - b.distance!);
+        setPharmacies(pharmaciesSortedBasedOnDistance);
     }
 
     const openFilters = () => {
