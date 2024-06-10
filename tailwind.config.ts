@@ -21,6 +21,9 @@ const config: Config = {
           lineHeight: '1.25rem',
           fontWeight: '600',
         }],
+        'subheading-xxsmall': ['0.65rem', {
+          lineHeight: '1rem',
+        }],
         'subheading-xsmall': ['0.75rem', {
           lineHeight: '1rem',
           fontWeight: '500',
@@ -32,6 +35,10 @@ const config: Config = {
         'subheading-medium': ['1rem', {
           lineHeight: '1rem',
           fontWeight: '500',
+        }],
+        'body-xxsmall': ['0.65rem', {
+          lineHeight: '1rem',
+          fontWeight: '400'
         }],
         'body-xsmall': ['0.75rem', {
           lineHeight: '1rem',

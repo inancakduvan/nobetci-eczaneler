@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import useTranslation from "next-translate/useTranslation";
 import { motion } from "framer-motion";
 
-import { IconInfoCircle, IconArrowLeft, IconPhone, IconPhoneCall, IconArrowRight, IconAdjustmentsHorizontal, IconCurrentLocation, IconStarFilled, IconMapUp } from "@tabler/icons-react";
+import { IconInfoCircle, IconArrowLeft, IconPhone, IconPhoneCall, IconAdjustmentsHorizontal, IconCurrentLocation, IconStarFilled, IconMapUp, IconSettings } from "@tabler/icons-react";
 
 import { fetchPharmacies } from "@/utils/fetch";
 import { TPharmacies, useGlobalContext } from "@/stores/globalStore";
@@ -12,6 +12,7 @@ import Skeletton from "@/elements/Skeletton/Skeletton";
 import { Days, Months } from "@/enums";
 import { findDistanceAsKm } from "@/utils/location";
 import { clearAllStorageData } from "@/utils/storage";
+import SettingsModal from "./SettingsModal";
 
 
 type TPharmaciesList = React.FC<{
@@ -42,6 +43,8 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
     const [month, setMonth] = useState<string>();
     const [year, setYear] = useState<number>();
     const [date, setDate] = useState<string>("-");
+
+    const [isSettingsModalOpen, setIsSettingsModalOpen] = useState<boolean>(false);
 
     const [isCurrentLocationModelOpen, setIsCurrentLocationModelOpen] = useState<boolean>(false);
     const [currentLocationStatus, setCurrentLocationStatus] = useState<string>("prompt");
@@ -204,9 +207,15 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
                         <div className="bg-transparent h-[70px] w-full"></div>
                     }
                     <div className={"transition-all flex items-center justify-center" + (isPageScrolled ? " z-20 fixed left-0 top-0 w-full bg-gradient-whiteToTransparent90deg bg-blur border-b" : " bg-semantic-light border rounded-lg")}>
-                        <div className={"max-w-[640px] w-full p-medium shadow-ultra-soft border-solid border-muted-700 bg-transparent"}>
-                            <div className="text-heading-medium text-onText-primary">{date}</div>
-                            <div className="text-subheading-xsmall text-primary-700 mt-xsmall capitalize">{city} / {district}</div>
+                        <div className={"flex items-start justify-between max-w-[640px] w-full p-medium shadow-ultra-soft border-solid border-muted-700 bg-transparent"}>
+                            <div>
+                                <div className="text-heading-medium text-onText-primary">{date}</div>
+                                <div className="text-subheading-xsmall text-primary-700 mt-xsmall capitalize">{city} / {district}</div>
+                            </div>
+
+                            <div className="text-onText-subdark cursor-pointer" onClick={() => setIsSettingsModalOpen(true)}>
+                                <IconSettings size={18} />
+                            </div>
                         </div>
                     </div>
 
@@ -361,6 +370,8 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
                 </div>
             </motion.div>
            }
+
+            <SettingsModal isOpen={isSettingsModalOpen} setIsOpen={setIsSettingsModalOpen} />
         </>
     )
 }
