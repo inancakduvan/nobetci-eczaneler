@@ -176,11 +176,6 @@ const SelectState: TSelectState = ({stateType}) => {
                     </motion.div>)
                     :
                     null
-                    // <>
-                    //     <div className="flex items-center gap-small text-onText-secondary text-body-medium">
-                    //        <div className="-translate-y-[1px]"><IconReportOff /></div> {t("noResult")}
-                    //     </div>
-                    // </>
                     }
                 </div>
                 :
