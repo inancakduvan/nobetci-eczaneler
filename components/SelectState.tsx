@@ -141,7 +141,7 @@ const SelectState: TSelectState = ({stateType}) => {
             </div>
 
             <div className={"relative mt-medium px-medium pb-medium" + (isResultsLoading ? " pointer-events-none" : "")}>
-                {searchedResultList && searchedResultList.length > 0 ? searchedResultList.map((state, index) => 
+                {searchedResultList && searchedResultList.length > 0 && searchedResultList.map((state, index) => 
                 <motion.div 
                     custom={index}
                     initial={{ opacity: 0 }}
@@ -154,12 +154,6 @@ const SelectState: TSelectState = ({stateType}) => {
                         {(isResultsLoading && state === selectedCity) && <Spinner />}
                     </div>
                 </motion.div>)
-                :
-                <>
-                    <div className="flex gap-medium text-body-medium text-onText-secondary">
-                        <div className="-translate-y-[1px]"><IconReportOff /></div> {t("noResult")}
-                    </div>
-                </>
                 }
             </div>
         </>
