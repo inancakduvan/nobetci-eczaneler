@@ -7,7 +7,7 @@ import Fuse from "fuse.js";
 import { useGlobalContext } from "@/stores/globalStore";
 import { motion } from "framer-motion";
 
-import {IconArrowLeft, IconSearch } from '@tabler/icons-react';
+import {IconArrowLeft, IconReportOff, IconSearch } from '@tabler/icons-react';
 
 import { StorageKeys } from "@/enums";
 import { fetchCities, fetchDistricts } from "@/utils/fetch";
@@ -141,7 +141,7 @@ const SelectState: TSelectState = ({stateType}) => {
             </div>
 
             <div className={"relative mt-medium px-medium pb-medium" + (isResultsLoading ? " pointer-events-none" : "")}>
-                {searchedResultList && searchedResultList.length > 0 && searchedResultList.map((state, index) => 
+                {searchedResultList && searchedResultList.length > 0 ? searchedResultList.map((state, index) => 
                 <motion.div 
                     custom={index}
                     initial={{ opacity: 0 }}
@@ -153,7 +153,14 @@ const SelectState: TSelectState = ({stateType}) => {
                         {state} 
                         {(isResultsLoading && state === selectedCity) && <Spinner />}
                     </div>
-                </motion.div>)}
+                </motion.div>)
+                :
+                <>
+                    <div className="flex gap-medium text-body-medium text-onText-secondary">
+                        <div className="-translate-y-[1px]"><IconReportOff /></div> {t("noResult")}
+                    </div>
+                </>
+                }
             </div>
         </>
     )
