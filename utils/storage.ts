@@ -6,8 +6,11 @@ export const setDataOfTodaysPharmacies = (value: string) => {
 
     const valueParsed = JSON.parse(value);
 
+    const oldData = localStorage.getItem(StorageKeys.TODAYS_PHARMACIES);
+    const oldDataParsed = oldData ? JSON.parse(oldData) : null;
+
     const newData = {
-        date: tomorrow,
+        date: oldDataParsed && oldDataParsed.date ? oldDataParsed.date : tomorrow,
         value: valueParsed
     }
 

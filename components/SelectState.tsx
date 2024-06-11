@@ -65,24 +65,22 @@ const SelectState: TSelectState = ({stateType}) => {
         }
 
         if(stateType === "district") {
-            if(!selectedCity) {
-                setIsResultsLoading(true);
+            setIsResultsLoading(true);
 
-                fetchDistricts(cityParamater, 
-                    (data: TDistrictsResponse) => {
-                        const result = data.result.map((item) => item.text);
-                        
-                        setDistricts(result);
-                        router.push("/district/" + cityParamater?.toString().toLocaleLowerCase('tr-TR'));
+            fetchDistricts(cityParamater, 
+                (data: TDistrictsResponse) => {
+                    const result = data.result.map((item) => item.text);
+                    
+                    setDistricts(result);
+                    router.push("/district/" + cityParamater?.toString().toLocaleLowerCase('tr-TR'));
 
-                        setIsResultsLoading(false);
-                    },
-                    () => {
-                        router.push("/city");
-                        setIsResultsLoading(false);
-                    }
-                )
-            }
+                    setIsResultsLoading(false);
+                },
+                () => {
+                    router.push("/city");
+                    setIsResultsLoading(false);
+                }
+            )
         }
     }, [])
 
@@ -97,16 +95,6 @@ const SelectState: TSelectState = ({stateType}) => {
         }
     }, [searchResults])
 
-    useEffect(() => {
-        if(stateType === "city") {
-            setSearchedResultList(cities);
-        }
-
-        if(stateType === "district") {
-            setSearchedResultList(districts);
-        }
-    }, [cities, districts])
-
     const setCityAndDistrict = (name: string) => {
         if(stateType === "city") {
             setSelectedCity(name);
@@ -116,20 +104,7 @@ const SelectState: TSelectState = ({stateType}) => {
             }
 
             setIsResultsLoading(true);
-
-            fetchDistricts(name, 
-                (data: TDistrictsResponse) => {
-                    const result = data.result.map((item) => item.text);
-                    
-                    setDistricts(result);
-                    router.push("/district/" + name.toLocaleLowerCase('tr-TR'));
-                    setIsResultsLoading(false);
-                },
-                () => {
-                    router.push("/city");
-                    setIsResultsLoading(false);
-                }
-            )
+            router.push("/district/" + name.toLocaleLowerCase('tr-TR'));
         }
 
         if(stateType === "district") {
