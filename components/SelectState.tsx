@@ -57,6 +57,7 @@ const SelectState: TSelectState = ({stateType}) => {
     }, [fuse, searchedValue]);
 
     useEffect(() => {
+        setIsComponentLoaded(false);
         setIsResultsLoading(false);
         setSearchedResultList([]);
         
