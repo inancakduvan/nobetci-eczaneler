@@ -3,13 +3,15 @@
 import { createContext, useContext, Dispatch, SetStateAction, useState } from "react";
 
 export type TPharmacies = {
-    name: string,
+    pharmacyName: string,
     dist: string,
     address: string,
     phone: string,
-    loc: string,
+    latitude: number,
+    longitude: number,
     closest?: boolean,
-    distance?: number
+    distance?: number,
+    directions?: string
 }
 
 interface ContextProps {

@@ -28,8 +28,8 @@ export default function Pharmacies()  {
       const _district = (selectedDistrict.toLocaleLowerCase('tr-TR') || districtParamater.toLocaleLowerCase('tr-TR'));
 
       fetchPharmacies(_city, _district, 
-        (data: TPharmaciesResponse) => {
-          setPharmacies(data.result);
+        (response: TPharmaciesResponse) => {
+          setPharmacies(response.data);
         },
         () => {
           setHasError(true);

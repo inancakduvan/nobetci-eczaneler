@@ -22,7 +22,7 @@ type TPharmaciesList = React.FC<{
 
 export type TPharmaciesResponse = {
   success: boolean;
-  result: TPharmacies[];
+  data: TPharmacies[];
 }
 
 type TCurrentLocation = {
@@ -89,11 +89,14 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
         }
 
         if(city && district) {
-            setPharmacies([]);
+            // setPharmacies([]);
+
+            console.log(city, district)
             
             fetchPharmacies(city, district, 
-                (data: TPharmaciesResponse) => {
-                    setPharmacies(data.result);
+                (response: TPharmaciesResponse) => {
+                    console.log(response.data);
+                    setPharmacies(response.data);
                 },
                 () => {
                     setHasError(true);
@@ -143,7 +146,7 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
 
     useEffect(() => {
         if(currentLocation) {
-            findClosestPharmacy(currentLocation.latitude, currentLocation.longitude);
+           findClosestPharmacy(currentLocation.latitude, currentLocation.longitude);
         }
     }, [currentLocation])
 
@@ -159,12 +162,14 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
         }
     }, [hasError])
 
-    const redirectToMap = (coordinates: string) => {
-        const splittedCoordinates = coordinates.split(",");
-        const lat = splittedCoordinates[0];
-        const lng = splittedCoordinates[1];
+    useEffect(() => {
+        console.log("nooo",
+            pharmacies
+        )
+    }, [pharmacies])
 
-        const url = "https://www.google.com/maps/search/?api=1&query=" + lat + "," + lng;
+    const redirectToMap = (latitude: number, longitude: number) => {
+        const url = "https://www.google.com/maps/search/?api=1&query=" + latitude + "," + longitude;
         
         window.open(url, "_blank");
     }
@@ -187,7 +192,7 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
         let pharmaciesNew = [];
 
         for (let item of pharmacies) {
-            const location = item.loc.split(",");
+            const location = [item.latitude, item.longitude];
             const lat = userLat - Number(location[0]);
             const lng = userLng - Number(location[1]);
 
@@ -265,13 +270,13 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     transition={{ delay: 0.04 * index }}
-                                    key={"pharmacy-" + pharmacy.name + pharmacy.phone + pharmacy.loc}
+                                    key={"pharmacy-" + pharmacy.pharmacyName + pharmacy.phone + pharmacy.latitude}
                                     className={(closestPharmacy && (closestPharmacy.phone === pharmacy.phone)) ? "-order-1" : ""}
                                     >
                                         <div  className="shadow-ultra-soft border border-muted-700 border-solid bg-semantic-light mb-medium rounded-lg">
                                             <div className="flex items-center justify-between p-medium border-b border-solid border-muted-600 text-heading-medium text-onText-primary">
                                                 <div className="flex flex-col">
-                                                    {pharmacy.name} 
+                                                    {pharmacy.pharmacyName.toLocaleUpperCase('tr-TR')} 
                                                     {pharmacy.distance && <div className="mt-xsmall text-subheading-xsmall text-onText-secondary">≈ {pharmacy.distance.toFixed(1)}km</div>}
                                                 </div>
                                                 
@@ -290,20 +295,21 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
 
                                             <div className="px-medium py-medium">
                                                 <div className="text-body-small text-onText-secondary">{pharmacy.address}</div>
+                                                {pharmacy.directions && <div className="text-subheading-xsmall text-onText-subdark mt-xsmall italic">{pharmacy.directions}</div>}
                                                 
-                                                <div className="flex items-center gap-xsmall mt-medium"> 
+                                                <div className="flex items-center gap-xsmall mt-large"> 
                                                     <div className="inline-flex text-primary-400 -translate-y-[1px]">
                                                         <IconPhone size={18} />
                                                     </div>
 
-                                                    <a href={"tel:0" + pharmacy.phone} className="block text-subheading-medium text-onText-subdark underline">0{pharmacy.phone}</a>
+                                                    <a href={"tel:" + pharmacy.phone} className="block text-subheading-medium text-onText-subdark underline">{pharmacy.phone}</a>
                                                 </div>
                                             </div>
 
                                             <div className="flex items-center justify-end gap-medium p-medium mt-small">
-                                                <Button type="secondary" text={t("seeOnMap")} Icon={IconMapUp} onClick={() => redirectToMap(pharmacy.loc)} />
+                                                <Button type="secondary" text={t("seeOnMap")} Icon={IconMapUp} onClick={() => redirectToMap(pharmacy.latitude, pharmacy.longitude)} />
                                                 
-                                                <a href={"tel:0" + pharmacy.phone}>
+                                                <a href={"tel:" + pharmacy.phone}>
                                                     <Button type="primary-light" Icon={IconPhoneCall} />
                                                 </a>
                                             </div>

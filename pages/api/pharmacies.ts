@@ -74,18 +74,18 @@ export default async function handler(req: NextRequest) {
     }
 
     try {
-        if(dataType !== "mock") {
+        if(true) {
             if (!city || !district) {
                 return new Response("Missing parameters", { status: 400 });
             }
-    
-            const url = `https://api.collectapi.com/health/dutyPharmacy?ilce=${district}&il=${city}`;
+
+            const url = `https://www.nosyapi.com/apiv2/service/pharmacies-on-duty?city=${city}&district=${district}`;
     
             const response = await fetch(url, {
                 mode: 'cors',
                 headers: {
                     "Access-Control-Allow-Origin" : "*",
-                    "Authorization" : 'apikey ' + key,
+                    "Authorization" : 'Bearer ' + key,
                     "Content-Type" : "application/json"
                 }
             });

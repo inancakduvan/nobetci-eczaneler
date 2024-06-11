@@ -25,7 +25,7 @@ export default async function handler(req: NextRequest) {
     }
 
     try {
-        if(process.env.DATA_TYPE == "mock") {
+        if(false) {
             return new Response(JSON.stringify(mockData), {
                 status: 200
             });
@@ -34,13 +34,13 @@ export default async function handler(req: NextRequest) {
                 return new Response("Missing parameters", { status: 400 });
             }
     
-            const url = `https://api.collectapi.com/health/districtList?il=${city}`;
+            const url = `https://www.nosyapi.com/apiv2/service/pharmacies-on-duty/cities?city=` + city;
     
             const response = await fetch(url, {
                 mode: 'cors',
                 headers: {
                     "Access-Control-Allow-Origin" : "*",
-                    "Authorization" : 'apikey ' + key,
+                    "Authorization" : 'Bearer ' + key,
                     "Content-Type" : "application/json"
                 }
             });

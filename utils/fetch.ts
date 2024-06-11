@@ -26,7 +26,7 @@ export const fetchDistricts = (city: string, onSuccess: Function, onError?: Func
     fetch(EndPoints.DISTRICTS_ENDPOINT + "?city=" + city)
     .then(response => response.json())
     .then(data => {
-        if(data.success) {
+        if(data.status === "success") {
             if(lastTenCityDistricts) {
                 const newData = [...JSON.parse(lastTenCityDistricts), {
                     city,
@@ -77,7 +77,7 @@ export const fetchPharmacies = (city: string, district: string, onSuccess: Funct
     fetch(EndPoints.PHARMACIES_ENDPOINT + "?city=" + city + "&district=" + district )
     .then(response => response.json())
     .then(data => {
-        if(data.success) {
+        if(data.status === "success") {
             if(todaysPharmacies) {
                 const todaysPharmaciesParsed = JSON.parse(todaysPharmacies);
 
