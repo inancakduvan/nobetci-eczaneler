@@ -87,7 +87,7 @@ const SelectState: TSelectState = ({stateType}) => {
     useEffect(() => {
         const results = stateType === "city" ? cities : districts;
 
-        if(searchResults.length === 0) {
+        if(searchedValue === "") {
             setSearchedResultList(results);
         } else {
             const formattedSearchedResultList = searchResults.map((result) => result.item);
