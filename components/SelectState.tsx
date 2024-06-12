@@ -100,6 +100,10 @@ const SelectState: TSelectState = ({stateType}) => {
                 }
             )
         }
+
+        return () => {
+            setSearchedResultList([]);
+        }
     }, [])
 
     useEffect(() => {

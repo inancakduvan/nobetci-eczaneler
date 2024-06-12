@@ -89,13 +89,8 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
         }
 
         if(city && district) {
-            // setPharmacies([]);
-
-            console.log(city, district)
-            
             fetchPharmacies(city, district, 
                 (response: TPharmaciesResponse) => {
-                    console.log(response.data);
                     setPharmacies(response.data);
                 },
                 () => {
@@ -108,6 +103,7 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
 
         return () => {
             document.getElementById("appContainer")?.removeEventListener("scroll", onScroll);
+            setPharmacies([]);
         }
     }, [])
 

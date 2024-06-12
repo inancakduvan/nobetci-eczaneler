@@ -1,5 +1,6 @@
 import { EndPoints, StorageKeys, Months } from "@/enums";
 import { setDataOfTodaysPharmacies } from "./storage";
+import { TrToEn } from "./string";
 
 export const fetchCities = (onSuccess: Function) => {
     fetch(EndPoints.CITIES_ENDPOINT)
@@ -11,6 +12,8 @@ export const fetchCities = (onSuccess: Function) => {
 
 export const fetchDistricts = (city: string, onSuccess: Function, onError?: Function) => {
     const lastTenCityDistricts = localStorage.getItem(StorageKeys.LAST_TEN_CITY_DISTRICT);
+
+    city = TrToEn(city);
 
     if(lastTenCityDistricts) {
         const lastTenCityDistrictsParsed = JSON.parse(lastTenCityDistricts);
@@ -55,6 +58,9 @@ export const fetchDistricts = (city: string, onSuccess: Function, onError?: Func
 
 export const fetchPharmacies = (city: string, district: string, onSuccess: Function, onError?: Function) => {
     const todaysPharmacies = localStorage.getItem(StorageKeys.TODAYS_PHARMACIES);
+    
+    city = TrToEn(city);
+    district = TrToEn(district);
 
     if(todaysPharmacies) {
         const todaysPharmaciesParsed = JSON.parse(todaysPharmacies);
