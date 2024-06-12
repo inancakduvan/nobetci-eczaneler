@@ -155,7 +155,7 @@ const SelectState: TSelectState = ({stateType}) => {
 
             {
                 isComponentLoaded ?
-                <div className={"relative mt-medium px-medium pb-medium" + (isResultsLoading ? " pointer-events-none" : "")}>
+                <div className={"relative mt-medium px-medium pb-medium"}>
                     {searchedResultList && searchedResultList.length > 0 ? searchedResultList.map((state, index) => 
                     <motion.div 
                         custom={index}
