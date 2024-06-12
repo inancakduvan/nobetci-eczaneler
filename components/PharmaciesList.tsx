@@ -58,6 +58,8 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
     const [hasError, setHasError] = useState(false);
 
     useEffect(() => {
+        let timeoutToCheckPharmaciesLength: ReturnType<typeof setTimeout>;
+
         const onScroll = (event: Event) => {
             const scrollTop = (event.target as HTMLElement).scrollTop;
 
@@ -87,7 +89,7 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
                 }   
             })
 
-            const timeoutToCheckPharmaciesLength = setTimeout(() => {
+            timeoutToCheckPharmaciesLength = setTimeout(() => {
                 if(pharmacies.length === 0) {
                     setHasError(true);
                 }
@@ -112,6 +114,10 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
         return () => {
             document.getElementById("appContainer")?.removeEventListener("scroll", onScroll);
             setPharmacies([]);
+
+            if(timeoutToCheckPharmaciesLength) {
+                clearTimeout(timeoutToCheckPharmaciesLength);
+            }
         }
     }, [])
 
