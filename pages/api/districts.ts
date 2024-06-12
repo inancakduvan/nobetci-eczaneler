@@ -26,11 +26,7 @@ export default async function handler(req: NextRequest) {
     }
 
     try {
-        if(dataType === "mock") {
-            return new Response(JSON.stringify(mockData), {
-                status: 200
-            });
-        } else {
+        if(dataType !== "mock") {
             if (!city) {
                 return new Response("Missing parameters", { status: 400 });
             }
@@ -49,6 +45,10 @@ export default async function handler(req: NextRequest) {
             const data = await response.json();
     
             return new Response(JSON.stringify(data), {
+                status: 200
+            });
+        } else {
+            return new Response(JSON.stringify(mockData), {
                 status: 200
             });
         }
