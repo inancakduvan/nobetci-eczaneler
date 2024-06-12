@@ -124,7 +124,7 @@ const SelectState: TSelectState = ({stateType}) => {
             setSearchedResultList([]);
             localStorage.setItem(SELECTED_DISTRICT_KEY, name);
             setSelectedDistrict(name);
-            router.push("/pharmacies/" + (selectedCity.toLocaleLowerCase('tr-TR') || cityParamater.toLocaleLowerCase('tr-TR')) + "/" + TrToEn(name.toLocaleLowerCase('tr-TR')));
+            router.push("/pharmacies/" + (selectedCity.toLocaleLowerCase('tr-TR') || cityParamater.toLocaleLowerCase('tr-TR')) + "/" + name.toLocaleLowerCase('tr-TR'));
         }
     }
 
