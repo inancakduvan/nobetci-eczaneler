@@ -97,6 +97,7 @@ const SelectState: TSelectState = ({stateType}) => {
 
         return () => {
             setSearchedResultList([]);
+            setIsResultsLoading(false);
         }
     }, [])
 
