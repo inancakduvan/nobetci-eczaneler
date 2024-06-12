@@ -68,10 +68,7 @@ const SelectState: TSelectState = ({stateType}) => {
             fetchCities((data: string[]) => {
                 setCities(data);
 
-                const timeout = setTimeout(() => {
-                    setIsComponentLoaded(true);
-                    clearTimeout(timeout);
-                }, 300);
+                setIsComponentLoaded(true);
             });
         }
 
@@ -80,7 +77,6 @@ const SelectState: TSelectState = ({stateType}) => {
 
             fetchDistricts(cityParamater, 
                 (response: TDistrictsResponse) => {
-                    console.log(response);
                     const result = response.data.map((item) => item.cities);
                     const slugs = response.data.map((item) => item.slug);
                     
@@ -90,10 +86,7 @@ const SelectState: TSelectState = ({stateType}) => {
 
                     setIsResultsLoading(false);
 
-                    const timeout = setTimeout(() => {
-                        setIsComponentLoaded(true);
-                        clearTimeout(timeout);
-                    }, 300);
+                    setIsComponentLoaded(true);
                 },
                 () => {
                     router.push("/city");
