@@ -12,6 +12,7 @@ import {IconArrowLeft, IconReportOff, IconSearch } from '@tabler/icons-react';
 import { StorageKeys } from "@/enums";
 import { fetchCities, fetchDistricts } from "@/utils/fetch";
 import Spinner from "@/elements/Spinner/Spinner";
+import { TrToEn } from "@/utils/string";
 
 
 type TSelectState = React.FC<{
@@ -20,7 +21,6 @@ type TSelectState = React.FC<{
 
 type TDistrictsResponseResult = {
     cities: string;
-    slug: string;
 }
 
 type TDistrictsResponse = {
@@ -37,8 +37,6 @@ const SelectState: TSelectState = ({stateType}) => {
     const { SELECTED_CITY_KEY, SELECTED_DISTRICT_KEY } = StorageKeys;
 
     const { cities, setCities, districts, setDistricts, selectedCity, setSelectedCity, selectedDistrict, setSelectedDistrict } = useGlobalContext();
-
-    const [districtsSlugs, setDistrictsSlugs] = useState<Array<string>>([]);
 
     const [isResultsLoading, setIsResultsLoading] = useState<boolean>(false);
     const [searchedResultList, setSearchedResultList] = useState<string[]>([]);
@@ -78,10 +76,8 @@ const SelectState: TSelectState = ({stateType}) => {
             fetchDistricts(cityParamater, 
                 (response: TDistrictsResponse) => {
                     const result = response.data.map((item) => item.cities);
-                    const slugs = response.data.map((item) => item.slug);
                     
                     setDistricts(result);
-                    setDistrictsSlugs(slugs);
                     router.push("/district/" + cityParamater?.toString().toLocaleLowerCase('tr-TR'));
 
                     setIsResultsLoading(false);
@@ -112,7 +108,7 @@ const SelectState: TSelectState = ({stateType}) => {
         }
     }, [searchResults])
 
-    const setCityAndDistrict = (name: string, slug?: string) => {
+    const setCityAndDistrict = (name: string) => {
         if(stateType === "city") {
             setSelectedCity(name);
 
@@ -128,7 +124,7 @@ const SelectState: TSelectState = ({stateType}) => {
             setSearchedResultList([]);
             localStorage.setItem(SELECTED_DISTRICT_KEY, name);
             setSelectedDistrict(name);
-            router.push("/pharmacies/" + (selectedCity.toLocaleLowerCase('tr-TR') || cityParamater.toLocaleLowerCase('tr-TR')) + "/" + slug!.toLocaleLowerCase('tr-TR'));
+            router.push("/pharmacies/" + (selectedCity.toLocaleLowerCase('tr-TR') || cityParamater.toLocaleLowerCase('tr-TR')) + "/" + TrToEn(name.toLocaleLowerCase('tr-TR')));
         }
     }
 
@@ -167,7 +163,7 @@ const SelectState: TSelectState = ({stateType}) => {
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.04 * index }}
                         key={"city-" + state}
-                        onClick={() => setCityAndDistrict(state, districtsSlugs[index])}>
+                        onClick={() => setCityAndDistrict(state)}>
                         <div className="flex items-center justify-between px-medium text-subheading-medium h-[60px] border-b border-solid border-muted-700 cursor-pointer">
                             {state.toLocaleUpperCase('tr-TR')} 
                             {(isResultsLoading && state === selectedCity) && <Spinner />}
