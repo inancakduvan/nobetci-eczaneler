@@ -86,6 +86,14 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
                     })
                 }   
             })
+
+            const timeoutToCheckPharmaciesLength = setTimeout(() => {
+                if(pharmacies.length === 0) {
+                    setHasError(true);
+                }
+
+                clearTimeout(timeoutToCheckPharmaciesLength);
+            }, 10000);
         }
 
         if(city && district) {
