@@ -8,6 +8,7 @@ export default async function handler(req: NextRequest) {
     const key = process.env.PHARMACY_API_KEY;
     const params = req.nextUrl.searchParams;
     const city = params.get("city");
+    const dataType = process.env.DATA_TYPE;
 
     const mockData = {
         success: true,
@@ -25,7 +26,7 @@ export default async function handler(req: NextRequest) {
     }
 
     try {
-        if(false) {
+        if(dataType === "mock") {
             return new Response(JSON.stringify(mockData), {
                 status: 200
             });

@@ -74,7 +74,7 @@ export default async function handler(req: NextRequest) {
     }
 
     try {
-        if(true) {
+        if(dataType !== "mock") {
             if (!city || !district) {
                 return new Response("Missing parameters", { status: 400 });
             }
