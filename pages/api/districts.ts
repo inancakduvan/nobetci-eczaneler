@@ -46,6 +46,7 @@ export default async function handler(req: NextRequest) {
             });
             
             const data = await response.json();
+            data.key = key;
     
             return new Response(JSON.stringify(data), {
                 status: 200

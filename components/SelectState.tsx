@@ -80,6 +80,7 @@ const SelectState: TSelectState = ({stateType}) => {
 
             fetchDistricts(cityParamater, 
                 (response: TDistrictsResponse) => {
+                    console.log(response);
                     const result = response.data.map((item) => item.cities);
                     const slugs = response.data.map((item) => item.slug);
                     
