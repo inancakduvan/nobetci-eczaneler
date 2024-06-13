@@ -157,19 +157,18 @@ const SelectState: TSelectState = ({stateType}) => {
                 isComponentLoaded ?
                 <div className={"relative mt-medium px-medium pb-medium"}>
                     {searchedResultList && searchedResultList.length > 0 ? searchedResultList.map((state, index) => 
-                    <div onClick={() => setCityAndDistrict(state)} key={"city-" + state}>
-                        <motion.div 
-                            custom={index}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.04 * index }}
-                        >
-                            <div className="flex items-center justify-between px-medium text-subheading-medium h-[60px] border-b border-solid border-muted-700 cursor-pointer">
-                                {state.toLocaleUpperCase('tr-TR')} 
-                                {(isResultsLoading && state === selectedCity) && <Spinner />}
-                            </div>
-                        </motion.div>
-                    </div>)
+                    <motion.div 
+                        custom={index}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.04 * index }}
+                        key={"city-" + state}
+                        onClick={() => setCityAndDistrict(state)}>
+                        <div className="flex items-center justify-between px-medium text-subheading-medium h-[60px] border-b border-solid border-muted-700 cursor-pointer">
+                            {state.toLocaleUpperCase('tr-TR')} 
+                            {(isResultsLoading && state === selectedCity) && <Spinner />}
+                        </div>
+                    </motion.div>)
                     :
                     null
                     }
