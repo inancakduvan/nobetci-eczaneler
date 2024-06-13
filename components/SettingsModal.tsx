@@ -1,6 +1,6 @@
 import { SetStateAction, Dispatch, useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { IconArrowRight, IconBrandFigma, IconBrandGithub, IconBrandX, IconWorldWww, IconX } from "@tabler/icons-react";
+import { IconArrowRight, IconBrandFigma, IconBrandGithub, IconBrandX, IconWorld, IconWorldWww, IconX } from "@tabler/icons-react";
 
 import setLanguage from 'next-translate/setLanguage'
 import useTranslation from "next-translate/useTranslation";
@@ -56,7 +56,10 @@ const SettingsModal:TSettingsModal = ({isOpen, setIsOpen}) => {
                         </div>
                     
                         <div className="flex items-center justify-between bg-muted-400 border-solid border border-muted-700 rounded-lg cursor-pointer p-medium" onClick={updateLanguage}>
-                            <div className="text-onText-primary text-subheading-medium">{t("changeLanguage")}</div>
+                            <div className="flex items-center gap-small text-onText-primary text-subheading-medium">
+                                <div className="text-primary-700"><IconWorld /></div>
+                                {t("changeLanguage")}
+                            </div>
 
                             <div className="text-primary-400">
                                 <IconArrowRight />

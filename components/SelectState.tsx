@@ -36,7 +36,7 @@ const SelectState: TSelectState = ({stateType}) => {
 
     const { SELECTED_CITY_KEY, SELECTED_DISTRICT_KEY } = StorageKeys;
 
-    const { cities, setCities, districts, setDistricts, selectedCity, setSelectedCity, selectedDistrict, setSelectedDistrict } = useGlobalContext();
+    const { cities, setCities, districts, setDistricts, selectedCity, setSelectedCity, setSelectedDistrict } = useGlobalContext();
 
     const [isResultsLoading, setIsResultsLoading] = useState<boolean>(false);
     const [searchedResultList, setSearchedResultList] = useState<string[]>([]);
