@@ -151,7 +151,7 @@ const SettingsModal:TSettingsModal = ({isOpen, setIsOpen}) => {
                                 <div className="flex-1">
                                     <Trans
                                         i18nKey="common:figmaDesc"
-                                        components={[<div />, <a href="https://www.figma.com/design/XniOaRVyYj8WhuCUWxqkKy/N%C3%B6bet%C3%A7i-Eczaneler?node-id=1-3&t=VAmkcOldi3Edy92U-1" target="_blank" rel="noreferrer" className="text-subheading-medium underline" />]}
+                                        components={[<div key="figmaDescWrapper" />, <a href="https://www.figma.com/design/XniOaRVyYj8WhuCUWxqkKy/N%C3%B6bet%C3%A7i-Eczaneler?node-id=1-3&t=VAmkcOldi3Edy92U-1" target="_blank" rel="noreferrer" className="text-subheading-medium underline" />]}
                                     />
                                 </div>
                             </div>
