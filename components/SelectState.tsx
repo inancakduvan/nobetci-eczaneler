@@ -7,7 +7,7 @@ import Fuse from "fuse.js";
 import { useGlobalContext } from "@/stores/globalStore";
 import { motion } from "framer-motion";
 
-import {IconArrowLeft, IconReportOff, IconSearch } from '@tabler/icons-react';
+import {IconArrowLeft, IconSearch } from '@tabler/icons-react';
 
 import { StorageKeys } from "@/enums";
 import { fetchCities, fetchDistricts } from "@/utils/fetch";

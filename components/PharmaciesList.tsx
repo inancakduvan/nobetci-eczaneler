@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import useTranslation from "next-translate/useTranslation";
 import { motion } from "framer-motion";
 
-import { IconInfoCircle, IconArrowLeft, IconPhone, IconPhoneCall, IconAdjustmentsHorizontal, IconCurrentLocation, IconStarFilled, IconMapUp, IconSettings } from "@tabler/icons-react";
+import { IconInfoCircle, IconPhone, IconPhoneCall, IconAdjustmentsHorizontal, IconCurrentLocation, IconStarFilled, IconMapUp, IconSettings, IconReportOff } from "@tabler/icons-react";
 
 import { fetchPharmacies } from "@/utils/fetch";
 import { TPharmacies, useGlobalContext } from "@/stores/globalStore";
@@ -13,6 +13,7 @@ import { Days, Months } from "@/enums";
 import { findDistanceAsKm } from "@/utils/location";
 import { clearAllStorageData } from "@/utils/storage";
 import SettingsModal from "./SettingsModal";
+import ErrorPage from "./ErrorPage";
 
 
 type TPharmaciesList = React.FC<{
@@ -54,6 +55,7 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
     const [closestPharmacy, setClosestPharmacy] = useState<TPharmacies | null>();
 
     const [isPageScrolled, setIsPageScrolled] = useState<boolean>(false);
+    const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false);
     const [isFilterButtonLoading, setIsFilterButtonLoading] = useState<boolean>(false);
     const [hasError, setHasError] = useState(false);
 
@@ -92,6 +94,7 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
             fetchPharmacies(city, district, 
                 (response: TPharmaciesResponse) => {
                     setPharmacies(response.data);
+                    setIsDataLoaded(true);
                 },
                 () => {
                     setHasError(true);
@@ -221,7 +224,7 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
                         isPageScrolled &&
                         <div className="bg-transparent h-[70px] w-full"></div>
                     }
-                    <div className={"transition-all flex items-center justify-center" + (isPageScrolled ? " z-20 fixed left-0 top-0 w-full bg-gradient-whiteToTransparent90deg bg-blur border-b" : " bg-semantic-light border rounded-lg")}>
+                    <div className={"transition-all flex items-center justify-center" + (isPageScrolled ? " z-50 fixed left-0 top-0 w-full bg-gradient-whiteToTransparent90deg bg-blur border-b" : " bg-semantic-light border rounded-lg")}>
                         <div className={"flex items-start justify-between max-w-[640px] w-full p-medium shadow-ultra-soft border-solid border-muted-700 bg-transparent"}>
                             <div>
                                 <div className="text-heading-medium text-onText-primary">{coreDate}</div>
@@ -311,17 +314,19 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
                             <>
                             {
                             hasError ?
-                            <div className="z-40 fixed top-0 left-0 w-full h-fit-screen flex items-center justify-center bg-muted-700">
-                                <div className="inline-flex flex-col px-large py-medium bg-white shadow-ultra-soft rounded-lg">
-                                <div className="text-body-medium text-center mb-medium">
-                                    {t("errorMessage")}
-                                </div>
-
-                                <Button type="primary" Icon={IconArrowLeft} text={t("goBack")} onClick={() => router.push("/city")} />
-                                </div>
-                            </div>
+                            <ErrorPage />
                             :
-                            <Skeletton />
+                            <>
+                                {
+                                    isDataLoaded ?
+                                    <div className="flex gap-medium items-center mt-large text-gray-400 text-heading-large">
+                                        <div className="-translate-y-[1px]"><IconReportOff size={24} /></div>
+                                        {t("noResult")}
+                                    </div>
+                                    :
+                                    <Skeletton />
+                                }
+                            </>
                             }
                             </>
                         }
@@ -330,17 +335,17 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
                 </div>
             </div>
 
-           {
-            pharmacies.length > 0 &&  
-            <>
-            <div className="z-20 fixed bottom-[40px] left-[50%] -translate-x-[50%] inline-flex items-center justify-center gap-medium">
-                {currentLocationStatus !== "granted" && <Button type="rounded" Icon={IconCurrentLocation} className="capitalize" onClick={() => setIsCurrentLocationModelOpen(true)} />}
-                <Button type="primary" text={district} Icon={IconAdjustmentsHorizontal} className="capitalize" isLoading={isFilterButtonLoading} onClick={openFilters} />
-            </div>
+            {
+                isDataLoaded &&
+                <>
+                <div className="z-20 fixed bottom-[40px] left-[50%] -translate-x-[50%] inline-flex items-center justify-center gap-medium">
+                    {currentLocationStatus !== "granted" && <Button type="rounded" Icon={IconCurrentLocation} className="capitalize" onClick={() => setIsCurrentLocationModelOpen(true)} />}
+                    <Button type="primary" text={district} Icon={IconAdjustmentsHorizontal} className="capitalize" isLoading={isFilterButtonLoading} onClick={openFilters} />
+                </div>
 
-            <div className="fixed left-0 bottom-0 block w-full h-[164px] bg-gradient-whiteToBlack pointer-events-none"></div>
-            </>
-           }
+                <div className="fixed left-0 bottom-0 block w-full h-[164px] bg-gradient-whiteToBlack pointer-events-none"></div>
+                </>
+            }
 
            {
             isCurrentLocationModelOpen &&
