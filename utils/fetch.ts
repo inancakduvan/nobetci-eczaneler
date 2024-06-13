@@ -66,6 +66,8 @@ export const fetchPharmacies = (city: string, district: string, onSuccess: Funct
         const todaysPharmaciesParsed = JSON.parse(todaysPharmacies);
 
         const date = new Date().getTime();
+        alert("date " + date);
+        alert("saved " + Number(todaysPharmaciesParsed.date))
 
         if(date > Number(todaysPharmaciesParsed.date)) {
             localStorage.removeItem(StorageKeys.TODAYS_PHARMACIES);
