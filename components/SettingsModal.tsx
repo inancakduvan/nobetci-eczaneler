@@ -145,7 +145,7 @@ const SettingsModal:TSettingsModal = ({isOpen, setIsOpen}) => {
                             <a className="text-subheading-small underline" href="https://github.com/inancakduvan/nobetci-eczaneler" target="_blank" rel="noreferrer">github.com/inancakduvan/nobetci-eczaneler</a>
                         </div>
 
-                        <div className="mt-medium bg-violet-100 text-violet-900 border-solid border border-violet-300 rounded-lg p-medium">
+                        {/* <div className="mt-medium bg-violet-100 text-violet-900 border-solid border border-violet-300 rounded-lg p-medium">
                             <div className="flex items-start gap-medium">
                                 <div className="translate-y-[3px] flex items-center justify-center w-[30px] h-[30px] bg-violet-200 rounded border border-violet-300"><IconBrandFigma size={20} /></div> 
                                 <div className="flex-1">
@@ -165,7 +165,7 @@ const SettingsModal:TSettingsModal = ({isOpen, setIsOpen}) => {
                                 <div className="text-subheading-medium">Prototype:</div>
                                 <div className="mt-small text-body-small italic text-violet-600"><a className="whitespace-nowrap" href="https://www.figma.com/proto/XniOaRVyYj8WhuCUWxqkKy/N%C3%B6bet%C3%A7i-Eczaneler?page-id=1%3A3&node-id=17-617&viewport=151%2C330%2C0.34&t=sdYoTy4QdmoFM8Y4-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=17%3A617" target="_blank" rel="noreferrer">https://www.figma.com/proto/XniOaRVyYj8WhuCUWxqkKy/N%C3%B6bet%C3%A7i-Eczaneler?page-id=1%3A3&node-id=17-617&viewport=151%2C330%2C0.34&t=sdYoTy4QdmoFM8Y4-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=17%3A617</a></div>
                             </div>
-                        </div>
+                        </div> */}
                         
                         <Button type="secondary" text={t("close")} className="w-full mt-large" onClick={() => setIsOpen(false)} />
 
