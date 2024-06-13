@@ -41,5 +41,6 @@
     "changeLanguage": "Switch language to Turkish",
     "developedAndDesignedBy": "Designed and Developed by",
     "dataSourceDesc": "This project retrieves data from the following source",
-    "openSourceDesc": "This project is an open-source project. You can see the details on the GitHub page."
+    "openSourceDesc": "This project is an open-source project. You can see the details on the GitHub page.",
+    "figmaDesc": "<0>You can review the design details in the <1>Figma</1> file.</0>"
 }

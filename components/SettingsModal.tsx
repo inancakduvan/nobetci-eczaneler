@@ -1,9 +1,11 @@
 import { SetStateAction, Dispatch, useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { IconArrowRight, IconBrandGithub, IconBrandX, IconWorldWww, IconX } from "@tabler/icons-react";
+import { IconArrowRight, IconBrandFigma, IconBrandGithub, IconBrandX, IconWorldWww, IconX } from "@tabler/icons-react";
 
 import setLanguage from 'next-translate/setLanguage'
 import useTranslation from "next-translate/useTranslation";
+import Trans from 'next-translate/Trans'
+
 import { useGlobalContext } from "@/stores/globalStore";
 import { Button } from "@/elements/Button";
 
@@ -47,7 +49,7 @@ const SettingsModal:TSettingsModal = ({isOpen, setIsOpen}) => {
                     <motion.div 
                         initial={{ x: 100 }}
                         animate={{ x: 0 }}
-                        className="w-[84%] sm:w-[24%] h-full bg-semantic-light shadow-soft p-medium overflow-auto"
+                        className="w-[84%] lg:w-[30%] h-full bg-semantic-light shadow-soft p-medium overflow-auto"
                     >
                         <div className="flex items-center justify-end cursor-pointer mb-large" onClick={() => setIsOpen(false)}>
                             <IconX />
@@ -61,7 +63,7 @@ const SettingsModal:TSettingsModal = ({isOpen, setIsOpen}) => {
                             </div>
                         </div>
 
-                        <div className="mt-large bg-muted-400 border-solid border border-muted-700 rounded-lg cursor-pointer p-medium">
+                        <div className="mt-xlarge bg-muted-400 border-solid border border-muted-700 rounded-lg p-medium">
                             <div className="text-onText-primary text-subheading-medium">{t("developedAndDesignedBy")}</div>
 
                             <div className="text-primary-400">İnanç Akduvan</div>
@@ -109,13 +111,13 @@ const SettingsModal:TSettingsModal = ({isOpen, setIsOpen}) => {
                             </div>
                         </div>
 
-                        <div className="mt-medium bg-helper-yellow-400 text-semantic-warning border-solid border border-muted-700 rounded-lg cursor-pointer p-medium">
+                        <div className="mt-medium bg-helper-yellow-400 text-semantic-warning border-solid border border-muted-700 rounded-lg p-medium">
                             <div className="text-body-small mb-small">{t("dataSourceDesc")}:</div>
 
-                            <a className="text-subheading-small underline" href="https://collectapi.com/tr/api/health/nobetci-eczane-api" target="_blank" rel="noreferrer">collectapi.com/tr/api/health/nobetci-eczane-api</a>
+                            <a className="text-subheading-small underline" href="https://www.nosyapi.com/api/nobetci-eczane" target="_blank" rel="noreferrer">https://www.nosyapi.com/api/nobetci-eczane</a>
                         </div>
 
-                        <div className="mt-medium bg-sky-100 text-sky-900 border-solid border border-sky-300 rounded-lg cursor-pointer p-medium">
+                        <div className="mt-medium bg-sky-100 text-sky-900 border-solid border border-sky-300 rounded-lg p-medium">
                             <div className="text-body-small mb-medium">{t("openSourceDesc")}</div>
 
                             <div className="flex gap-small flex-wrap mb-large">
@@ -143,6 +145,28 @@ const SettingsModal:TSettingsModal = ({isOpen, setIsOpen}) => {
                             <a className="text-subheading-small underline" href="https://github.com/inancakduvan/nobetci-eczaneler" target="_blank" rel="noreferrer">github.com/inancakduvan/nobetci-eczaneler</a>
                         </div>
 
+                        <div className="mt-medium bg-violet-100 text-violet-900 border-solid border border-violet-300 rounded-lg p-medium">
+                            <div className="flex items-start gap-medium">
+                                <div className="translate-y-[3px] flex items-center justify-center w-[30px] h-[30px] bg-violet-200 rounded border border-violet-300"><IconBrandFigma size={20} /></div> 
+                                <div className="flex-1">
+                                    <Trans
+                                        i18nKey="common:figmaDesc"
+                                        components={[<div />, <a href="https://www.figma.com/design/XniOaRVyYj8WhuCUWxqkKy/N%C3%B6bet%C3%A7i-Eczaneler?node-id=1-3&t=VAmkcOldi3Edy92U-1" target="_blank" rel="noreferrer" className="text-subheading-medium underline" />]}
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="mt-large overflow-hidden">
+                                <div className="text-subheading-medium">Design:</div>
+                                <div className="mt-small text-body-small italic text-violet-600"><a className="whitespace-nowrap" href="https://www.figma.com/design/XniOaRVyYj8WhuCUWxqkKy/N%C3%B6bet%C3%A7i-Eczaneler?node-id=1-3" target="_blank" rel="noreferrer">https://www.figma.com/design/XniOaRVyYj8WhuCUWxqkKy/N%C3%B6bet%C3%A7i-Eczaneler?node-id=1-3</a></div>
+                            </div>
+
+                            <div className="mt-medium overflow-hidden">
+                                <div className="text-subheading-medium">Prototype:</div>
+                                <div className="mt-small text-body-small italic text-violet-600"><a className="whitespace-nowrap" href="https://www.figma.com/proto/XniOaRVyYj8WhuCUWxqkKy/N%C3%B6bet%C3%A7i-Eczaneler?page-id=1%3A3&node-id=17-617&viewport=151%2C330%2C0.34&t=sdYoTy4QdmoFM8Y4-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=17%3A617" target="_blank" rel="noreferrer">https://www.figma.com/proto/XniOaRVyYj8WhuCUWxqkKy/N%C3%B6bet%C3%A7i-Eczaneler?page-id=1%3A3&node-id=17-617&viewport=151%2C330%2C0.34&t=sdYoTy4QdmoFM8Y4-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=17%3A617</a></div>
+                            </div>
+                        </div>
+                        
                         <Button type="secondary" text={t("close")} className="w-full mt-large" onClick={() => setIsOpen(false)} />
 
                     </motion.div>

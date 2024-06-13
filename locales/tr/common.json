@@ -41,5 +41,6 @@
     "changeLanguage": "Dili İngilizceye çevir",
     "developedAndDesignedBy": "Tasarlayan ve Geliştiren",
     "dataSourceDesc": "Bu proje, verileri aşağıdan belirtilen kaynaktan almaktadır",
-    "openSourceDesc": "Bu proje, açık kaynak bir projedir. Detaylarını github adresinden görebilirsiniz."
+    "openSourceDesc": "Bu proje, açık kaynak bir projedir. Detaylarını github adresinden görebilirsiniz.",
+    "figmaDesc": "<0>Tasarımın detaylarını <1>Figma</1> dosyasından inceleyebilirsiniz.</0>"
 }
