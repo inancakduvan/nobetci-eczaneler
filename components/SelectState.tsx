@@ -162,7 +162,7 @@ const SelectState: TSelectState = ({stateType}) => {
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.04 * index }}
-                        key={"city-" + state}
+                        key={"city-" + state + index}
                         onClick={() => setCityAndDistrict(state)}>
                         <div className="flex items-center justify-between px-medium text-subheading-medium h-[60px] border-b border-solid border-muted-700 cursor-pointer">
                             {state.toLocaleUpperCase('tr-TR')} 
