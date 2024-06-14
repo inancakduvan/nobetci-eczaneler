@@ -37,11 +37,11 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
     const [dayOfWeek, setDayOfWeek] = useState<string>();
     const [nextDayOfWeek, setNextDayOfWeek] = useState<string>();
     const [dayOfMonth, setDayOfMonth] = useState<number>();
-    const [realDayOfMonth, setRealDayOfMonth] = useState<number>();
+    const [dutyDateDayOfMonth, setDutyDayOfMonth] = useState<number>();
     const [month, setMonth] = useState<string>();
     const [year, setYear] = useState<number>();
     const [date, setDate] = useState<string>("-");
-    const [coreDate, setCoreDate] = useState<string>("-");
+    const [dutyDate, setDutyDate] = useState<string>("-");
 
     const [isSettingsModalOpen, setIsSettingsModalOpen] = useState<boolean>(false);
 
@@ -121,20 +121,20 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
         const _dayOfWeek = t(Days[dayIndex]);
         const _nextDayOfWeek = t(Days[nextDayIndex]);
         const _dayOfMonth = monthDayIndex;
-        const _coreDayOfMonth = date.getDate();
+        const _dutyDayOfMonth = date.getDate();
         const _month = t(Months[date.getMonth()]);
         const _year = date.getFullYear();
         const _date = _dayOfMonth + " " + _month + " " + _year + ", " + _dayOfWeek; 
-        const _coreDate = _coreDayOfMonth + " " + _month + " " + _year + ", " + _dayOfWeek; 
+        const _dutyDate = _dutyDayOfMonth + " " + _month + " " + _year + ", " + _dayOfWeek; 
 
         setDayOfWeek(_dayOfWeek);
         setNextDayOfWeek(_nextDayOfWeek);
         setDayOfMonth(_dayOfMonth);
-        setRealDayOfMonth(_coreDayOfMonth);
+        setDutyDayOfMonth(_dutyDayOfMonth);
         setMonth(_month);
         setYear(_year);
         setDate(_date);
-        setCoreDate(_coreDate);
+        setDutyDate(_dutyDate);
     }, [siteLanguage])
 
     useEffect(() => {
@@ -210,7 +210,7 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
                     <div className={"transition-all flex items-center justify-center" + (isPageScrolled ? " z-50 fixed left-0 top-0 w-full bg-gradient-whiteToTransparent90deg bg-blur border-b" : " bg-semantic-light border rounded-lg")}>
                         <div className={"flex items-start justify-between max-w-[640px] w-full p-medium shadow-ultra-soft border-solid border-muted-700 bg-transparent"}>
                             <div>
-                                <div className="text-heading-medium text-onText-primary">{coreDate}</div>
+                                <div className="text-heading-medium text-onText-primary">{dutyDate}</div>
                                 <div className="text-subheading-xsmall text-primary-700 mt-xsmall capitalize">{city} / {district}</div>
                             </div>
 
