@@ -57,7 +57,7 @@ export const fetchDistricts = (city: string, onSuccess: Function, onError?: Func
 }
 
 export const fetchPharmacies = (city: string, district: string, onSuccess: Function, onError?: Function) => {
-    const todaysPharmacies = localStorage.getItem(StorageKeys.TODAYS_PHARMACIES);
+    const todaysPharmacies = sessionStorage.getItem(StorageKeys.TODAYS_PHARMACIES);
     
     city = TrToEn(city);
     district = TrToEn(district);
@@ -65,18 +65,12 @@ export const fetchPharmacies = (city: string, district: string, onSuccess: Funct
     if(todaysPharmacies) {
         const todaysPharmaciesParsed = JSON.parse(todaysPharmacies);
 
-        const date = new Date().getTime();
+        const searchedPharmacies = todaysPharmaciesParsed.value.find((item: {state: string}) => item.state === (city + "-" + district));
+    
+        if(searchedPharmacies) {
+            onSuccess && onSuccess(searchedPharmacies.data);
 
-        if(date > Number(todaysPharmaciesParsed.date)) {
-            localStorage.removeItem(StorageKeys.TODAYS_PHARMACIES);
-        } else {
-            const searchedPharmacies = todaysPharmaciesParsed.value.find((item: {state: string}) => item.state === (city + "-" + district));
-    
-            if(searchedPharmacies) {
-                onSuccess && onSuccess(searchedPharmacies.data);
-    
-                return;
-            }
+            return;
         }
     }
 
