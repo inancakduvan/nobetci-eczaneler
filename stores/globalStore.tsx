@@ -14,6 +14,11 @@ export type TPharmacies = {
     directions?: string
 }
 
+export type TCurrentLocation = {
+    latitude: number;
+    longitude: number;
+}
+
 interface ContextProps {
     cities: Array<string>;
     setCities: Dispatch<SetStateAction<Array<string>>>;
@@ -32,6 +37,12 @@ interface ContextProps {
 
     siteLanguage: string;
     setSiteLanguage: Dispatch<SetStateAction<string>>;
+
+    currentLocation: null | TCurrentLocation;
+    setCurrentLocation: Dispatch<SetStateAction<TCurrentLocation | null>>;
+
+    currentLocationStatus: string;
+    setCurrentLocationStatus: Dispatch<SetStateAction<string>>;
 }
 
 const GlobalContext = createContext<ContextProps>({
@@ -52,6 +63,12 @@ const GlobalContext = createContext<ContextProps>({
 
     siteLanguage: "",
     setSiteLanguage: (): string => "",
+
+    currentLocation: null,
+    setCurrentLocation: (): null => null,
+
+    currentLocationStatus: "prompt",
+    setCurrentLocationStatus: (): string => "prompt",
 })
 
 export const GlobalContextProvider : React.FC <{ children: React.ReactNode }> = ({ children }) => {
@@ -65,7 +82,10 @@ export const GlobalContextProvider : React.FC <{ children: React.ReactNode }> = 
     const [selectedDistrict, setSelectedDistrict] = useState('');
 
     const [siteLanguage, setSiteLanguage] = useState('tr');
-    
+
+    const [currentLocation, setCurrentLocation] = useState<TCurrentLocation | null>(null);
+    const [currentLocationStatus, setCurrentLocationStatus] = useState("prompt");
+
     return (
         <GlobalContext.Provider value={{ 
             cities,
@@ -79,7 +99,11 @@ export const GlobalContextProvider : React.FC <{ children: React.ReactNode }> = 
             selectedDistrict, 
             setSelectedDistrict,
             siteLanguage, 
-            setSiteLanguage 
+            setSiteLanguage,
+            currentLocation,
+            setCurrentLocation,
+            currentLocationStatus,
+            setCurrentLocationStatus 
         }}>
             {children}
         </GlobalContext.Provider>

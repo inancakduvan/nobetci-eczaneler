@@ -14,6 +14,7 @@ import { findDistanceAsKm } from "@/utils/location";
 import { clearAllStorageData } from "@/utils/storage";
 import SettingsModal from "./SettingsModal";
 import ErrorPage from "./ErrorPage";
+import LocationPermissionModal from "./LocationPermissionModal";
 
 
 type TPharmaciesList = React.FC<{
@@ -26,17 +27,12 @@ export type TPharmaciesResponse = {
   data: TPharmacies[];
 }
 
-type TCurrentLocation = {
-    latitude: number;
-    longitude: number;
-}
-
 const PharmaciesList: TPharmaciesList = ({city, district}) => {
     const router = useRouter();
 
     const { t } = useTranslation('common');
 
-    const { pharmacies, setPharmacies, siteLanguage } = useGlobalContext();
+    const { pharmacies, setPharmacies, siteLanguage, currentLocation, setCurrentLocation, currentLocationStatus, setCurrentLocationStatus } = useGlobalContext();
 
     const [dayOfWeek, setDayOfWeek] = useState<string>();
     const [nextDayOfWeek, setNextDayOfWeek] = useState<string>();
@@ -50,8 +46,6 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
     const [isSettingsModalOpen, setIsSettingsModalOpen] = useState<boolean>(false);
 
     const [isCurrentLocationModelOpen, setIsCurrentLocationModelOpen] = useState<boolean>(false);
-    const [currentLocationStatus, setCurrentLocationStatus] = useState<string>("prompt");
-    const [currentLocation, setCurrentLocation] = useState<TCurrentLocation | null>();
     const [closestPharmacy, setClosestPharmacy] = useState<TPharmacies | null>();
 
     const [isPageScrolled, setIsPageScrolled] = useState<boolean>(false);
@@ -165,17 +159,6 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
         const url = "https://www.google.com/maps/search/?api=1&query=" + latitude + "," + longitude;
         
         window.open(url, "_blank");
-    }
-
-    const getCurrentLocation = () => {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            setCurrentLocationStatus("granted");
-            setCurrentLocation(position.coords);
-
-            setIsCurrentLocationModelOpen(false);
-        }, function(error) {
-            setCurrentLocationStatus("denied");
-        });
     }
 
     const findClosestPharmacy = (userLat: number = 0, userLng: number = 0) => {    
@@ -347,50 +330,7 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
                 </>
             }
 
-           {
-            isCurrentLocationModelOpen &&
-            <motion.div 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-            >
-                <div className="z-20 fixed top-0 left-0 flex items-center justify-center w-full h-fit-screen p-medium bg-overlay-30">
-                    <motion.div 
-                        initial={{ scale: 0.8 }}
-                        animate={{ scale: 1 }}
-                    >
-                        <div className="bg-semantic-light rounded-lg overflow-hidden">
-                            <div className="px-medium pt-medium">
-                                <div className="text-heading-medium text-onText-primary mb-small uppercase">{t("allowLocationTitle")}</div>
-                                <div className="text-body-small text-onText-secondary mb-xlarge">
-                                    {currentLocationStatus === "denied" ? t("allowLocationDeniedDesc") : t("allowLocationDesc")}
-                                </div>
-                            </div>
-
-                            <div className="flex h-[50px]">
-                                {
-                                    currentLocationStatus === "denied" ?
-                                    <>
-                                        <div className="flex-1 flex items-center justify-center bg-muted-400 text-subheading-small text-onText-primary border-t border-solid border-muted-700 cursor-pointer" onClick={() => setIsCurrentLocationModelOpen(false)}>
-                                            {t("okay")}
-                                        </div>
-                                    </>
-                                    :
-                                    <>
-                                        <div className="flex-1 flex items-center justify-center bg-muted-400 text-subheading-small text-onText-primary border-t border-r border-solid border-muted-700 cursor-pointer" onClick={() => setIsCurrentLocationModelOpen(false)}>
-                                            {t("cancel")}
-                                        </div>
-
-                                        <div className="flex-1 flex items-center justify-center bg-muted-400 text-subheading-small text-onText-primary border-t border-solid border-muted-700 cursor-pointer" onClick={getCurrentLocation}>
-                                            {t("allowLocationTitle")}
-                                        </div>
-                                    </>
-                                }
-                            </div>
-                        </div>
-                    </motion.div>
-                </div>
-            </motion.div>
-           }
+            { isCurrentLocationModelOpen && <LocationPermissionModal setIsOpen={setIsCurrentLocationModelOpen} /> }
 
             <SettingsModal isOpen={isSettingsModalOpen} setIsOpen={setIsSettingsModalOpen} />
         </>
