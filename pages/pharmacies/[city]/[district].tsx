@@ -1,18 +1,13 @@
-import Skeletton from "@/elements/Skeletton/Skeletton";
 import MainLayout from "@/layouts/MainLayout";
 import { useGlobalContext } from "@/stores/globalStore";
-import useTranslation from "next-translate/useTranslation";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { Button } from "@/elements/Button";
 
-import { IconArrowLeft } from "@tabler/icons-react";
 import { fetchPharmacies } from "@/utils/fetch";
 import PharmaciesList, { TPharmaciesResponse } from "@/components/PharmaciesList";
 
 
 export default function Pharmacies()  {
-  const { t } = useTranslation('common');
   const router = useRouter();
 
   const cityParamater = router.query.city?.toString();
@@ -41,14 +36,10 @@ export default function Pharmacies()  {
   }, [])
 
   if(!(cityParamater && districtParamater)) {
-    return "";
+    return null;
   }
 
-  return (
-    <>
-       <PharmaciesList city={cityParamater} district={districtParamater} />
-    </>
-  );
+  return <PharmaciesList city={cityParamater} district={districtParamater} />;
 }
 
 Pharmacies.Layout = MainLayout;

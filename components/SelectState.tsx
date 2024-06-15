@@ -9,10 +9,9 @@ import { motion } from "framer-motion";
 
 import {IconArrowLeft, IconSearch } from '@tabler/icons-react';
 
-import { StorageKeys } from "@/enums";
+import { StorageKeys } from "@/types";
 import { fetchCities, fetchDistricts } from "@/utils/fetch";
 import Spinner from "@/elements/Spinner/Spinner";
-import { TrToEn } from "@/utils/string";
 
 
 type TSelectState = React.FC<{

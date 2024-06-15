@@ -1,4 +1,4 @@
-import { StorageKeys } from "@/enums";
+import { StorageKeys } from "@/types";
 
 export const setDataOfTodaysPharmacies = (value: string) => {
     const dateObject = new Date();

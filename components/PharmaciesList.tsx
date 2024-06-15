@@ -9,7 +9,7 @@ import { fetchPharmacies } from "@/utils/fetch";
 import { TPharmacies, useGlobalContext } from "@/stores/globalStore";
 import { Button } from "@/elements/Button";
 import Skeletton from "@/elements/Skeletton/Skeletton";
-import { Days, Months } from "@/enums";
+import { Days, Months } from "@/constants";
 import { findDistanceAsKm } from "@/utils/location";
 import { clearAllStorageData } from "@/utils/storage";
 import SettingsModal from "./SettingsModal";

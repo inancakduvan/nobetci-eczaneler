@@ -1,9 +1,9 @@
-import { EndPoints, StorageKeys, Months } from "@/enums";
+import { StorageKeys } from "@/types";
 import { setDataOfTodaysPharmacies } from "./storage";
 import { TrToEn } from "./string";
 
 export const fetchCities = (onSuccess: Function) => {
-    fetch(EndPoints.CITIES_ENDPOINT)
+    fetch("/api/cities")
     .then(response => response.json())
     .then(data => {
         onSuccess && onSuccess(data);
@@ -26,7 +26,7 @@ export const fetchDistricts = (city: string, onSuccess: Function, onError?: Func
         }
     }
 
-    fetch(EndPoints.DISTRICTS_ENDPOINT + "?city=" + city)
+    fetch("/api/districts?city=" + city)
     .then(response => response.json())
     .then(data => {
         if(data.status === "success") {
@@ -74,7 +74,7 @@ export const fetchPharmacies = (city: string, district: string, onSuccess: Funct
         }
     }
 
-    fetch(EndPoints.PHARMACIES_ENDPOINT + "?city=" + city + "&district=" + district )
+    fetch("/api/pharmacies?city=" + city + "&district=" + district )
     .then(response => response.json())
     .then(data => {
         if(data.status === "success") {

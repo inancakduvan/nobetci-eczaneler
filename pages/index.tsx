@@ -1,4 +1,4 @@
-import { StorageKeys } from "@/enums";
+import { StorageKeys } from "@/types";
 import MainLayout from "@/layouts/MainLayout";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -32,11 +32,11 @@ export default function Home()  {
     }
   }, [])
 
-  return (
-    <>
-      {(city && district) && <PharmaciesList city={city.toLocaleLowerCase('tr-TR')} district={district.toLocaleLowerCase('tr-TR')} />}
-    </>
-  );
+  if(city && district) {
+    return <PharmaciesList city={city.toLocaleLowerCase('tr-TR')} district={district.toLocaleLowerCase('tr-TR')} />;
+  }
+
+  return null;
 }
 
 Home.Layout = MainLayout;
