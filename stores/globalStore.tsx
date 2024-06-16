@@ -2,7 +2,7 @@
 
 import { createContext, useContext, Dispatch, SetStateAction, useState } from "react";
 
-export type TPharmacies = {
+export interface IPharmacies {
     pharmacyName: string,
     dist: string,
     address: string,
@@ -14,7 +14,7 @@ export type TPharmacies = {
     directions?: string
 }
 
-export type TCurrentLocation = {
+export interface ICurrentLocation {
     latitude: number;
     longitude: number;
 }
@@ -26,8 +26,8 @@ interface ContextProps {
     districts: Array<string>;
     setDistricts: Dispatch<SetStateAction<Array<string>>>;
 
-    pharmacies: TPharmacies[];
-    setPharmacies: Dispatch<SetStateAction<Array<TPharmacies>>>;
+    pharmacies: IPharmacies[];
+    setPharmacies: Dispatch<SetStateAction<Array<IPharmacies>>>;
 
     selectedCity: string;
     setSelectedCity: Dispatch<SetStateAction<string>>;
@@ -38,8 +38,8 @@ interface ContextProps {
     siteLanguage: string;
     setSiteLanguage: Dispatch<SetStateAction<string>>;
 
-    currentLocation: null | TCurrentLocation;
-    setCurrentLocation: Dispatch<SetStateAction<TCurrentLocation | null>>;
+    currentLocation: null | ICurrentLocation;
+    setCurrentLocation: Dispatch<SetStateAction<ICurrentLocation | null>>;
 
     currentLocationStatus: string;
     setCurrentLocationStatus: Dispatch<SetStateAction<string>>;
@@ -76,14 +76,14 @@ export const GlobalContextProvider : React.FC <{ children: React.ReactNode }> = 
 
     const [districts, setDistricts] = useState<Array<string>>([]);
 
-    const [pharmacies, setPharmacies] = useState<Array<TPharmacies>>([]);
+    const [pharmacies, setPharmacies] = useState<Array<IPharmacies>>([]);
 
     const [selectedCity, setSelectedCity] = useState('');
     const [selectedDistrict, setSelectedDistrict] = useState('');
 
     const [siteLanguage, setSiteLanguage] = useState('tr');
 
-    const [currentLocation, setCurrentLocation] = useState<TCurrentLocation | null>(null);
+    const [currentLocation, setCurrentLocation] = useState<ICurrentLocation | null>(null);
     const [currentLocationStatus, setCurrentLocationStatus] = useState("prompt");
 
     return (

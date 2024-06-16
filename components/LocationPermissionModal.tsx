@@ -3,11 +3,11 @@ import useTranslation from "next-translate/useTranslation";
 
 import { useGlobalContext } from "@/stores/globalStore";
 
-type TLocationPermissionModal = React.FC<{
+interface ILocationPermissionModalProps {
     setIsOpen: (value: boolean) => void
-}>;
+};
 
-const LocationPermissionModal: TLocationPermissionModal = ({ setIsOpen }) => {
+const LocationPermissionModal = ({ setIsOpen }: ILocationPermissionModalProps) => {
     const { t } = useTranslation('common');
 
     const { setCurrentLocation, currentLocationStatus, setCurrentLocationStatus } = useGlobalContext();

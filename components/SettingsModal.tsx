@@ -9,12 +9,12 @@ import Trans from 'next-translate/Trans'
 import { useGlobalContext } from "@/stores/globalStore";
 import { Button } from "@/elements/Button";
 
-type TSettingsModal = React.FC<{
+interface ISettingsModal {
     isOpen: boolean;
     setIsOpen: Dispatch<SetStateAction<boolean>>;
-}>;
+};
 
-const SettingsModal:TSettingsModal = ({isOpen, setIsOpen}) => {
+const SettingsModal = ({isOpen, setIsOpen}: ISettingsModal) => {
     const { t } = useTranslation('common');
 
     const { siteLanguage, setSiteLanguage } = useGlobalContext();

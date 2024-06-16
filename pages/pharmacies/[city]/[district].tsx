@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 import { fetchPharmacies } from "@/utils/fetch";
-import PharmaciesList, { TPharmaciesResponse } from "@/components/PharmaciesList";
+import PharmaciesList, { IPharmaciesResponse } from "@/components/PharmaciesList";
 
 
 export default function Pharmacies()  {
@@ -13,7 +13,7 @@ export default function Pharmacies()  {
   const cityParamater = router.query.city?.toString();
   const districtParamater = router.query.district?.toString();
 
-  const { selectedCity, selectedDistrict, pharmacies, setPharmacies } = useGlobalContext();
+  const { selectedCity, selectedDistrict, setPharmacies } = useGlobalContext();
 
   const [hasError, setHasError] = useState(false);
 
@@ -23,7 +23,7 @@ export default function Pharmacies()  {
       const _district = (selectedDistrict.toLocaleLowerCase('tr-TR') || districtParamater.toLocaleLowerCase('tr-TR'));
 
       fetchPharmacies(_city, _district, 
-        (response: TPharmaciesResponse) => {
+        (response: IPharmaciesResponse) => {
           setPharmacies(response.data);
         },
         () => {

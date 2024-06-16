@@ -14,20 +14,20 @@ import { fetchCities, fetchDistricts } from "@/utils/fetch";
 import Spinner from "@/elements/Spinner/Spinner";
 
 
-type TSelectState = React.FC<{
+interface ISelectStateProps {
     stateType: "city" | "district";
-}>;
+};
 
-type TDistrictsResponseResult = {
+interface IDistrictsResponseResult {
     cities: string;
 }
 
-type TDistrictsResponse = {
+interface IDistrictsResponse {
     success: boolean;
-    data: TDistrictsResponseResult[];
+    data: IDistrictsResponseResult[];
 }
 
-const SelectState: TSelectState = ({stateType}) => {
+const SelectState = ({stateType}: ISelectStateProps) => {
     const router = useRouter();
     const cityParamater = router.query.city ? router.query.city.toString() : "";
     
@@ -73,7 +73,7 @@ const SelectState: TSelectState = ({stateType}) => {
             setIsResultsLoading(true);
 
             fetchDistricts(cityParamater, 
-                (response: TDistrictsResponse) => {
+                (response: IDistrictsResponse) => {
                     const result = response.data.map((item) => item.cities);
                     
                     setDistricts(result);

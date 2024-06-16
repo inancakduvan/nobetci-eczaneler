@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { IconInfoCircle, IconPhone, IconPhoneCall, IconAdjustmentsHorizontal, IconCurrentLocation, IconStarFilled, IconMapUp, IconSettings, IconReportOff } from "@tabler/icons-react";
 
 import { fetchPharmacies } from "@/utils/fetch";
-import { TPharmacies, useGlobalContext } from "@/stores/globalStore";
+import { IPharmacies, useGlobalContext } from "@/stores/globalStore";
 import { Button } from "@/elements/Button";
 import Skeletton from "@/elements/Skeletton/Skeletton";
 import { Days, Months } from "@/constants";
@@ -17,17 +17,17 @@ import ErrorPage from "./ErrorPage";
 import LocationPermissionModal from "./LocationPermissionModal";
 
 
-type TPharmaciesList = React.FC<{
+interface IPharmaciesListProps {
     city: string;
     district: string;
-}>;
+};
 
-export type TPharmaciesResponse = {
+export interface IPharmaciesResponse {
   success: boolean;
-  data: TPharmacies[];
+  data: IPharmacies[];
 }
 
-const PharmaciesList: TPharmaciesList = ({city, district}) => {
+const PharmaciesList = ({city, district}: IPharmaciesListProps) => {
     const router = useRouter();
 
     const { t } = useTranslation('common');
@@ -46,7 +46,7 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
     const [isSettingsModalOpen, setIsSettingsModalOpen] = useState<boolean>(false);
 
     const [isCurrentLocationModelOpen, setIsCurrentLocationModelOpen] = useState<boolean>(false);
-    const [closestPharmacy, setClosestPharmacy] = useState<TPharmacies | null>();
+    const [closestPharmacy, setClosestPharmacy] = useState<IPharmacies | null>();
 
     const [isPageScrolled, setIsPageScrolled] = useState<boolean>(false);
     const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false);
@@ -86,7 +86,7 @@ const PharmaciesList: TPharmaciesList = ({city, district}) => {
 
         if(city && district) {
             fetchPharmacies(city, district, 
-                (response: TPharmaciesResponse) => {
+                (response: IPharmaciesResponse) => {
                     setPharmacies(response.data);
                     setIsDataLoaded(true);
                 },
