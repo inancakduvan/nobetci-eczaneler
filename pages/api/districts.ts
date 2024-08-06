@@ -31,13 +31,12 @@ export default async function handler(req: NextRequest) {
                 return new Response("Missing parameters", { status: 400 });
             }
     
-            const url = `https://www.nosyapi.com/apiv2/service/pharmacies-on-duty/cities?city=` + city;
+            const url = `https://www.nosyapi.com/apiv2/service/pharmacies-on-duty/cities?city=${city}&apiKey=${key}`;
     
             const response = await fetch(url, {
                 mode: 'cors',
                 headers: {
                     "Access-Control-Allow-Origin" : "*",
-                    "Authorization" : 'Bearer ' + key,
                     "Content-Type" : "application/json"
                 }
             });
