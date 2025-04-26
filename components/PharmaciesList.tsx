@@ -65,7 +65,7 @@ const PharmaciesList = ({city, district}: IPharmaciesListProps) => {
         }
 
         if(window) {
-            // Window scroll
+            // Window scroll.
             document.getElementById("appContainer")?.addEventListener("scroll", onScroll);
 
             document.getElementById("appContainer")?.scrollTo(0, 0);
